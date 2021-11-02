@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraSplashScreen;
 using Ji;
 using Ji.Core;
+using Shell.Views.Frm;
 using System;
 using System.Collections.Generic;
 using System.Linq;

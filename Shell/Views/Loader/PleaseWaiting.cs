@@ -7,11 +7,11 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraSplashScreen;
 
-namespace Shell
+namespace Shell.Views.Loader
 {
-    public partial class WaitCheck : SplashScreen
+    public partial class PleaseWaiting : SplashScreen
     {
-        public WaitCheck()
+        public PleaseWaiting()
         {
             InitializeComponent();
         }

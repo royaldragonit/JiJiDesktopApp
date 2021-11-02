@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Shell
+namespace Shell.Views.Shared
 {
     public partial class TestBug : Form
     {

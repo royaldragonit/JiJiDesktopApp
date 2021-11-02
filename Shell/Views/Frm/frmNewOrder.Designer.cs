@@ -1,4 +1,4 @@
-﻿namespace Shell
+﻿namespace Shell.Views.Frm
 {
     partial class frmNewOrder
     {

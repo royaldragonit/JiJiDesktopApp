@@ -4,7 +4,8 @@ using Ji.Core;
 using Ji.Model;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
-using PluginChat;
+using Shell.Views.Loader;
+//using PluginChat;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Shell
+namespace Shell.Views.Frm
 {
     public partial class frmMain : ClientForm, IClientControl
     {
@@ -209,13 +210,13 @@ namespace Shell
                     case "Chat trực tuyến":
                         {
                             UI.ShowSplashForm();
-                            frmChatRealTime frm = new frmChatRealTime();
-                            frm.hubConnection = hubConnection;
-                            frm.UserID = Extension.Setup["userID"].ToInt();
-                            frm.Token ="Bearer "+ API.Access_Token;
-                            frm.HotLine = Extension.Setup["hotline"].ToString();
-                            frm.ShopName = Extension.Setup["shopName"].ToString();
-                            frm.ShowDialog();
+                            //frmChatRealTime frm = new frmChatRealTime();
+                            //frm.hubConnection = hubConnection;
+                            //frm.UserID = Extension.Setup["userID"].ToInt();
+                            //frm.Token ="Bearer "+ API.Access_Token;
+                            //frm.HotLine = Extension.Setup["hotline"].ToString();
+                            //frm.ShopName = Extension.Setup["shopName"].ToString();
+                            //frm.ShowDialog();
                             break;
                         }
                     default:

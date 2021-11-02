@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraWaitForm;
 
-namespace Shell
+namespace Shell.Views.Loader
 {
     public partial class PleaseWait : WaitForm
     {

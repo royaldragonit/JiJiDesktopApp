@@ -1,4 +1,4 @@
-﻿namespace Shell
+﻿namespace Shell.Views.Shared
 {
     partial class TestBug
     {

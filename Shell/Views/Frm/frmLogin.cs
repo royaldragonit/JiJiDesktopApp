@@ -8,6 +8,7 @@ using Ji.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Shell.Model;
+using Shell.Views.Loader;
 using System;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace Shell
+namespace Shell.Views.Frm
 {
     public partial class frmLogin : ClientForm
     {

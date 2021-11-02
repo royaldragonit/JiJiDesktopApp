@@ -1,6 +1,6 @@
-﻿namespace Shell
+﻿namespace Shell.Views.Loader
 {
-    partial class WaitCheck
+    partial class PleaseWaiting
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaitCheck));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PleaseWaiting));
       this.labelStatus = new DevExpress.XtraEditors.LabelControl();
       this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
       this.hyperlinkLabelControl1 = new DevExpress.XtraEditors.HyperlinkLabelControl();
@@ -48,11 +48,11 @@
       this.labelStatus.Appearance.ForeColor = System.Drawing.Color.Green;
       this.labelStatus.Appearance.Options.UseFont = true;
       this.labelStatus.Appearance.Options.UseForeColor = true;
-      this.labelStatus.Location = new System.Drawing.Point(12, 57);
+      this.labelStatus.Location = new System.Drawing.Point(53, 57);
       this.labelStatus.Name = "labelStatus";
-      this.labelStatus.Size = new System.Drawing.Size(562, 24);
+      this.labelStatus.Size = new System.Drawing.Size(382, 24);
       this.labelStatus.TabIndex = 7;
-      this.labelStatus.Text = "Đang kiểm tra thông tin tài khoản, vui lòng chờ nhé ♥ ...";
+      this.labelStatus.Text = "Đang tải dữ liệu, vui lòng chờ nhé ♥ ...";
       // 
       // progressPanel1
       // 
@@ -64,7 +64,7 @@
       this.progressPanel1.AppearanceDescription.Options.UseFont = true;
       this.progressPanel1.BarAnimationElementThickness = 2;
       this.progressPanel1.ImageHorzOffset = 20;
-      this.progressPanel1.Location = new System.Drawing.Point(194, 12);
+      this.progressPanel1.Location = new System.Drawing.Point(160, 12);
       this.progressPanel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
       this.progressPanel1.Name = "progressPanel1";
       this.progressPanel1.Size = new System.Drawing.Size(146, 39);
@@ -75,7 +75,7 @@
       // 
       this.hyperlinkLabelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
       this.hyperlinkLabelControl1.Appearance.Options.UseFont = true;
-      this.hyperlinkLabelControl1.Location = new System.Drawing.Point(182, 87);
+      this.hyperlinkLabelControl1.Location = new System.Drawing.Point(133, 87);
       this.hyperlinkLabelControl1.Name = "hyperlinkLabelControl1";
       this.hyperlinkLabelControl1.Size = new System.Drawing.Size(259, 19);
       this.hyperlinkLabelControl1.TabIndex = 10;
@@ -85,7 +85,7 @@
       // 
       this.hyperlinkLabelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
       this.hyperlinkLabelControl3.Appearance.Options.UseFont = true;
-      this.hyperlinkLabelControl3.Location = new System.Drawing.Point(430, 119);
+      this.hyperlinkLabelControl3.Location = new System.Drawing.Point(384, 119);
       this.hyperlinkLabelControl3.Name = "hyperlinkLabelControl3";
       this.hyperlinkLabelControl3.Size = new System.Drawing.Size(78, 16);
       this.hyperlinkLabelControl3.TabIndex = 14;
@@ -94,7 +94,7 @@
       // pictureEdit1
       // 
       this.pictureEdit1.EditValue = global::Shell.Properties.Resources.fb_icon;
-      this.pictureEdit1.Location = new System.Drawing.Point(138, 81);
+      this.pictureEdit1.Location = new System.Drawing.Point(89, 81);
       this.pictureEdit1.Name = "pictureEdit1";
       this.pictureEdit1.Properties.InitialImageOptions.Image = global::Shell.Properties.Resources.fb_icon;
       this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
@@ -123,17 +123,17 @@
       // pictureEdit2
       // 
       this.pictureEdit2.EditValue = ((object)(resources.GetObject("pictureEdit2.EditValue")));
-      this.pictureEdit2.Location = new System.Drawing.Point(389, 112);
+      this.pictureEdit2.Location = new System.Drawing.Point(343, 112);
       this.pictureEdit2.Name = "pictureEdit2";
       this.pictureEdit2.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
       this.pictureEdit2.Size = new System.Drawing.Size(35, 30);
       this.pictureEdit2.TabIndex = 18;
       // 
-      // WaitCheck
+      // PleaseWaiting
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(556, 164);
+      this.ClientSize = new System.Drawing.Size(474, 164);
       this.Controls.Add(this.pictureEdit2);
       this.Controls.Add(this.hyperlinkLabelControl2);
       this.Controls.Add(this.pictureEdit3);
@@ -143,7 +143,7 @@
       this.Controls.Add(this.progressPanel1);
       this.Controls.Add(this.labelStatus);
       this.InactiveGlowColor = System.Drawing.Color.White;
-      this.Name = "WaitCheck";
+      this.Name = "PleaseWaiting";
       this.Text = "Form1";
       ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.pictureEdit3.Properties)).EndInit();

@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Ji.Model;
 
-namespace Shell
+namespace Shell.Views.Frm
 {
     public partial class frmChat : ClientForm
     {

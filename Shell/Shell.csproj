@@ -37,7 +37,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>logo96x96_Yat_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\images\logo96x96_Yat_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -241,117 +241,117 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmChat.cs">
+    <Compile Include="Views\Frm\frmChat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmChat.Designer.cs">
+    <Compile Include="Views\Frm\frmChat.Designer.cs">
       <DependentUpon>frmChat.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmInformationLogin.cs">
+    <Compile Include="Views\Frm\frmInformationLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInformationLogin.Designer.cs">
+    <Compile Include="Views\Frm\frmInformationLogin.Designer.cs">
       <DependentUpon>frmInformationLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmInformationSoftware.cs">
+    <Compile Include="Views\Frm\frmInformationSoftware.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInformationSoftware.Designer.cs">
+    <Compile Include="Views\Frm\frmInformationSoftware.Designer.cs">
       <DependentUpon>frmInformationSoftware.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="Views\Frm\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
+    <Compile Include="Views\Frm\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmLoginWithGoogle.cs">
+    <Compile Include="Views\Frm\frmLoginWithGoogle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoginWithGoogle.Designer.cs">
+    <Compile Include="Views\Frm\frmLoginWithGoogle.Designer.cs">
       <DependentUpon>frmLoginWithGoogle.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="Views\Frm\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="Views\Frm\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNewOrder.cs">
+    <Compile Include="Views\Frm\frmNewOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNewOrder.Designer.cs">
+    <Compile Include="Views\Frm\frmNewOrder.Designer.cs">
       <DependentUpon>frmNewOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSignUp.cs">
+    <Compile Include="Views\Frm\frmSignUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSignUp.Designer.cs">
+    <Compile Include="Views\Frm\frmSignUp.Designer.cs">
       <DependentUpon>frmSignUp.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\GooglePlusAccessToken.cs" />
-    <Compile Include="PleaseWait.cs">
+    <Compile Include="Views\Loader\PleaseWait.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PleaseWait.Designer.cs">
+    <Compile Include="Views\Loader\PleaseWait.Designer.cs">
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </Compile>
-    <Compile Include="TestBug.cs">
+    <Compile Include="Views\Shared\TestBug.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestBug.Designer.cs">
+    <Compile Include="Views\Shared\TestBug.Designer.cs">
       <DependentUpon>TestBug.cs</DependentUpon>
     </Compile>
-    <Compile Include="WaitCheck.cs">
+    <Compile Include="Views\Loader\WaitCheck.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WaitCheck.Designer.cs">
+    <Compile Include="Views\Loader\WaitCheck.Designer.cs">
       <DependentUpon>WaitCheck.cs</DependentUpon>
     </Compile>
-    <Compile Include="PleaseWaiting.cs">
+    <Compile Include="Views\Loader\PleaseWaiting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PleaseWaiting.Designer.cs">
+    <Compile Include="Views\Loader\PleaseWaiting.Designer.cs">
       <DependentUpon>PleaseWaiting.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmChat.resx">
+    <EmbeddedResource Include="Views\Frm\frmChat.resx">
       <DependentUpon>frmChat.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmInformationLogin.resx">
+    <EmbeddedResource Include="Views\Frm\frmInformationLogin.resx">
       <DependentUpon>frmInformationLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmInformationSoftware.resx">
+    <EmbeddedResource Include="Views\Frm\frmInformationSoftware.resx">
       <DependentUpon>frmInformationSoftware.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="Views\Frm\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoginWithGoogle.resx">
+    <EmbeddedResource Include="Views\Frm\frmLoginWithGoogle.resx">
       <DependentUpon>frmLoginWithGoogle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
+    <EmbeddedResource Include="Views\Frm\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNewOrder.resx">
+    <EmbeddedResource Include="Views\Frm\frmNewOrder.resx">
       <DependentUpon>frmNewOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSignUp.resx">
+    <EmbeddedResource Include="Views\Frm\frmSignUp.resx">
       <DependentUpon>frmSignUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PleaseWait.resx">
+    <EmbeddedResource Include="Views\Loader\PleaseWait.resx">
       <DependentUpon>PleaseWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="TestBug.resx">
+    <EmbeddedResource Include="Views\Shared\TestBug.resx">
       <DependentUpon>TestBug.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WaitCheck.resx">
+    <EmbeddedResource Include="Views\Loader\WaitCheck.resx">
       <DependentUpon>WaitCheck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PleaseWaiting.resx">
+    <EmbeddedResource Include="Views\Loader\PleaseWaiting.resx">
       <DependentUpon>PleaseWaiting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -389,8 +389,8 @@
     <None Include="Resources\images\Screenshot_1.png" />
     <None Include="Resources\1524509357_lock.png" />
     <None Include="Resources\fb-icon.jpg" />
-    <Content Include="logo75x75_cqt_icon.ico" />
-    <Content Include="logo96x96_Yat_icon.ico" />
+    <Content Include="Resources\images\logo75x75_cqt_icon.ico" />
+    <Content Include="Resources\images\logo96x96_Yat_icon.ico" />
     <Content Include="Resources\images\logo.ico" />
     <None Include="Resources\logo75x75.jpg" />
     <None Include="Resources\logo150x150.jpg" />
@@ -401,6 +401,9 @@
       <Project>{c1071b03-4bdb-4e17-91a3-1d370ece1ef0}</Project>
       <Name>Ji.Sales</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Uc\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
