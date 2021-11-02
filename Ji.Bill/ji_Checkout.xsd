@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ji_Checkout" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+<xs:element name="ji_Checkout" msdata:IsDataSet="true">
+<xs:complexType>
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element name="Table1">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="cIndex" type="xs:int" minOccurs="0" />
+<xs:element name="CustomerName" type="xs:string" minOccurs="0" />
+<xs:element name="Cashier" type="xs:string" minOccurs="0" />
+<xs:element name="TimeCheckout" type="xs:dateTime" minOccurs="0" />
+<xs:element name="FoodName" type="xs:string" minOccurs="0" />
+<xs:element name="Topping" type="xs:string" minOccurs="0" />
+<xs:element name="Quantity" type="xs:int" minOccurs="0" />
+<xs:element name="Money" type="xs:string" minOccurs="0" />
+<xs:element name="TotalMoney" type="xs:string" minOccurs="0" />
+<xs:element name="MoneyCustomer" type="xs:string" minOccurs="0" />
+<xs:element name="CustomerRefund" type="xs:string" minOccurs="0" />
+<xs:element name="Floor" type="xs:int" minOccurs="0" />
+<xs:element name="Table" type="xs:int" minOccurs="0" />
+<xs:element name="Total" type="xs:string" minOccurs="0" />
+<xs:element name="BillID" type="xs:int" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+</xs:choice>
+</xs:complexType>
+</xs:element>
+</xs:schema>
