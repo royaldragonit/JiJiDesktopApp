@@ -24,6 +24,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Ji.Core
 {
@@ -34,6 +35,11 @@ namespace Ji.Core
     {
         public static int UserID { get; set; }
         public static JObject Setup { get; set; }
+        public static T GetServices<T>(this T input)
+        {
+            T result = (T)API.ServiceProvider.GetService(typeof(T));
+            return result;
+        }
         public static DataTable ToDataTable<T>(this IList<T> data)
         {
             PropertyDescriptorCollection props =
@@ -54,6 +60,18 @@ namespace Ji.Core
                 table.Rows.Add(values);
             }
             return table;
+        }
+        /// <summary>
+        /// Lấy thông tin theo element trong file XML
+        /// </summary>
+        /// <param name="el"></param>
+        /// <returns></returns>
+        public static string GetInfoByXML(string fileName,string el)
+        {
+            XElement root = XElement.Load(fileName);
+            if (root.Element(el) != null)
+                return root.Element(el).Value;
+            return null;
         }
         /// <summary>
         /// Kiểm tra kết nối mạng

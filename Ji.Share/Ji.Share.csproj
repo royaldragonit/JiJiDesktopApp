@@ -112,6 +112,9 @@
     <Compile Include="ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commons\AuthorizeConstant.cs" />
+    <Compile Include="Commons\MessageConstant.cs" />
+    <Compile Include="Commons\UrlApi.cs" />
     <Compile Include="Controls\DragonComboBoox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -223,9 +226,13 @@
     </Compile>
     <Compile Include="Model\AddListOrder.cs" />
     <Compile Include="Model\Categories.cs" />
+    <Compile Include="Model\CustomModels\ResultCustomModel.cs" />
+    <Compile Include="Model\Entities\LUsers.cs" />
     <Compile Include="Model\Formula.cs" />
     <Compile Include="Model\Ji_GetAllMilkTeaOrder.cs" />
     <Compile Include="Model\Ji_GetDetailBill.cs" />
+    <Compile Include="Model\LoginModels\LoginRequest.cs" />
+    <Compile Include="Model\LoginModels\LoginResultModel.cs" />
     <Compile Include="Model\Menus.cs" />
     <Compile Include="Model\Messenger.cs" />
     <Compile Include="Model\OrderDetailV2.cs" />
@@ -251,7 +258,9 @@
       <DependentUpon>Pleasewait.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interface\ILoginServices.cs" />
     <Compile Include="Services\ISales.cs" />
+    <Compile Include="Services\LoginServices.cs" />
     <EmbeddedResource Include="ChooseDate.resx">
       <DependentUpon>ChooseDate.cs</DependentUpon>
     </EmbeddedResource>

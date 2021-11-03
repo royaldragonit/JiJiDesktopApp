@@ -1,4 +1,5 @@
-﻿using Ji.Model;
+﻿using Ji.Commons;
+using Ji.Model;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -20,7 +21,7 @@ namespace Ji.Core
         /// </summary>
         public static string Access_Token { get; set; }
         public static string FacID { get; set; }
-
+        public static IServiceProvider ServiceProvider { get; set; }
         public static int UpdateRecipe(int RecipeID, string Note)
         {
             var client = new RestClient(Extension.GetAppSetting("API") + "Recipe/UpdateRecipe");
@@ -84,7 +85,35 @@ namespace Ji.Core
                 return response.Data;
             return null;
         }
-
+        public static T Post<T>(string url,object param)
+        {
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Authorization", UrlApi.TokenType + AuthorizeConstant.Token); client.ConfigureWebRequest((r) =>
+            {
+                r.ServicePoint.Expect100Continue = false;
+                r.KeepAlive = true;
+            });
+            request.AddJsonBody(param);
+            var data = client.Execute<T>(request).Data;
+            return data;
+        }
+        public static T Get<T>(string url,object param)
+        {
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", UrlApi.TokenType + AuthorizeConstant.Token); client.ConfigureWebRequest((r) =>
+            {
+                r.ServicePoint.Expect100Continue = false;
+                r.KeepAlive = true;
+            });
+            var data = client.Execute<T>(request).Data;
+            return data;
+        }
         public static int AddResourceRecipe(int PriceCost, int Quantity, int ResourcesID, int RecipeID)
         {
             var client = new RestClient(Extension.GetAppSetting("API") + "Recipe/AddResourceRecipe");

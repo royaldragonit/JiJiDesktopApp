@@ -1,10 +1,15 @@
 ﻿using DevExpress.XtraSplashScreen;
 using Ji;
+using Ji.Commons;
 using Ji.Core;
+using Ji.Services;
+using Ji.Services.Interface;
+using Microsoft.Extensions.DependencyInjection;
 using Shell.Views.Frm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,7 +28,9 @@ namespace Shell
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmLoginWithGoogle());
             bool ownmutex;
-
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            ConfigureServices();
+            UrlApi.Url = Extension.GetAppSetting("ApiUrl");
             // Tạo và lấy quyền sở hữu một Mutex có tên là Icon;
             using (Mutex mutex = new Mutex(true, "Icon", out ownmutex))
             {
@@ -73,6 +80,13 @@ namespace Shell
         {
             Exception e = (Exception)args.ExceptionObject;
             UI.Error(e);
+        }
+
+        private static void ConfigureServices()
+        {
+            var services = new ServiceCollection();
+            services.AddTransient<ILoginServices, LoginServices>();
+            API.ServiceProvider = services.BuildServiceProvider();
         }
         static void EndProcess()
         {
