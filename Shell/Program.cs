@@ -86,6 +86,9 @@ namespace Shell
         {
             var services = new ServiceCollection();
             services.AddTransient<ILoginServices, LoginServices>();
+            services.AddTransient<ISystemServices, SystemServices>();
+            services.AddTransient<IOrderServices, OrderServices>();
+            services.AddTransient<IProductServices, ProductServices>();
             API.ServiceProvider = services.BuildServiceProvider();
         }
         static void EndProcess()

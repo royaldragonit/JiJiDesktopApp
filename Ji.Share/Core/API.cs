@@ -85,7 +85,7 @@ namespace Ji.Core
                 return response.Data;
             return null;
         }
-        public static T Post<T>(string url,object param)
+        public static T Post<T>(string url,object param=null)
         {
             var client = new RestClient(url);
             client.Timeout = -1;
@@ -98,10 +98,10 @@ namespace Ji.Core
                 r.KeepAlive = true;
             });
             request.AddJsonBody(param);
-            var data = client.Execute<T>(request).Data;
-            return data;
+            var data = client.Execute<T>(request);
+            return data.Data;
         }
-        public static T Get<T>(string url,object param)
+        public static T Get<T>(string url)
         {
             var client = new RestClient(url);
             client.Timeout = -1;
@@ -111,8 +111,8 @@ namespace Ji.Core
                 r.ServicePoint.Expect100Continue = false;
                 r.KeepAlive = true;
             });
-            var data = client.Execute<T>(request).Data;
-            return data;
+            var data = client.Execute<T>(request);
+            return data.Data;
         }
         public static int AddResourceRecipe(int PriceCost, int Quantity, int ResourcesID, int RecipeID)
         {

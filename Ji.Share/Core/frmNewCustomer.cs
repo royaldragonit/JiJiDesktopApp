@@ -69,18 +69,18 @@ namespace Ji.Core
                 request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddParameter("Phone", txtPhone.Text);
-                var response = client.Post<L_Customer>(request);
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    //Nếu khách hàng đã tồn tại
-                    if (response.Data != null)
-                    {
-                        DialogResult = System.Windows.Forms.DialogResult.OK;
-                        CustomerName = response.Data.FullName;
-                        CustomerID = response.Data.ID;
-                        Close();
-                    }
-                }
+                //var response = client.Post<L_Customer>(request);
+                //if (response.StatusCode == HttpStatusCode.OK)
+                //{
+                //    //Nếu khách hàng đã tồn tại
+                //    if (response.Data != null)
+                //    {
+                //        DialogResult = System.Windows.Forms.DialogResult.OK;
+                //        CustomerName = response.Data.FullName;
+                //        CustomerID = response.Data.ID;
+                //        Close();
+                //    }
+                //}
             }
         }
     }

@@ -2,6 +2,7 @@
 using Ji;
 using Ji.Core;
 using Ji.Model;
+using Ji.Services.Interface;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Shell.Views.Loader;
@@ -22,8 +23,10 @@ namespace Shell.Views.Frm
     public partial class frmMain : ClientForm, IClientControl
     {
         HubConnection hubConnection;
+        private readonly ISystemServices _systemServices;
         public frmMain()
         {
+            _systemServices= _systemServices.GetServices();
             InitializeComponent();
             hubConnection = new HubConnectionBuilder()
                 .WithUrl(Extension.GetAppSetting("Server") + "/ChatHub", options =>
@@ -65,42 +68,42 @@ namespace Shell.Views.Frm
 
         public void LoadControl()
         {
-            if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.ShowForm(typeof(PleaseWaiting));
-            var menu = API.API_GetAllApplication<Dictionary<string, string>>(Extension.GetAppSetting("API") + "Application/GetAllApplication", API.Access_Token);
+            UI.ShowSplashForm();
+            var menu = _systemServices.ListSystemMenu();
             var menu2 = menu.Select(x => new
             {
-                Cat = x["category"],
-                CatNonUnicode = x["categoryNonUnicode"]
+                x.Category,
+                x.CategoryNonUnicode
             }).Distinct();
             foreach (var cat in menu2)
             {
-                ToolStripMenuItem MenuItems = new ToolStripMenuItem(cat.Cat);
-                MenuItems.Name = cat.CatNonUnicode;
+                ToolStripMenuItem MenuItems = new ToolStripMenuItem(cat.Category);
+                MenuItems.Name = cat.CategoryNonUnicode;
                 JiMenu.Items.Add(MenuItems);
-                foreach (var item in menu.Where(x => x["categoryNonUnicode"].Equals(cat.CatNonUnicode)))
+                var lstMenu2 = menu.Where(x => x.CategoryNonUnicode.Equals(cat.CategoryNonUnicode));
+                foreach (var item in lstMenu2)
                 {
-                    ToolStripMenuItem SubMenuItem = new ToolStripMenuItem(item["name"]);
-                    SubMenuItem.Name = item["nameNonUnicode"];
-                    if (item["image"].Length > 100)
+                    ToolStripMenuItem SubMenuItem = new ToolStripMenuItem(item.Name);
+                    SubMenuItem.Name = item.NameNonUnicode;
+                    if (item.Image.Length > 100)
                     {
-                        Image image = item["image"].Base64ToImage();
+                        Image image = item.Image.Base64ToImage();
                         SubMenuItem.Image = image;
                     }
-                    SubMenuItem.Tag = item["dll"] + "," + item["className"];
+                    SubMenuItem.Tag = item.DLL + "," + item.ClassName;
                     SubMenuItem.Click += SubMenuItem_Click;
-                    string FileName = item["dll"];
-                    string ClassName = item["className"];
+                    string FileName = item.DLL;
+                    string ClassName = item.ClassName;
                     MenuItems.DropDownItems.Add(SubMenuItem);
                 }
             }
             #region Load DLL mặc định
-            var menu3 = menu.FirstOrDefault(x => Convert.ToBoolean(x["defaultDLL"]));
+            var menu3 = menu.FirstOrDefault(x => Convert.ToBoolean(x.DefaultDLL));
             if (menu3 != null)
             {
                 ClientControl control = null;
-                string fileName = menu3["dll"];
-                string className = menu3["className"];
+                string fileName = menu3.DLL;
+                string className = menu3.ClassName;
                 if (fileName != "0")
                 {
                     fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
@@ -122,8 +125,7 @@ namespace Shell.Views.Frm
                 }
             }
             #endregion
-            if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.CloseForm();
+            UI.CloseSplashForm();
         }
 
         private void SubMenuItem_Click(object sender, EventArgs e)
@@ -232,7 +234,7 @@ namespace Shell.Views.Frm
         {
             try
             {
-                int CustomerID = Extension.Setup["userID"].ToInt();
+                int CustomerID =1;
                 await hubConnection.StartAsync();
                 string ConnectionID = hubConnection.ConnectionId;
                 //Lưu ConnectionID của Supporter lên Server

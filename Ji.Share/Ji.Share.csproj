@@ -82,18 +82,6 @@
   <ItemGroup>
     <Compile Include="Base\ValidateAPIAttribute.cs" />
     <Compile Include="Base\Modules.cs" />
-    <Compile Include="BillDetail.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="BillFood.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Bills.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Category.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="ChooseDate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,94 +127,17 @@
     </Compile>
     <Compile Include="Core\GridcontrolDevexpress.cs" />
     <Compile Include="Core\UI.cs" />
-    <Compile Include="Facility.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HistoryDeleteItemOrder.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="IClientControl.cs" />
-    <Compile Include="Installed.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Installer.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JiApplication.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JiContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JiContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JiContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="JiContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>JiContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ji_Checkout1_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_Checkout_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_GetDataOrder_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_LoadCategory_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_LoadMilk_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_Printing1_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_Printing_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ji_Printing_Result1.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="LoadMilk_Result.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_Customer.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_DateCome_Customer.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_Floor.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_Food.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_HistoryPoached.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_History_Installer.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_Poached.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_Topping.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="L_Users.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\AddListOrder.cs" />
     <Compile Include="Model\Categories.cs" />
+    <Compile Include="Model\CustomModels\InitCashierModel.cs" />
     <Compile Include="Model\CustomModels\ResultCustomModel.cs" />
+    <Compile Include="Model\Entities\Ji_GetDetailBillResult.cs" />
+    <Compile Include="Model\Entities\Orders.cs" />
+    <Compile Include="Model\Entities\Ji_GetAllMilkTeaOrderResult.cs" />
+    <Compile Include="Model\Entities\ji_GetApplicationResult.cs" />
+    <Compile Include="Model\Entities\LFloor.cs" />
+    <Compile Include="Model\Entities\LTopping.cs" />
     <Compile Include="Model\Entities\LUsers.cs" />
     <Compile Include="Model\Formula.cs" />
     <Compile Include="Model\Ji_GetAllMilkTeaOrder.cs" />
@@ -236,6 +147,7 @@
     <Compile Include="Model\Menus.cs" />
     <Compile Include="Model\Messenger.cs" />
     <Compile Include="Model\OrderDetailV2.cs" />
+    <Compile Include="Model\OrderModels\OrderDetailRequest.cs" />
     <Compile Include="Model\Pay.cs" />
     <Compile Include="Model\Recipe.cs" />
     <Compile Include="Model\ReportBillDetail.cs" />
@@ -245,12 +157,6 @@
     <Compile Include="Model\SetupShops.cs" />
     <Compile Include="Model\Topping.cs" />
     <Compile Include="Model\Users.cs" />
-    <Compile Include="Orders.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OrdersFood.cs">
-      <DependentUpon>JiContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pleasewait.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,8 +165,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interface\ILoginServices.cs" />
+    <Compile Include="Services\Interface\IOrderServices.cs" />
+    <Compile Include="Services\Interface\IProductServices.cs" />
+    <Compile Include="Services\Interface\ISystemServices.cs" />
     <Compile Include="Services\ISales.cs" />
     <Compile Include="Services\LoginServices.cs" />
+    <Compile Include="Services\OrderServices.cs" />
+    <Compile Include="Services\ProductServices.cs" />
+    <Compile Include="Services\SystemServices.cs" />
     <EmbeddedResource Include="ChooseDate.resx">
       <DependentUpon>ChooseDate.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,13 +204,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EntityDeploy Include="JiContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>JiContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="JiContext.edmx.diagram">
-      <DependentUpon>JiContext.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -317,16 +222,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="JiContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>JiContext.edmx</DependentUpon>
-      <LastGenOutput>JiContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="JiContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>JiContext.edmx</DependentUpon>
-      <LastGenOutput>JiContext.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\783px-Arrow_down_red.svg.png" />
     <None Include="Resources\arrow_down.png" />
   </ItemGroup>

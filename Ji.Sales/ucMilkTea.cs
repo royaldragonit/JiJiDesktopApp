@@ -20,6 +20,10 @@ using Ji.Base;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Net;
+using Ji.Services.Interface;
+using Ji.Model.Entities;
+using Ji.Model.OrderModels;
+using Ji.Model.CustomModels;
 
 namespace Ji.Sales
 {
@@ -27,14 +31,15 @@ namespace Ji.Sales
     {
         HubConnection hubConnection = new HubConnection(Extension.GetAppSetting("Server"));
         IHubProxy chat;
-        private DataTable Orders;
-        private DataTable Floors;
-        private DataTable ListMilkTea;
+        private InitCashierModel initCashier;
         private int? CustomerID = null;
         private int Floor = 1, Table = 1;
+        private readonly IProductServices _productServices;
+        private readonly ISystemServices _systemServices;
+        private readonly IOrderServices _orderServices;
         public void Initaily()
         {
-            LoadData(Floor, Table);
+            LoadData(Floor, Table, initCashier.ListOrderDetail);
             LoadControl();
             btnDelete.Click += btnDelete_Click;
             chat = hubConnection.CreateHubProxy("ChatHub");
@@ -42,81 +47,43 @@ namespace Ji.Sales
 
         public ucMilkTea()
         {
+            _productServices = _productServices.GetServices();
+            _systemServices = _systemServices.GetServices();
+            _orderServices = _orderServices.GetServices();
             InitializeComponent();
-            BinddingFood();
             BinddingMilkTea();
-            GetFloors();
-            GetOrders();
-            Initaily();
             BindingTopping();
+            Initaily();
         }
-        public static object CallAPI(string url, Dictionary<string, object> param = null)
+        public void BinddingMilkTea()
         {
-            var client = new RestClient(Extension.GetAppSetting("API") + url);
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
-            if (param != null)
-            {
-                foreach (var item in param)
-                {
-                    request.AddParameter(item.Key, item.Value);
-                }
-            }
-            var response = client.Post(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Content;
-            return -1;
-        }
-        public void BinddingFood()
-        {
-            var ds = CallAPI("Application/GetAllFood").ToString();
-            List<Ji_GetAllMilkTeaOrder> UserList = JsonConvert.DeserializeObject<List<Ji_GetAllMilkTeaOrder>>(ds);
-            searchFood.Properties.DataSource = UserList.ToDataTable();
+            OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
+            orderDetailRequest.Table = Table;
+            orderDetailRequest.Floor = Floor;
+            initCashier = _systemServices.InitCashier(orderDetailRequest);
+            searchFood.Properties.DataSource = initCashier.ListMilkTea;
             searchFood.Properties.DisplayMember = "FoodName";
             searchFood.Properties.ValueMember = "ID";
         }
         /// <summary>
-        /// Lấy danh sách tất cả tầng/lầu của quán
-        /// </summary>
-        public void GetFloors()
-        {
-            var ds = CallAPI("Application/GetFloor").ToString();
-            List<L_Floor> floors = JsonConvert.DeserializeObject<List<L_Floor>>(ds);
-            Floors = floors.ToDataTable();
-        }
-        /// <summary>
         /// Lấy danh sách tất cả Order
         /// </summary>
-        public void GetOrders()
+        public void ReloadOrders()
         {
-            var ds = CallAPI("Order/GetOrders").ToString();
-            List<Orders> orders = JsonConvert.DeserializeObject<List<Orders>>(ds);
-            Orders = orders.ToDataTable();
-        }
-        /// <summary>
-        /// Load Trà Sữa lên
-        /// </summary>
-        public void BinddingMilkTea()
-        {
-            var ds = CallAPI("Application/GetAllFood").ToString();
-            List<Food> list = JsonConvert.DeserializeObject<List<Food>>(ds);
-            ListMilkTea = list.ToDataTable();
+            initCashier.ListOrder = _orderServices.ListOrder();
         }
         /// <summary>
         /// Load Topping lên (Truy vấn Database ---> Tương lai sẽ chuyển sang Cached)
         /// </summary>
         private void BindingTopping()
         {
-            var data = CallAPI("Application/GetAllToppings").ToString();
-            List<L_Topping> list = JsonConvert.DeserializeObject<List<L_Topping>>(data);
-            DataTable ds = list.ToDataTable();
-            if (ds?.Rows?.Count > 0)
+            var data = initCashier.ListTopping;
+            if (data != null)
             {
-                foreach (DataRow i in ds.Rows)
+                foreach (var item in data)
                 {
-                    CheckedListBoxItem items = new CheckedListBoxItem(i["ID"], true);
-                    items.Description = i["ToppingName"].ToString();
+                    CheckedListBoxItem items = new CheckedListBoxItem(item.Id, true);
+                    items.Description = item.ToppingName;
                     items.CheckState = CheckState.Unchecked;
                     cbListTopping.Properties.Items.Add(items);
                 }
@@ -127,11 +94,11 @@ namespace Ji.Sales
         /// </summary>
         public void RemoveAllChildControl()
         {
-            if (Floors?.Rows?.Count > 0)
+            if (initCashier.ListFloor != null)
             {
-                foreach (DataRow item in Floors.Rows)
+                foreach (var item in initCashier.ListFloor)
                 {
-                    XtraTabPage tp = this.Controls.Find("TabFloor" + item["Affect"], true).FirstOrDefault() as XtraTabPage;
+                    XtraTabPage tp = this.Controls.Find("TabFloor" + item.Affect, true).FirstOrDefault() as XtraTabPage;
                     TabControlListTable.TabPages.Remove(tp);
                 }
             }
@@ -140,24 +107,24 @@ namespace Ji.Sales
         {
             int NumberTableInRow = (TabControlListTable.Width - 6) / 7;
             int Width = (TabControlListTable.Width - 6) / (NumberTableInRow == 0 ? 1 : NumberTableInRow);
-            if (Floors?.Rows?.Count > 0)
+            if (initCashier.ListFloor != null)
             {
-                foreach (DataRow item in Floors.Rows)
+                foreach (var item in initCashier.ListFloor)
                 {
                     XtraTabPage tp = new XtraTabPage();
-                    tp.Name = "TabFloor" + item["Affect"];
+                    tp.Name = "TabFloor" + item.Affect;
                     tp.BackColor = Color.FromArgb(255, 192, 192);
                     tp.Click += Tp_Click;
-                    tp.Tag = item["Affect"];
-                    tp.Text = item["Name"].ToString();
+                    tp.Tag = item.Affect;
+                    tp.Text = item.Name;
                     TabControlListTable.TabPages.Add(tp);
                     //Số bàn trên 1 hàng
-                    for (int i = 0; i < item["CountTable"].ToInt(); i++)
+                    for (int i = 0; i < item.CountTable; i++)
                     {
                         SimpleButton btn = new SimpleButton();
                         btn.Text = (i + 1).ToString();
                         btn.Height = NumberTableInRow;
-                        btn.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Style3D;
+                        btn.ButtonStyle = BorderStyles.Style3D;
                         btn.Appearance.BackColor = Color.FromArgb(192, 255, 255);
                         btn.Appearance.ForeColor = Color.Black;
                         btn.Appearance.Font = new Font(btn.Appearance.Font.FontFamily, btn.Appearance.Font.Size, FontStyle.Bold);
@@ -178,7 +145,8 @@ namespace Ji.Sales
                 tbx.Appearance.BackColor = Color.Yellow;
                 tbx.Appearance.ForeColor = Color.Black;
             }
-            chkBarCode.Visible = Extension.Setup["showBarCode"].ToBoolean();
+            //chkBarCode.Visible = Extension.Setup["showBarCode"].ToBoolean();
+            chkBarCode.Visible =true;
         }
         /// <summary>
         /// Hàm TabPage Click để set đang chọn ở Tầng nào
@@ -217,34 +185,34 @@ namespace Ji.Sales
                             CustomerName = txtCustomerName.Text;
                         if (!string.IsNullOrEmpty(txtCustomerMoney.EditValue.ToString()))
                             CustomerMoney = txtCustomerMoney.Text.ToInt();
-                        List<ReportBillDetail> lst = new List<ReportBillDetail>();
-                        foreach (DataRow item in dataPrint.Rows)
-                        {
-                            ReportBillDetail rep = new ReportBillDetail();
-                            rep.BillID = item["cOrderID"].ToInt();
-                            rep.Cashier = "Thu ngân";
-                            rep.Topping = item["cPriceTopping"].ToVND();
-                            rep.cIndex = item["cIndex"].ToInt();
-                            rep.Quantity = item["cQuantity"].ToInt();
-                            rep.TimeCheckout = DateTime.Now;
-                            rep.CustomerName = CustomerName;
-                            rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
-                            rep.Discount = discount;
-                            rep.Floor = Floor;
-                            rep.FoodName = item["cFood"].ToString();
-                            //Đơn giá tiền
-                            rep.Money = item["cPrice"].ToVND();
-                            //Tiền khách đưa
-                            rep.MoneyCustomer = CustomerMoney.ToVND();
-                            //tổng tiền sau khi nhân với số lượng và Topping
-                            rep.TotalMoney = item["cTotal"].ToVND();
-                            //Số tiền cần thanh toán
-                            rep.Total = totalMoney.ToVND();
-                            lst.Add(rep);
-                        }
+                        //List<ReportBillDetail> lst = new List<ReportBillDetail>();
+                        //foreach (DataRow item in dataPrint.Rows)
+                        //{
+                        //    ReportBillDetail rep = new ReportBillDetail();
+                        //    rep.BillID = item["cOrderID"].ToInt();
+                        //    rep.Cashier = "Thu ngân";
+                        //    rep.Topping = item["cPriceTopping"].ToVND();
+                        //    rep.cIndex = item["cIndex"].ToInt();
+                        //    rep.Quantity = item["cQuantity"].ToInt();
+                        //    rep.TimeCheckout = DateTime.Now;
+                        //    rep.CustomerName = CustomerName;
+                        //    rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
+                        //    rep.Discount = discount;
+                        //    rep.Floor = Floor;
+                        //    rep.FoodName = item["cFood"].ToString();
+                        //    //Đơn giá tiền
+                        //    rep.Money = item["cPrice"].ToVND();
+                        //    //Tiền khách đưa
+                        //    rep.MoneyCustomer = CustomerMoney.ToVND();
+                        //    //tổng tiền sau khi nhân với số lượng và Topping
+                        //    rep.TotalMoney = item["cTotal"].ToVND();
+                        //    //Số tiền cần thanh toán
+                        //    rep.Total = totalMoney.ToVND();
+                        //    lst.Add(rep);
+                        //}
                         rptBill report = new rptBill();
                         report.ShowPrintMarginsWarning = false;
-                        report.DataSource = lst;
+                        // report.DataSource = lst;
                         report.CreateDocument();
                         Thread thread = new Thread(() =>
                         {
@@ -274,9 +242,9 @@ namespace Ji.Sales
         /// </summary>
         public void SetColorTable()
         {
-            foreach (DataRow item in Orders?.Rows)
+            foreach (var item in initCashier.ListOrder)
             {
-                SimpleButton sb = Controls.Find("btnTable" + item["Table"], true).FirstOrDefault() as SimpleButton;
+                SimpleButton sb = Controls.Find("btnTable" + item.Table, true).FirstOrDefault() as SimpleButton;
                 if (sb != null)
                 {
                     sb.ToolTip = sb.Text + " đang có đơn hàng   ";
@@ -338,29 +306,29 @@ namespace Ji.Sales
         {
 
         }
-        public void LoadData(int floor, int table)
+        public void LoadData(int floor, int table, List<Ji_GetDetailBillResult> lstData=null)
         {
             if (!Extension.CheckInternet())
             {
                 UI.Warning("Vui lòng kiểm tra kết nối mạng và thử lại");
                 return;
             }
-            Dictionary<string, object> p = new Dictionary<string, object>();
-            p["Table"] = table;
-            p["Floor"] = floor;
-            var ds = CallAPI("Order/GetOrder", p).ToString();
-            List<Ji_GetDetailBill> list = JsonConvert.DeserializeObject<List<Ji_GetDetailBill>>(ds);
-            var dataSourceDetailBill = list.ToDataTable();
-            gridControl1.DataSource = null;
-            gridControl1.DataSource = dataSourceDetailBill;
-            string rs = API.GetTotalMoneyOrder();
-            lblTotalMoneyOrder.Text = rs.VNDToNumber().ToVND();
-            int total = 0;
-            foreach (DataRow item in dataSourceDetailBill.Rows)
+            if (lstData == null)
             {
-                total += item["cTotal"].ToInt();
+                OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
+                orderDetailRequest.Table = table;
+                orderDetailRequest.Floor = floor;
+                lstData= _orderServices.ListOrderDetail(orderDetailRequest);
             }
-            txtNote.Text = dataSourceDetailBill.Rows.Count > 0 ? dataSourceDetailBill.Rows[0]["Note"].ToString() : "";
+            gridControl1.DataSource = null;
+            gridControl1.DataSource = lstData;
+            lblTotalMoneyOrder.Text = 136975.ToVND();
+            int total = 0;
+            foreach (var item in lstData)
+            {
+                total += item.cTotal.Value;
+            }
+            txtNote.Text = lstData.Count > 0 ? lstData[0].Note : "";
             txtTotalTemp.Text = total.ToVND();
             try
             {
@@ -376,8 +344,8 @@ namespace Ji.Sales
             {
                 UI.Warning("Vui lòng nhập định dạng giảm giá đúng với số");
             }
-            if (dataSourceDetailBill.Rows.Count > 0)
-                gridControl1.Tag = dataSourceDetailBill.Rows[0]["cOrderID"];
+            if (lstData.Count > 0)
+                gridControl1.Tag = lstData[0].cOrderID;
         }
 
         private void txtDiscountMoney_EditValueChanging(object sender, ChangingEventArgs e)
@@ -464,59 +432,59 @@ namespace Ji.Sales
                 var dataSource = ReadyPrinting();
                 if (dataSource != null)
                 {
-                    printing.dataSource = dataSource;
+                    //  printing.dataSource = dataSource;
                     printing.ShowDialog();
                 }
                 if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
                     SplashScreenManager.CloseForm();
             }
         }
-        private List<ReportBillDetail> ReadyPrinting()
+        private List<dynamic> ReadyPrinting()
         {
-            var ds = ((DataTable)gridControl1.DataSource);
-            int t = 0;
-            foreach (DataRow item in ds.Rows)
-            {
-                t += item["cTotal"].ToInt();
-            }
-            //Tính tổng giảm giá        (%)                        và          tiền mặt
-            int discount = t * txtDiscountPercent.Text.ToInt() / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
-            int totalMoney = t - discount;
-            if (ds.Rows.Count > 0)
-            {
-                int CustomerMoney = -1;
-                string CustomerName = "Khách yêu ♥";
-                if (!string.IsNullOrEmpty(txtCustomerName.EditValue.ToString()))
-                    CustomerName = txtCustomerName.Text;
-                if (!string.IsNullOrEmpty(txtCustomerMoney.EditValue.ToString()))
-                    CustomerMoney = txtCustomerMoney.Text.ToInt();
-                List<ReportBillDetail> lst = new List<ReportBillDetail>();
-                foreach (DataRow item in ds.Rows)
-                {
-                    ReportBillDetail rep = new ReportBillDetail();
-                    rep.BillID = item["cOrderID"].ToInt();
-                    rep.Cashier = "Thu ngân";
-                    rep.Topping = item["cPriceTopping"].ToVND();
-                    rep.cIndex = item["cIndex"].ToInt();
-                    rep.Quantity = item["cQuantity"].ToInt();
-                    rep.TimeCheckout = DateTime.Now;
-                    rep.CustomerName = CustomerName;
-                    rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
-                    rep.Discount = t;
-                    rep.Floor = Floor;
-                    rep.FoodName = item["cFood"].ToString();
-                    //Đơn giá tiền
-                    rep.Money = item["cPrice"].ToVND();
-                    //Tiền khách đưa
-                    rep.MoneyCustomer = CustomerMoney.ToVND();
-                    //tổng tiền sau khi nhân với số lượng và Topping
-                    rep.TotalMoney = item["cTotal"].ToVND();
-                    //Số tiền cần thanh toán
-                    rep.Total = totalMoney.ToVND();
-                    lst.Add(rep);
-                }
-                return lst;
-            }
+            //var ds = ((DataTable)gridControl1.DataSource);
+            //int t = 0;
+            //foreach (DataRow item in ds.Rows)
+            //{
+            //    t += item["cTotal"].ToInt();
+            //}
+            ////Tính tổng giảm giá        (%)                        và          tiền mặt
+            //int discount = t * txtDiscountPercent.Text.ToInt() / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
+            //int totalMoney = t - discount;
+            //if (ds.Rows.Count > 0)
+            //{
+            //    int CustomerMoney = -1;
+            //    string CustomerName = "Khách yêu ♥";
+            //    if (!string.IsNullOrEmpty(txtCustomerName.EditValue.ToString()))
+            //        CustomerName = txtCustomerName.Text;
+            //    if (!string.IsNullOrEmpty(txtCustomerMoney.EditValue.ToString()))
+            //        CustomerMoney = txtCustomerMoney.Text.ToInt();
+            //    List<ReportBillDetail> lst = new List<ReportBillDetail>();
+            //    foreach (DataRow item in ds.Rows)
+            //    {
+            //        ReportBillDetail rep = new ReportBillDetail();
+            //        rep.BillID = item["cOrderID"].ToInt();
+            //        rep.Cashier = "Thu ngân";
+            //        rep.Topping = item["cPriceTopping"].ToVND();
+            //        rep.cIndex = item["cIndex"].ToInt();
+            //        rep.Quantity = item["cQuantity"].ToInt();
+            //        rep.TimeCheckout = DateTime.Now;
+            //        rep.CustomerName = CustomerName;
+            //        rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
+            //        rep.Discount = t;
+            //        rep.Floor = Floor;
+            //        rep.FoodName = item["cFood"].ToString();
+            //        //Đơn giá tiền
+            //        rep.Money = item["cPrice"].ToVND();
+            //        //Tiền khách đưa
+            //        rep.MoneyCustomer = CustomerMoney.ToVND();
+            //        //tổng tiền sau khi nhân với số lượng và Topping
+            //        rep.TotalMoney = item["cTotal"].ToVND();
+            //        //Số tiền cần thanh toán
+            //        rep.Total = totalMoney.ToVND();
+            //        lst.Add(rep);
+            //    }
+            //    return lst;
+            //}
             return null;
         }
         /// <summary>
@@ -585,7 +553,7 @@ namespace Ji.Sales
                         t += txtDiscountMoney.Text?.ToInt() ?? 0;
                         txtTotal.Text = (total - t).ToVND();
                     }
-                    GetOrders();
+                    ReloadOrders();
                 }
             }
             if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
@@ -626,7 +594,7 @@ namespace Ji.Sales
                     int ds1 = API.DeleteOrder(Floor, Table);
                     if (ds1 > 0)
                     {
-                        GetOrders();
+                        ReloadOrders();
                         LoadData(Floor, Table);
                     }
                 }
@@ -779,7 +747,7 @@ namespace Ji.Sales
                             if (chkBarCode.Checked)
                                 printing.BarCode = true;
                             var ds = ReadyPrinting();
-                            printing.dataSource = ds;
+                            // printing.dataSource = ds;
                             //Khi bấm In mới lưu xuống Database
                             if (DialogResult.OK == printing.ShowDialog())
                             {

@@ -19,7 +19,7 @@ namespace Ji.Sales
 {
     public partial class PreviewPrinting : Form
     {
-        public List<ReportBillDetail> dataSource;
+        public List<dynamic> dataSource;
         public string type = "print";
         JObject setup = Extension.Setup;
         public PreviewPrinting()
@@ -44,7 +44,7 @@ namespace Ji.Sales
             Preview.DocumentSource = report;
             //Set cho máy in mã vạch
             rptBarCode.ShowPrintMarginsWarning = false;
-            List<ReportBillDetail> barcode = new List<ReportBillDetail>();
+            List<dynamic> barcode = new List<dynamic>();
             foreach (var item in dataSource)
             {
                 for (int i = 0; i < item.Quantity; i++)

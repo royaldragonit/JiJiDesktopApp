@@ -1,4 +1,5 @@
 ﻿using Ji.Core;
+using Ji.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace Ji.Sales
         public frmTopping()
         {
             InitializeComponent();
-            var ds = API.API_GetAllTopping<L_Topping>(Extension.GetAppSetting("API") + "Application/GetAllTopping");
+            var ds = API.API_GetAllTopping<LTopping>(Extension.GetAppSetting("API") + "Application/GetAllTopping");
             ChooseTopping.DataSource = ds;
             ChooseTopping.ValueMember = "ID";
             ChooseTopping.DisplayMember = "ToppingName";
@@ -30,9 +31,9 @@ namespace Ji.Sales
         {
             int[] listID = new int[ChooseTopping.CheckedItems.Count+1];
             int i = 0;
-            foreach (L_Topping item in ChooseTopping.CheckedItems )
+            foreach (LTopping item in ChooseTopping.CheckedItems )
             {
-                listID[i++] = item.ID;
+                listID[i++] = item.Id;
             }
             if (listID.Count() == 0)
             {
