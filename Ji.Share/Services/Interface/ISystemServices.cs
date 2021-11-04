@@ -14,5 +14,6 @@ namespace Ji.Services.Interface
         List<ji_GetApplicationResult> ListSystemMenu();
         List<LFloor> ListFloor();
         InitCashierModel InitCashier(OrderDetailRequest orderDetailRequest);
+        bool SetDefaultDLL(string dll, string className);
     }
 }

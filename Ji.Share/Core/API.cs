@@ -5,11 +5,14 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using RestSharp.Serializers.NewtonsoftJson;
+using Newtonsoft.Json.Serialization;
 
 namespace Ji.Core
 {
@@ -85,9 +88,10 @@ namespace Ji.Core
                 return response.Data;
             return null;
         }
-        public static T Post<T>(string path, object param=null)
+        public static T Post<T>(string path, object param = null)
         {
             var client = new RestClient(UrlApi.Url + path);
+            client.UseNewtonsoftJson();
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Accept", "application/json");
@@ -98,12 +102,15 @@ namespace Ji.Core
                 r.KeepAlive = true;
             });
             request.AddJsonBody(param);
-            var data = client.Execute<T>(request);
-            return data.Data;
+            var res = client.Execute<T>(request);
+            return res.Data;
         }
+      
         public static T Get<T>(string path)
         {
             var client = new RestClient(UrlApi.Url + path);
+            client.UseNewtonsoftJson();
+
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", UrlApi.TokenType + AuthorizeConstant.Token); client.ConfigureWebRequest((r) =>
@@ -111,8 +118,8 @@ namespace Ji.Core
                 r.ServicePoint.Expect100Continue = false;
                 r.KeepAlive = true;
             });
-            var data = client.Execute<T>(request);
-            return data.Data;
+            var res = client.Execute<T>(request);
+            return res.Data;
         }
         public static int AddResourceRecipe(int PriceCost, int Quantity, int ResourcesID, int RecipeID)
         {
@@ -150,21 +157,6 @@ namespace Ji.Core
             return 0;
         }
 
-        public static string SetDefaultDLL(string fileName2, string className)
-        {
-            var client = new RestClient(Extension.GetAppSetting("API") + "Application/SetDefaultDLL");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", Token_Type + Access_Token);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddParameter("DLL", fileName2);
-            request.AddParameter("ClassName", className);
-            var response = client.Post(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Content;
-            return null;
-        }
-
         public static IEnumerable<Messenger> LoadMessenger(int iD)
         {
             var client = new RestClient(Extension.GetAppSetting("API") + "Application/GetMessenger");
@@ -189,30 +181,6 @@ namespace Ji.Core
             request.AddParameter("CreateOn", CreateOn);
             request.AddParameter("FoodID", FoodID);
             var response = client.Post<Recipe>(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Data;
-            return null;
-        }
-
-        public static IEnumerable<T> GetFloors<T>(string url, string access_Token)
-        {
-            var client = new RestClient(url);
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", Token_Type + access_Token);
-            var response = client.Post<List<T>>(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Data;
-            return null;
-        }
-
-        public static IEnumerable<T> LoadAllMenu<T>(string url, string access_Token)
-        {
-            var client = new RestClient(url);
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", Token_Type + access_Token);
-            var response = client.Post<List<T>>(request);
             if (response.StatusCode == HttpStatusCode.OK)
                 return response.Data;
             return null;
@@ -603,7 +571,7 @@ namespace Ji.Core
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/json");
-            request.AddParameter("application/json", "{\r\n    \"Username\":\""+username+ "\",\r\n    \"Password\":\"" + password + "\"\r\n}", ParameterType.RequestBody);
+            request.AddParameter("application/json", "{\r\n    \"Username\":\"" + username + "\",\r\n    \"Password\":\"" + password + "\"\r\n}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
             return response.Content;
         }
@@ -666,7 +634,7 @@ namespace Ji.Core
             request.AddHeader("Authorization", Token_Type + token);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddHeader("Content-Type", "application/json");
-            orders.Columns.Add("OrderID",typeof( int));
+            orders.Columns.Add("OrderID", typeof(int));
             orders.Columns.Add("Discount", typeof(int));
             orders.Columns.Add("CustomerName", typeof(string));
             orders.Columns.Add("CustomerID", typeof(int));
@@ -683,8 +651,8 @@ namespace Ji.Core
                 item["OrderID"] = OrderID;
                 item["Discount"] = Discount;
                 item["CustomerName"] = CustomerName;
-                item["CustomerID"] = customerID??-1;
-                item["Delivery"] =delivery;
+                item["CustomerID"] = customerID ?? -1;
+                item["Delivery"] = delivery;
                 item["CustomerPhone"] = CustomerPhone;
                 item["TimeCheckout"] = TimeCheckout;
                 item["Cashier"] = Cashier;
@@ -694,7 +662,7 @@ namespace Ji.Core
                 item["TotalMoney"] = TotalMoney;
             }
             string JSONresult = JsonConvert.SerializeObject(orders);
-            request.AddParameter("application/json", JSONresult,ParameterType.RequestBody);
+            request.AddParameter("application/json", JSONresult, ParameterType.RequestBody);
             var response = client.Post<int>(request);
             if (response.StatusCode == HttpStatusCode.OK)
                 return response.Data;
@@ -851,7 +819,7 @@ namespace Ji.Core
         /// <param name="table"></param>
         public static List<OrderDetailV2> GetDataOrder(int floor, int table)
         {
-            var client = new RestClient(Extension.GetAppSetting("API") + "Order/GetListOrder?Table=" + table+"&Floor="+floor);
+            var client = new RestClient(Extension.GetAppSetting("API") + "Order/GetListOrder?Table=" + table + "&Floor=" + floor);
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Authorization", Token_Type + Access_Token);

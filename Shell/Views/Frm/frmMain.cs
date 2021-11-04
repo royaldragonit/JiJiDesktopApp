@@ -22,7 +22,7 @@ namespace Shell.Views.Frm
 {
     public partial class frmMain : ClientForm, IClientControl
     {
-        HubConnection hubConnection;
+        private readonly HubConnection hubConnection;
         private readonly ISystemServices _systemServices;
         public frmMain()
         {
@@ -90,19 +90,19 @@ namespace Shell.Views.Frm
                         Image image = item.Image.Base64ToImage();
                         SubMenuItem.Image = image;
                     }
-                    SubMenuItem.Tag = item.DLL + "," + item.ClassName;
+                    SubMenuItem.Tag = item.Dll + "," + item.ClassName;
                     SubMenuItem.Click += SubMenuItem_Click;
-                    string FileName = item.DLL;
+                    string FileName = item.Dll;
                     string ClassName = item.ClassName;
                     MenuItems.DropDownItems.Add(SubMenuItem);
                 }
             }
             #region Load DLL mặc định
-            var menu3 = menu.FirstOrDefault(x => Convert.ToBoolean(x.DefaultDLL));
+            var menu3 = menu.FirstOrDefault(x =>x.DefaultDLL);
             if (menu3 != null)
             {
                 ClientControl control = null;
-                string fileName = menu3.DLL;
+                string fileName = menu3.Dll;
                 string className = menu3.ClassName;
                 if (fileName != "0")
                 {
@@ -143,7 +143,7 @@ namespace Shell.Views.Frm
             {
                 if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
                     SplashScreenManager.ShowForm(typeof(PleaseWaiting));
-                var fileName2 = fileName;
+                var dll = fileName;
                 fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
                 if (File.Exists(fileName))
                 {
@@ -152,7 +152,7 @@ namespace Shell.Views.Frm
                     if (control != null)
                     {
                         #region Cập nhật DLL mặc định
-                        API.SetDefaultDLL(fileName2, className);
+                        _systemServices.SetDefaultDLL(dll, className);
                         #endregion
                         panelControl1.Controls.Clear();
                         panelControl1.Controls.Add(control);

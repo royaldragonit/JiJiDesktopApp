@@ -17,19 +17,25 @@ namespace Ji.Services
     {
         public List<ji_GetApplicationResult> ListSystemMenu()
         {
-            var data = API.Get<ResultCustomModel<List<ji_GetApplicationResult>>>(UrlApi.ListSystemMenu).Data;
-            return data;
+            var data = API.Get<ResultCustomModel<List<ji_GetApplicationResult>>>(UrlApi.ListSystemMenu);
+            return data.Data;
         }
         public List<LFloor> ListFloor()
         {
-            var data = API.Get<ResultCustomModel<List<LFloor>>>(UrlApi.ListFloor).Data;
-            return data;
+            var data = API.Get<ResultCustomModel<List<LFloor>>>(UrlApi.ListFloor);
+            return data.Data;
         }
 
         public InitCashierModel InitCashier(OrderDetailRequest orderDetailRequest)
         {
-            var data = API.Post<InitCashierModel>(UrlApi.InitCashier, orderDetailRequest);
-            return data;
+            var data = API.Post<ResultCustomModel<InitCashierModel>>(UrlApi.InitCashier, orderDetailRequest);
+            return data.Data;
+        }
+
+        public bool SetDefaultDLL(string dll, string className)
+        {
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.SetDefaultDLL+"?dll="+ dll+"&className="+className);
+            return data.Data;
         }
     }
 }

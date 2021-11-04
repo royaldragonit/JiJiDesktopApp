@@ -14,6 +14,7 @@ namespace Ji.Commons
         public const string ListSystemMenu = "api/System/ListSystemMenu";
         public const string ListFloor = "api/System/ListFloor";
         public const string InitCashier = "api/System/InitCashier";
+        public const string SetDefaultDLL = "api/System/SetDefaultDLL";
         #endregion
         #region Product API
         public const string ListMilkTea = "api/Product/ListMilkTea";
