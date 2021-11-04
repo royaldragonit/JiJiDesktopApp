@@ -15,13 +15,13 @@ namespace Ji.Services
     {
         public List<Ji_GetAllMilkTeaOrderResult> ListMilkTea()
         {
-            var data = API.Get<ResultCustomModel<List<Ji_GetAllMilkTeaOrderResult>>>(UrlApi.Url + UrlApi.ListMilkTea);
+            var data = API.Get<ResultCustomModel<List<Ji_GetAllMilkTeaOrderResult>>>(UrlApi.ListMilkTea);
             return data.Data;
         }
 
         public List<LTopping> ListTopping()
         {
-            var data = API.Get<ResultCustomModel<List<LTopping>>>(UrlApi.Url + UrlApi.ListTopping);
+            var data = API.Get<ResultCustomModel<List<LTopping>>>(UrlApi.ListTopping);
             return data.Data;
         }
     }

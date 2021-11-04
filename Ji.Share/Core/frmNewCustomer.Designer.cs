@@ -32,11 +32,11 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.txtEmail = new DevExpress.XtraEditors.TextEdit();
+            this.txtAddress = new DevExpress.XtraEditors.TextEdit();
             this.txtPhone = new DevExpress.XtraEditors.TextEdit();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEmail.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPhone.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             this.SuspendLayout();
@@ -76,25 +76,25 @@
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(12, 76);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(43, 16);
+            this.labelControl2.Size = new System.Drawing.Size(45, 17);
             this.labelControl2.TabIndex = 7;
-            this.labelControl2.Text = "E-Mail:";
+            this.labelControl2.Text = "Địa chỉ";
             // 
-            // txtEmail
+            // txtAddress
             // 
-            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmail.EditValue = "";
-            this.txtEmail.Location = new System.Drawing.Point(67, 71);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.txtEmail.Properties.Appearance.Options.UseFont = true;
-            this.txtEmail.Properties.Appearance.Options.UseTextOptions = true;
-            this.txtEmail.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.txtEmail.Properties.DisplayFormat.FormatString = "{0:n0}";
-            this.txtEmail.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.txtEmail.Size = new System.Drawing.Size(215, 26);
-            this.txtEmail.TabIndex = 13;
+            this.txtAddress.EditValue = "";
+            this.txtAddress.Location = new System.Drawing.Point(67, 71);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.txtAddress.Properties.Appearance.Options.UseFont = true;
+            this.txtAddress.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtAddress.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.txtAddress.Properties.DisplayFormat.FormatString = "{0:n0}";
+            this.txtAddress.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.txtAddress.Size = new System.Drawing.Size(215, 26);
+            this.txtAddress.TabIndex = 13;
             // 
             // txtPhone
             // 
@@ -153,7 +153,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtCustomerName);
             this.Controls.Add(this.txtPhone);
-            this.Controls.Add(this.txtEmail);
+            this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelControl7);
@@ -163,7 +163,7 @@
             this.Name = "frmNewCustomer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm Khách Hàng mới";
-            ((System.ComponentModel.ISupportInitialize)(this.txtEmail.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPhone.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -176,7 +176,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.TextEdit txtEmail;
+        private DevExpress.XtraEditors.TextEdit txtAddress;
         private DevExpress.XtraEditors.TextEdit txtPhone;
         private DevExpress.XtraEditors.TextEdit txtCustomerName;
         private DevExpress.XtraEditors.SimpleButton btnAdd;

@@ -13,22 +13,22 @@ using System.Threading.Tasks;
 
 namespace Ji.Services
 {
-    public class SystemServices: ISystemServices
+    public class SystemServices : ISystemServices
     {
         public List<ji_GetApplicationResult> ListSystemMenu()
         {
-            var data = API.Get<ResultCustomModel<List<ji_GetApplicationResult>>>(UrlApi.Url + UrlApi.ListSystemMenu).Data;
+            var data = API.Get<ResultCustomModel<List<ji_GetApplicationResult>>>(UrlApi.ListSystemMenu).Data;
             return data;
         }
         public List<LFloor> ListFloor()
         {
-            var data = API.Get<ResultCustomModel<List<LFloor>>>(UrlApi.Url + UrlApi.ListFloor).Data;
+            var data = API.Get<ResultCustomModel<List<LFloor>>>(UrlApi.ListFloor).Data;
             return data;
         }
 
         public InitCashierModel InitCashier(OrderDetailRequest orderDetailRequest)
         {
-            var data = API.Post<InitCashierModel>(UrlApi.Url + UrlApi.InitCashier, orderDetailRequest);
+            var data = API.Post<InitCashierModel>(UrlApi.InitCashier, orderDetailRequest);
             return data;
         }
     }

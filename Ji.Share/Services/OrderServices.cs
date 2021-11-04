@@ -16,18 +16,18 @@ namespace Ji.Services
     {
         public int CalculationTotalMoneyOrder()
         {
-            var data = API.Get<ResultCustomModel<int>>(UrlApi.Url + UrlApi.CalculationTotalMoneyOrder);
+            var data = API.Get<ResultCustomModel<int>>(UrlApi.CalculationTotalMoneyOrder);
             return data.Data;
         }
 
         public List<Orders> ListOrder()
         {
-            var data = API.Get<ResultCustomModel<List<Orders>>>(UrlApi.Url + UrlApi.ListOrder);
+            var data = API.Get<ResultCustomModel<List<Orders>>>(UrlApi.ListOrder);
             return data.Data;
         }
         public List<Ji_GetDetailBillResult> ListOrderDetail(OrderDetailRequest orderDetailRequest)
         {
-            var data = API.Post<ResultCustomModel<List<Ji_GetDetailBillResult>>>(UrlApi.Url + UrlApi.ListOrderDetail, orderDetailRequest);
+            var data = API.Post<ResultCustomModel<List<Ji_GetDetailBillResult>>>(UrlApi.ListOrderDetail, orderDetailRequest);
             return data.Data;
         }
     }

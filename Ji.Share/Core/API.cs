@@ -85,9 +85,9 @@ namespace Ji.Core
                 return response.Data;
             return null;
         }
-        public static T Post<T>(string url,object param=null)
+        public static T Post<T>(string path, object param=null)
         {
-            var client = new RestClient(url);
+            var client = new RestClient(UrlApi.Url + path);
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Accept", "application/json");
@@ -101,9 +101,9 @@ namespace Ji.Core
             var data = client.Execute<T>(request);
             return data.Data;
         }
-        public static T Get<T>(string url)
+        public static T Get<T>(string path)
         {
-            var client = new RestClient(url);
+            var client = new RestClient(UrlApi.Url + path);
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", UrlApi.TokenType + AuthorizeConstant.Token); client.ConfigureWebRequest((r) =>
