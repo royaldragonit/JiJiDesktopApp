@@ -1,5 +1,6 @@
 ﻿using Ji.Commons;
 using Ji.Core;
+using Ji.Model;
 using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using Ji.Model.OrderModels;
@@ -16,5 +17,7 @@ namespace Ji.Services.Interface
         List<Orders> ListOrder();
         List<Ji_GetDetailBillResult> ListOrderDetail(OrderDetailRequest orderDetailRequest);
         int CalculationTotalMoneyOrder();
+        bool RemoveOrderItems(OrderDeleteItem item);
+        List<Ji_GetDetailBillResult> AddOrderItems(List<AddListOrder> listOrders);
     }
 }

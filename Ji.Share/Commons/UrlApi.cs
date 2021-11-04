@@ -26,8 +26,10 @@ namespace Ji.Commons
         #endregion
         #region Order API
         public const string ListOrder = "api/Order/ListOrder";
+        public const string AddOrderItem = "api/Order/AddOrderItem";
         public const string CalculationTotalMoneyOrder = "api/Order/CalculationTotalMoneyOrder";
         public const string ListOrderDetail = "api/Order/ListOrderDetail";
+        public const string RemoveOrderItems = "api/Order/RemoveOrderItems";
         #endregion
         public static string BackEnd = "api/Deployment/BackEnd";
         public static string FrontEnd = "api/Deployment/FrontEnd";

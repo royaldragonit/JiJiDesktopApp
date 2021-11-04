@@ -39,6 +39,7 @@ using System.Runtime.InteropServices;
  * Version: 1.3.1.1 LongNH sửa thêm khách hàng mới ngày 15/08/2020
  * Version: 1.4.2.1 LongNH thay đổi EntityFramework sang API ADO.NET
  * Version: 1.5.2.1 LongNH thay đổi code thường sang Services 04/11/2021
+ * Version: 1.5.3.1 LongNH thay đổi Model LTopping add thêm ToppingCustom
  */
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.3.1.1")]
+[assembly: AssemblyFileVersion("1.5.3.1")]

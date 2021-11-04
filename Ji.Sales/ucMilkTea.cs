@@ -84,7 +84,7 @@ namespace Ji.Sales
             {
                 foreach (var item in data)
                 {
-                    CheckedListBoxItem items = new CheckedListBoxItem(item.Id, true);
+                    CheckedListBoxItem items = new CheckedListBoxItem(item.ToppingId, true);
                     items.Description = item.ToppingName;
                     items.CheckState = CheckState.Unchecked;
                     cbListTopping.Properties.Items.Add(items);
@@ -148,7 +148,7 @@ namespace Ji.Sales
                 tbx.Appearance.ForeColor = Color.Black;
             }
             //chkBarCode.Visible = Extension.Setup["showBarCode"].ToBoolean();
-            chkBarCode.Visible =true;
+            chkBarCode.Visible = true;
         }
         /// <summary>
         /// Hàm TabPage Click để set đang chọn ở Tầng nào
@@ -289,6 +289,10 @@ namespace Ji.Sales
             int OrderID = gridView1.GetRowCellValue(row, "cOrderID").ToString().ToInt();
             int FoodID = gridView1.GetRowCellValue(row, "cFoodID").ToString().ToInt();
             string ToppingID = gridView1.GetRowCellValue(row, "cToppingID")?.ToString();
+            OrderDeleteItem item = new OrderDeleteItem();
+            item.FoodID = FoodID;
+            item.OrderID = OrderID;
+            item.ToppingID = ToppingID;
             if (UI.Question("Bạn có muốn xóa món này không?"))
             {
                 if (!Extension.CheckInternet())
@@ -296,7 +300,8 @@ namespace Ji.Sales
                     UI.Warning(MessageConstant.CheckInternet);
                     return;
                 }
-                if (API.RemoveOrderItems(OrderID, FoodID, ToppingID) != -1)
+                bool isRemoveSuccess = _orderServices.RemoveOrderItems(item);
+                if (isRemoveSuccess)
                     LoadData(Floor, Table);
             }
         }
@@ -305,7 +310,7 @@ namespace Ji.Sales
         {
 
         }
-        public void LoadData(int floor, int table, List<Ji_GetDetailBillResult> lstData=null)
+        public void LoadData(int floor, int table, IEnumerable<Ji_GetDetailBillResult> lstData = null)
         {
             if (!Extension.CheckInternet())
             {
@@ -317,18 +322,18 @@ namespace Ji.Sales
                 OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
                 orderDetailRequest.Table = table;
                 orderDetailRequest.Floor = floor;
-                lstData= _orderServices.ListOrderDetail(orderDetailRequest);
+                lstData = _orderServices.ListOrderDetail(orderDetailRequest);
             }
             gridControl1.DataSource = null;
             gridControl1.DataSource = lstData;
-            int totalOrderMoney=_orderServices.CalculationTotalMoneyOrder();
+            int totalOrderMoney = _orderServices.CalculationTotalMoneyOrder();
             lblTotalMoneyOrder.Text = totalOrderMoney.ToVND();
             int total = 0;
             foreach (var item in lstData)
             {
                 total += item.cTotal.Value;
             }
-            txtNote.Text = lstData.Count > 0 ? lstData[0].Note : "";
+            txtNote.Text = lstData.Count() > 0 ? lstData.FirstOrDefault()?.Note : "";
             txtTotalTemp.Text = total.ToVND();
             try
             {
@@ -344,8 +349,8 @@ namespace Ji.Sales
             {
                 UI.Warning("Vui lòng nhập định dạng giảm giá đúng với số");
             }
-            if (lstData.Count > 0)
-                gridControl1.Tag = lstData[0].cOrderID;
+            if (lstData.Count() > 0)
+                gridControl1.Tag = lstData.FirstOrDefault().cOrderID;
         }
 
         private void txtDiscountMoney_EditValueChanging(object sender, ChangingEventArgs e)
@@ -424,7 +429,7 @@ namespace Ji.Sales
                 UI.CloseSplashForm();
                 if (dataSource != null)
                 {
-                     printing.dataSource = dataSource;
+                    printing.dataSource = dataSource;
                     printing.ShowDialog();
                 }
             }
@@ -436,7 +441,7 @@ namespace Ji.Sales
             //Tính tổng giảm giá        (%)                        và          tiền mặt
             int discount = totalMoney * txtDiscountPercent.Text.ToInt() / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
             int totalMoneyAfterDiscount = totalMoney - discount;
-            if (ds!=null)
+            if (ds != null)
             {
                 int CustomerMoney = -1;
                 string CustomerName = "Khách yêu ♥";
@@ -514,20 +519,15 @@ namespace Ji.Sales
                         Table=Table
                     }
                 };
-                var rs = API.AddOrderItems(listOrders).ToDataTable();
-                if (rs != null && rs.Rows.Count > 0)
+                var rs = _orderServices.AddOrderItems(listOrders);
+                if (rs != null && rs.Count > 0)
                 {
                     gridControl1.DataSource = null;
                     gridControl1.DataSource = rs;
-                    gridControl1.Tag = rs.Rows[0]["cOrderID"];
-                    string res = API.GetTotalMoneyOrder();
+                    gridControl1.Tag = rs[0].cOrderID;
+                    string res = _orderServices.CalculationTotalMoneyOrder().ToVND();
                     lblTotalMoneyOrder.Text = res.VNDToNumber().ToVND();
-                    var ds = (DataTable)gridControl1.DataSource;
-                    int total = 0;
-                    foreach (DataRow item in rs.Rows)
-                    {
-                        total += item["cTotal"].ToInt();
-                    }
+                    int total = rs.Sum(x => x.cTotal).ToInt();
                     txtTotalTemp.Text = total.ToVND();
                     //Giảm theo %
                     int t = txtDiscountPercent.Text?.ToInt() ?? 0;
@@ -542,8 +542,7 @@ namespace Ji.Sales
                     ReloadOrders();
                 }
             }
-            if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.CloseForm();
+            UI.CloseSplashForm();
         }
 
         private void txtDiscountPercent_EditValueChanged(object sender, EventArgs e)

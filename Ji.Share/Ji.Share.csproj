@@ -145,6 +145,7 @@
     <Compile Include="Model\Entities\LFloor.cs" />
     <Compile Include="Model\Entities\LTopping.cs" />
     <Compile Include="Model\Entities\LUsers.cs" />
+    <Compile Include="Model\Entities\ToppingCustom.cs" />
     <Compile Include="Model\Formula.cs" />
     <Compile Include="Model\Ji_GetAllMilkTeaOrder.cs" />
     <Compile Include="Model\Ji_GetDetailBill.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Model\Menus.cs" />
     <Compile Include="Model\Messenger.cs" />
     <Compile Include="Model\OrderDetailV2.cs" />
+    <Compile Include="Model\OrderModels\OrderDeleteItem.cs" />
     <Compile Include="Model\OrderModels\OrderDetailRequest.cs" />
     <Compile Include="Model\Pay.cs" />
     <Compile Include="Model\Recipe.cs" />

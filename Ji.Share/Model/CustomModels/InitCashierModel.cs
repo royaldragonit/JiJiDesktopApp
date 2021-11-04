@@ -9,11 +9,11 @@ namespace Ji.Model.CustomModels
 {
     public class InitCashierModel
     {
-        public List<LFloor> ListFloor { get; set; }
-        public List<Ji_GetAllMilkTeaOrderResult> ListMilkTea { get; set; }
-        public List<LTopping> ListTopping { get; set; }
-        public List<Orders> ListOrder { get; set; }
-        public List<Ji_GetDetailBillResult> ListOrderDetail { get; set; }
+        public IEnumerable<LFloor> ListFloor { get; set; }
+        public IEnumerable<Ji_GetAllMilkTeaOrderResult> ListMilkTea { get; set; }
+        public IEnumerable<ToppingCustom> ListTopping { get; set; }
+        public IEnumerable<Orders> ListOrder { get; set; }
+        public IEnumerable<Ji_GetDetailBillResult> ListOrderDetail { get; set; }
 
     }
 }
