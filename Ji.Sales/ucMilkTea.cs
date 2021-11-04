@@ -24,6 +24,8 @@ using Ji.Services.Interface;
 using Ji.Model.Entities;
 using Ji.Model.OrderModels;
 using Ji.Model.CustomModels;
+using Ji.Commons;
+using Ji.Model.Billing;
 
 namespace Ji.Sales
 {
@@ -255,8 +257,7 @@ namespace Ji.Sales
         }
         private void BtnTable_Click(object sender, EventArgs e)
         {
-            if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.ShowForm(typeof(Pleasewait));
+            UI.ShowSplashForm();
             //Thay đổi màu của bàn cũ thành màu xanh 
             SimpleButton tbx = Controls.Find("btnTable" + Table, true).FirstOrDefault() as SimpleButton;
             tbx.Appearance.BackColor = Color.FromArgb(192, 255, 255);
@@ -270,14 +271,12 @@ namespace Ji.Sales
             Table = btn.Text.ToInt();
             //Load lại dữ liệu của bàn hiện tại
             LoadData(Floor, Table);
-            if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.CloseForm();
+            UI.CloseSplashForm();
         }
         private void ucMiikTea_Load(object sender, EventArgs e)
         {
             CallPrintBill();
-            if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.CloseForm();
+            UI.CloseSplashForm();
         }
         /// <summary>
         /// Hàm xóa món
@@ -294,7 +293,7 @@ namespace Ji.Sales
             {
                 if (!Extension.CheckInternet())
                 {
-                    UI.Warning("Vui lòng kiểm tra kết nối mạng và thử lại");
+                    UI.Warning(MessageConstant.CheckInternet);
                     return;
                 }
                 if (API.RemoveOrderItems(OrderID, FoodID, ToppingID) != -1)
@@ -310,7 +309,7 @@ namespace Ji.Sales
         {
             if (!Extension.CheckInternet())
             {
-                UI.Warning("Vui lòng kiểm tra kết nối mạng và thử lại");
+                UI.Warning(MessageConstant.CheckInternet);
                 return;
             }
             if (lstData == null)
@@ -322,7 +321,8 @@ namespace Ji.Sales
             }
             gridControl1.DataSource = null;
             gridControl1.DataSource = lstData;
-            lblTotalMoneyOrder.Text = 136975.ToVND();
+            int totalOrderMoney=_orderServices.CalculationTotalMoneyOrder();
+            lblTotalMoneyOrder.Text = totalOrderMoney.ToVND();
             int total = 0;
             foreach (var item in lstData)
             {
@@ -357,12 +357,8 @@ namespace Ji.Sales
                 try
                 {
                     int t = txtDiscountPercent.Text?.ToInt() ?? 0;
-                    var ds = (DataTable)gridControl1.DataSource;
-                    int total = 0;
-                    foreach (DataRow item in ds.Rows)
-                    {
-                        total += item["cTotal"].ToInt();
-                    }
+                    var ds = (List<Ji_GetDetailBillResult>)gridControl1.DataSource;
+                    int total = ds.Sum(x => x.cTotal).ToInt();
                     txtTotal.Text = (total - total * t / 100 - txtDiscountMoney.Text?.ToInt() ?? 0).ToVND();
                 }
                 catch (Exception)
@@ -391,12 +387,8 @@ namespace Ji.Sales
                     }
                     else
                     {
-                        var ds = (DataTable)gridControl1.DataSource;
-                        int total = 0;
-                        foreach (DataRow item in ds.Rows)
-                        {
-                            total += item["cTotal"].ToInt();
-                        }
+                        var ds = (List<Ji_GetDetailBillResult>)gridControl1.DataSource;
+                        int total = ds.Sum(x => x.cTotal).ToInt();
                         txtTotal.Text = (total - total * t / 100 - txtDiscountMoney.Text?.ToInt() ?? 0).ToVND();
                     }
                 }
@@ -424,67 +416,61 @@ namespace Ji.Sales
                 UI.Warning("Bàn này chưa gọi món nào");
             else
             {
-                if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
-                    SplashScreenManager.ShowForm(typeof(Pleasewait));
+                UI.ShowSplashForm();
                 PreviewPrinting printing = new PreviewPrinting();
                 if (chkBarCode.Checked)
                     printing.BarCode = true;
                 var dataSource = ReadyPrinting();
+                UI.CloseSplashForm();
                 if (dataSource != null)
                 {
-                    //  printing.dataSource = dataSource;
+                     printing.dataSource = dataSource;
                     printing.ShowDialog();
                 }
-                if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
-                    SplashScreenManager.CloseForm();
             }
         }
-        private List<dynamic> ReadyPrinting()
+        private List<ReportBillDetail> ReadyPrinting()
         {
-            //var ds = ((DataTable)gridControl1.DataSource);
-            //int t = 0;
-            //foreach (DataRow item in ds.Rows)
-            //{
-            //    t += item["cTotal"].ToInt();
-            //}
-            ////Tính tổng giảm giá        (%)                        và          tiền mặt
-            //int discount = t * txtDiscountPercent.Text.ToInt() / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
-            //int totalMoney = t - discount;
-            //if (ds.Rows.Count > 0)
-            //{
-            //    int CustomerMoney = -1;
-            //    string CustomerName = "Khách yêu ♥";
-            //    if (!string.IsNullOrEmpty(txtCustomerName.EditValue.ToString()))
-            //        CustomerName = txtCustomerName.Text;
-            //    if (!string.IsNullOrEmpty(txtCustomerMoney.EditValue.ToString()))
-            //        CustomerMoney = txtCustomerMoney.Text.ToInt();
-            //    List<ReportBillDetail> lst = new List<ReportBillDetail>();
-            //    foreach (DataRow item in ds.Rows)
-            //    {
-            //        ReportBillDetail rep = new ReportBillDetail();
-            //        rep.BillID = item["cOrderID"].ToInt();
-            //        rep.Cashier = "Thu ngân";
-            //        rep.Topping = item["cPriceTopping"].ToVND();
-            //        rep.cIndex = item["cIndex"].ToInt();
-            //        rep.Quantity = item["cQuantity"].ToInt();
-            //        rep.TimeCheckout = DateTime.Now;
-            //        rep.CustomerName = CustomerName;
-            //        rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
-            //        rep.Discount = t;
-            //        rep.Floor = Floor;
-            //        rep.FoodName = item["cFood"].ToString();
-            //        //Đơn giá tiền
-            //        rep.Money = item["cPrice"].ToVND();
-            //        //Tiền khách đưa
-            //        rep.MoneyCustomer = CustomerMoney.ToVND();
-            //        //tổng tiền sau khi nhân với số lượng và Topping
-            //        rep.TotalMoney = item["cTotal"].ToVND();
-            //        //Số tiền cần thanh toán
-            //        rep.Total = totalMoney.ToVND();
-            //        lst.Add(rep);
-            //    }
-            //    return lst;
-            //}
+            var ds = (List<Ji_GetDetailBillResult>)gridControl1.DataSource;
+            int totalMoney = ds.Sum(x => x.cTotal).ToInt();
+            //Tính tổng giảm giá        (%)                        và          tiền mặt
+            int discount = totalMoney * txtDiscountPercent.Text.ToInt() / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
+            int totalMoneyAfterDiscount = totalMoney - discount;
+            if (ds!=null)
+            {
+                int CustomerMoney = -1;
+                string CustomerName = "Khách yêu ♥";
+                if (!string.IsNullOrEmpty(txtCustomerName.EditValue.ToString()))
+                    CustomerName = txtCustomerName.Text;
+                if (!string.IsNullOrEmpty(txtCustomerMoney.EditValue.ToString()))
+                    CustomerMoney = txtCustomerMoney.Text.ToInt();
+                List<ReportBillDetail> lst = new List<ReportBillDetail>();
+                foreach (var item in ds)
+                {
+                    ReportBillDetail rep = new ReportBillDetail();
+                    rep.BillID = item.cOrderID.ToInt();
+                    rep.Cashier = "Thu ngân";
+                    rep.Topping = item.cPriceTopping.ToVND();
+                    rep.cIndex = item.cIndex.ToInt();
+                    rep.Quantity = item.cQuantity.ToInt();
+                    rep.TimeCheckout = DateTime.Now;
+                    rep.CustomerName = CustomerName;
+                    rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
+                    rep.Discount = totalMoney;
+                    rep.Floor = Floor;
+                    rep.FoodName = item.cFood.ToString();
+                    //Đơn giá tiền
+                    rep.Money = item.cPrice.ToVND();
+                    //Tiền khách đưa
+                    rep.MoneyCustomer = CustomerMoney.ToVND();
+                    //tổng tiền sau khi nhân với số lượng và Topping
+                    rep.TotalMoney = item.cTotal.ToVND();
+                    //Số tiền cần thanh toán
+                    rep.Total = totalMoney.ToVND();
+                    lst.Add(rep);
+                }
+                return lst;
+            }
             return null;
         }
         /// <summary>

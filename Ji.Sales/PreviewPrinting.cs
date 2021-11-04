@@ -3,6 +3,7 @@ using DevExpress.XtraReports.UI;
 using Ji.Bill;
 using Ji.Core;
 using Ji.Model;
+using Ji.Model.Billing;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Ji.Sales
 {
     public partial class PreviewPrinting : Form
     {
-        public List<dynamic> dataSource;
+        public List<ReportBillDetail> dataSource;
         public string type = "print";
         JObject setup = Extension.Setup;
         public PreviewPrinting()
@@ -28,8 +29,8 @@ namespace Ji.Sales
             foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
                 ListPrinter.Properties.Items.Add(printer);
             ListPrinter.SelectedIndex = 0;
-            if (ListPrinter.Properties.Items.Contains(setup["defaultPrinter"]))
-                ListPrinter.SelectedItem = setup["defaultPrinter"];
+            //if (ListPrinter.Properties.Items.Contains(setup["defaultPrinter"]))
+            //    ListPrinter.SelectedItem = setup["defaultPrinter"];
         }
 
         rptBill report = new rptBill();

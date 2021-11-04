@@ -15,5 +15,6 @@ namespace Ji.Services.Interface
     {
         List<Orders> ListOrder();
         List<Ji_GetDetailBillResult> ListOrderDetail(OrderDetailRequest orderDetailRequest);
+        int CalculationTotalMoneyOrder();
     }
 }

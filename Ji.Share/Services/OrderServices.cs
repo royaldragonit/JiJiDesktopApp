@@ -14,6 +14,12 @@ namespace Ji.Services
 {
     public class OrderServices: IOrderServices
     {
+        public int CalculationTotalMoneyOrder()
+        {
+            var data = API.Get<ResultCustomModel<int>>(UrlApi.Url + UrlApi.CalculationTotalMoneyOrder);
+            return data.Data;
+        }
+
         public List<Orders> ListOrder()
         {
             var data = API.Get<ResultCustomModel<List<Orders>>>(UrlApi.Url + UrlApi.ListOrder);

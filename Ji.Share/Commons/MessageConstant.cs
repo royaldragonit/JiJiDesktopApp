@@ -9,5 +9,6 @@ namespace Ji.Commons
     public static class MessageConstant
     {
         public const string InvalidInfoSave = "Thông tin đăng nhập đã lưu không chính xác, vui lòng thử đăng nhập lại";
+        public const string CheckInternet = "Vui lòng kiểm tra kết nối mạng và thử lại";
     }
 }
