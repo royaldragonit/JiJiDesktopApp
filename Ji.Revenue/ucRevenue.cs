@@ -14,46 +14,40 @@ using System.Diagnostics;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Reflection;
 using System.IO;
+using Ji.Services.Interface;
+using Ji.Commons;
+using Ji.Model.CustomModels;
+using Ji.Model.Entities;
 
 namespace Ji.Revenue
 {
     public partial class ucRevenue : ClientControl, IClientControl
     {
-        private List<Revenue> SaveRevenue = new List<Revenue>();
+        private List<ji_Report_RevenueTodayResult> SaveRevenue = new List<ji_Report_RevenueTodayResult>();
+        private readonly IRevenueServices _revenueServices;
         int p = 0;
         public ucRevenue()
         {
             InitializeComponent();
+            _revenueServices = _revenueServices.GetServices();
             BindingData();
         }
         public void BindingData()
         {
+            InitRevenueModel data = _revenueServices.InitRevenue(Configure.Setup.FacId);
             gridControl1.DataSource = null;
-            var ds = API.GetRevenueToday<Revenue>(Extension.GetAppSetting("API") + "Report/GetRevenueToday", API.Access_Token, DateTime.Now).ToList();
-            gridControl1.DataSource = ds;
-            txtLy.Text = ds.Sum(x => x.cQuantity).ToString();
-            lblTotalDiscount.Text = ds?.Sum(x => x.cDiscount).ToVND() ?? "0 VNĐ";
-            lblTotalRevenueReal.Text = ds?.Sum(x => x.cTotalMoney.VNDToNumber()).ToVND() ?? "0 VNĐ";
-            SaveRevenue = ds;
-            int total = 0;
-            foreach (var item in ds)
-            {
-                total += item.cTotalMoney.VNDToNumber();
-            }
+            gridControl1.DataSource = data.RevenueToday;
+            txtLy.Text = data.RevenueToday.Sum(x => x.cQuantity).ToString();
+            lblTotalDiscount.Text = data.RevenueToday?.Sum(x => x.cDiscount).ToVND() ?? "0 VNĐ";
+            lblTotalRevenueReal.Text = data.RevenueToday?.Sum(x => x.cTotalMoney.VNDToNumber()).ToVND() ?? "0 VNĐ";
+            SaveRevenue = data.RevenueToday;
+            int total = data.RevenueToday.Sum(x => x.cTotalMoney.VNDToNumber());
             txtTotalMoney.Text = total.ToVND();
-            var pays = API.GetPayToDay<Pays>(Extension.GetAppSetting("API") + "Pay/GetPayToDay", API.Access_Token, DateTime.Now);
-            int p = pays?.Sum(x => x.Money) ?? 0;
+            int p = data.PayToDay?.Sum(x => x.Money) ?? 0;
             txtTotalPay.Text = p.ToVND();
-            DateTime from = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime to = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-            var ds_this_month = API.GetRevenue<Revenue>(Extension.GetAppSetting("API") + "Report/GetRevenue", API.Access_Token, from, to).ToList();
-            total = 0;
-            foreach (var item in ds_this_month)
-            {
-                total += item.cTotalMoney.VNDToNumber();
-            }
+            total = data.RevenueCurrentMonth.Sum(x => x.cTotalMoney.VNDToNumber()); ;
             txtRevenueThisMonth.Text = total.ToVND();
-            lblRevenue.Text = ds.Where(x => x.Delivery.Contains("GRAB") || x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney.VNDToNumber()).ToVND();
+            lblRevenue.Text = data.RevenueToday.Where(x => x.Delivery.Contains("GRAB") || x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney.VNDToNumber()).ToVND();
         }
 
         public void LoadControl()
@@ -105,19 +99,15 @@ namespace Ji.Revenue
             if (ChooseType.Properties.Items[ChooseType.SelectedIndex].Value.ToString().ToInt() == 1)
             {
                 PanelChoose.Visible = true;
-                DateTime from = dtFromDate.Value.Date;
-                DateTime to = dtToDate.Value.Date;
+                DateTime fromDate = dtFromDate.Value.Date;
+                DateTime toDate = dtToDate.Value.Date;
                 gridControl1.DataSource = null;
-                var ds = API.GetRevenue<Revenue>(Extension.GetAppSetting("API") + "Report/GetRevenue", API.Access_Token, from, to).ToList();
-                gridControl1.DataSource = ds;
-                SaveRevenue = ds;
-                int total = 0;
-                foreach (var item in ds)
-                {
-                    total += item.cTotalMoney.VNDToNumber();
-                }
+                List<ji_Report_RevenueTodayResult> data = _revenueServices.RevenueDistance(fromDate, toDate);
+                gridControl1.DataSource = data;
+                SaveRevenue = data;
+                int total = data.Sum(x => x.cTotalMoney.VNDToNumber());
                 txtTotalMoney.Text = total.ToVND();
-                lblRevenue.Text = ds.Where(x => !x.Delivery.Contains("GRAB") || !x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney.VNDToNumber()).ToVND();
+                lblRevenue.Text = data.Where(x => !x.Delivery.Contains("GRAB") || !x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney.VNDToNumber()).ToVND();
             }
             else
                 UI.Warning("Bạn phải chọn bộ lọc \"chọn ngày\"");
@@ -125,9 +115,9 @@ namespace Ji.Revenue
 
         private void btnSearchID_Click(object sender, EventArgs e)
         {
-            if (gridView1.DataSource != null && ((List<Revenue>)gridView1.DataSource).Count != 0 && txtBillID.Text.IsNumber())
+            if (gridView1.DataSource != null && ((List<ji_Report_RevenueTodayResult>)gridView1.DataSource).Count != 0 && txtBillID.Text.IsNumber())
             {
-                List<Revenue> temp = (List<Revenue>)gridControl1.DataSource;
+                List<ji_Report_RevenueTodayResult> temp = (List<ji_Report_RevenueTodayResult>)gridControl1.DataSource;
                 gridControl1.DataSource = null;
                 var ds = temp.Where(x => x.cOrderID == txtBillID.Text.ToInt()).ToList();
                 gridControl1.DataSource = ds;
@@ -146,7 +136,7 @@ namespace Ji.Revenue
                     SaveRevenue.Remove(temp);
                     gridControl1.DataSource = null;
                     gridControl1.DataSource = SaveRevenue;
-                    txtLy.Text = SaveRevenue.Sum(x => x.Quantity).ToString();
+                    txtLy.Text = SaveRevenue.Sum(x => x.cQuantity).ToString();
                     int total = 0;
                     foreach (var item in SaveRevenue)
                     {

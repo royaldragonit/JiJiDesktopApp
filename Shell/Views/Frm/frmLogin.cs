@@ -109,7 +109,7 @@ namespace Shell.Views.Frm
                     login.Password = Extension.GetInfoByXML("Information.xml", "Password");
                     ResultCustomModel<LoginResultModel> result = _loginServices.UserLogin(login);
                     UI.CloseSplashForm();
-                    if (result.Success)
+                    if (result!=null&&result.Success)
                     {
                         AuthorizeConstant.Users = result.Data.User;
                         AuthorizeConstant.Token = result.Data.Token;
@@ -119,6 +119,11 @@ namespace Shell.Views.Frm
                     }
                     else
                     {
+                        if (result == null)
+                        {
+                            UI.ShowError(MessageConstant.ServerNotResponse);
+                            return;
+                        }
                         UI.ShowError(result.Message["vn"]);
                         return;
                     }

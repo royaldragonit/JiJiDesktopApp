@@ -43,5 +43,11 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<SetupShop>>(UrlApi.GetConfigureStore);
             return data.Data;
         }
+
+        public bool ConfigureStore(SetupShop setup)
+        {
+            var data = API.Post<ResultCustomModel<bool>>(UrlApi.GetConfigureStore,setup);
+            return data.Data;
+        }
     }
 }

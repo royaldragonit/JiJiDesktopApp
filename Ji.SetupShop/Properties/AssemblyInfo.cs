@@ -35,6 +35,7 @@ using System.Runtime.InteropServices;
 /*
  * * Version: 1.0.0.0 LongNH tạo mới
  * * Version: 1.2.1.1 14/08/2020 LongNH thêm tính năng tùy chọn máy in trong cài đặt
+ * * Version: 1.3.1.1 06/11/2021 LongNH chuyển qua services
  */
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.2.1.1")]

@@ -32,9 +32,9 @@ namespace Ji.Revenue
         private void btnPrint_Click(object sender, EventArgs e)
         {
                 PreviewPrinting printing = new PreviewPrinting();
-                var dataSource = API.API_RePrinter<ReportBillDetail>(Extension.GetAppSetting("API") + "Print/RePrinter", API.Access_Token, BillID).ToList();
-                // var dataSource = db.ji_Checkout(gridControl1.Tag.ToInt(), 1, 0, CustomerName, "0978.123.900", DateTime.Now, CustomerMoney).ToList();
-                printing.dataSource = dataSource;
+                //var dataSource = API.API_RePrinter<ReportBillDetail>(Extension.GetAppSetting("API") + "Print/RePrinter", API.Access_Token, BillID).ToList();
+                //// var dataSource = db.ji_Checkout(gridControl1.Tag.ToInt(), 1, 0, CustomerName, "0978.123.900", DateTime.Now, CustomerMoney).ToList();
+                //printing.dataSource = dataSource;
                 printing.ShowDialog();
             }
     }

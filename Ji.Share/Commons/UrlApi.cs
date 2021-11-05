@@ -34,6 +34,10 @@ namespace Ji.Commons
         public const string RemoveOrderItems = "api/Order/RemoveOrderItems";
         public const string Checkout = "api/Order/Checkout";
         #endregion
+        #region Revenue API
+        public const string InitRevenue = "api/Revenue/InitRevenue";
+        public const string RevenueDistance = "api/Revenue/RevenueDistance";
+        #endregion
         public static string BackEnd = "api/Deployment/BackEnd";
         public static string FrontEnd = "api/Deployment/FrontEnd";
         public static string Database = "api/Deployment/Database";

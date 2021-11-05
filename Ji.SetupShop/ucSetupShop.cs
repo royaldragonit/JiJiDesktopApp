@@ -12,21 +12,24 @@ using Ji.Model;
 using Ji.Core;
 using Newtonsoft.Json.Linq;
 using Ji.Model.Billing;
+using Ji.Commons;
+using Ji.Services.Interface;
 
 namespace Ji.SetupShop
 {
-    public partial class ucSetupShop : ClientControl,IClientControl
+    public partial class ucSetupShop : ClientControl, IClientControl
     {
         private string Logo { get; set; }
+        private readonly ISystemServices _systemServices;
         public ucSetupShop()
         {
             InitializeComponent();
+            _systemServices = _systemServices.GetServices();
             foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
                 ListPrinter.Properties.Items.Add(printer);
             ListPrinter.SelectedIndex = 0;
-            var setup = Extension.Setup;
-            if (ListPrinter.Properties.Items.Contains(setup["defaultPrinter"]))
-                ListPrinter.SelectedItem = setup["defaultPrinter"];
+            if (ListPrinter.Properties.Items.Contains(Configure.Setup.DefaultPrinter))
+                ListPrinter.SelectedItem = Configure.Setup.DefaultPrinter;
             BindingData();
         }
 
@@ -89,20 +92,19 @@ namespace Ji.SetupShop
         }
         public void BindingData()
         {
-            var setup = Extension.Setup;
-            if (setup != null)
+            if (Configure.Setup != null)
             {
-                txtAbbreviation.Text = setup["abbreviation"].ToString();
-                txtAddress.Text = setup["shopAddress"].ToString();
-                txtPhone.Text = setup["hotline"].ToString();
-                txtNameShop.Text = setup["shopName"].ToString();
-                txtSlogan.Text = setup["slogan"].ToString();
-                txtFaceBook.Text = setup["faceBook"].ToString();
-                chkWaringcheckout.Checked = setup["warningCheckout"].ToString().ToBoolean();
-                chkBarCode.Checked = setup["showBarCode"].ToString().ToBoolean();
-                if (!string.IsNullOrEmpty(setup["logo"].ToString()))
+                txtAbbreviation.Text = Configure.Setup.Abbreviation.ToString();
+                txtAddress.Text = Configure.Setup.Address.ToString();
+                txtPhone.Text = Configure.Setup.Hotline.ToString();
+                txtNameShop.Text = Configure.Setup.ShopName.ToString();
+                txtSlogan.Text = Configure.Setup.Slogan.ToString();
+                txtFaceBook.Text = Configure.Setup.FaceBook.ToString();
+                chkWaringcheckout.Checked = Configure.Setup.WarningCheckout.ToString().ToBoolean();
+                chkBarCode.Checked = Configure.Setup.ShowBarCode.Value;
+                if (!string.IsNullOrEmpty(Configure.Setup.Logo.ToString()))
                 {
-                    imgLogo.Image = setup["logo"].ToString().Base64ToImage().Resize(250, 250);
+                    imgLogo.Image = Configure.Setup.Logo.Base64ToImage().Resize(250, 250);
                 }
             }
         }
@@ -114,29 +116,22 @@ namespace Ji.SetupShop
                 if (UI.Question("Bạn có chắc muốn thiết lập " + ListPrinter.SelectedItem.ToString() + " làm máy in mặc định in Bill?"))
                 {
 
-                    int rs = API.SetSetup(txtNameShop.Text, txtAbbreviation.Text, txtPhone.Text, txtAddress.Text, txtSlogan.Text, chkBarCode.Checked, ListPrinter.SelectedItem.ToString(), txtFaceBook.Text, Logo, ChooseType.Properties.Items[ChooseType.SelectedIndex].Value.ToInt(),chkWaringcheckout.Checked);
-                    if (rs > 0)
-                    {
-                        JObject setup = new JObject();
-                        setup["abbreviation"] = txtAbbreviation.Text;
-                        setup["shopName"] = txtNameShop.Text;
-                        setup["hotline"] = txtPhone.Text;
-                        setup["address"] = txtAddress.Text;
-                        setup["slogan"] = txtSlogan.Text;
-                        setup["showBarCode"] = chkBarCode.Checked;
-                        setup["defaultPrinter"] = ListPrinter.SelectedItem.ToString();
-                        setup["faceBook"] = txtFaceBook.Text;
-                        setup["logo"] = Logo;
-                        setup["numberPrintBill"] = ChooseType.Properties.Items[ChooseType.SelectedIndex].Value.ToInt();
-                        setup["warningCheckout"] = chkWaringcheckout.Checked;
-                        setup["id"] = Extension.Setup["id"];
-                        setup["facID"] = Extension.Setup["facID"];
-                        Extension.Setup = setup;
+                    Configure.Setup.Abbreviation = txtAbbreviation.Text;
+                    Configure.Setup.ShopName = txtNameShop.Text;
+                    Configure.Setup.Hotline = txtPhone.Text;
+                    Configure.Setup.Address = txtAddress.Text;
+                    Configure.Setup.Slogan = txtSlogan.Text;
+                    Configure.Setup.ShowBarCode = chkBarCode.Checked;
+                    Configure.Setup.DefaultPrinter = ListPrinter.SelectedItem.ToString();
+                    Configure.Setup.FaceBook = txtFaceBook.Text;
+                    Configure.Setup.Logo = Logo;
+                    Configure.Setup.NumberPrintBill = ChooseType.Properties.Items[ChooseType.SelectedIndex].Value.ToInt();
+                    Configure.Setup.WarningCheckout = chkWaringcheckout.Checked;
+                    bool isSuccess = _systemServices.ConfigureStore(Configure.Setup);
+                    if (isSuccess)
                         UI.SaveInformation();
-                    }
-
                     else
-                        UI.Warning("Đã xảy ra lỗi, vui lòng kiểm tra lại");
+                        UI.ShowError(MessageConstant.ConfigureStoreError);
                 }
             }
             else
@@ -149,7 +144,7 @@ namespace Ji.SetupShop
             if (file != null)
             {
                 Logo = file.FileName.ConvertFileToBase64();
-                imgLogo.Image = Image.FromFile(file.FileName).Resize(250,250);
+                imgLogo.Image = Image.FromFile(file.FileName).Resize(250, 250);
             }
         }
     }

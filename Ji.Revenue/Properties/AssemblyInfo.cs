@@ -39,6 +39,7 @@ using System.Runtime.InteropServices;
  *  Version: 1.0.3.0 13/06/2020 LongNH sửa 1 số lỗi cơ bản
  *  Version: 1.0.4.0 14/08/2020 LongNH nâng cấp
  *  Version: 1.0.5.0 15/08/2020 LongNH thêm loại giao hàng
+ *  Version: 1.0.5.0 06/11/2021 LongNH convert qua Services
  */
 
 [assembly: AssemblyVersion("1.0.0.0")]

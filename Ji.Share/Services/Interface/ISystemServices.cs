@@ -16,5 +16,6 @@ namespace Ji.Services.Interface
         InitCashierModel InitCashier(OrderDetailRequest orderDetailRequest);
         bool SetDefaultDLL(string dll, string className);
         SetupShop GetConfigureStore();
+        bool ConfigureStore(SetupShop setup);
     }
 }

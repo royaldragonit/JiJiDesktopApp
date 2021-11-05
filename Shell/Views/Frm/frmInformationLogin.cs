@@ -1,4 +1,5 @@
 ﻿using Ji;
+using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
 using Newtonsoft.Json.Linq;
@@ -24,12 +25,12 @@ namespace Shell.Views.Frm
 
         private void frmInformationLogin_Load(object sender, EventArgs e)
         {
-            txtAddress.Text = users["userAddress"].ToString();
-            txtBirthday.DateTime = users["userBirthday"].ToDateTime();
-            txtPassword.Text = users["userPassword"].ToString();
-            txtPermission.Text = users["userRole"].ToString();
-            txtPhone.Text = users["userPhone"].ToString();
-            txtUsername.Text = users["userName"].ToString();
+            txtAddress.Text = AuthorizeConstant.Users.Address;
+            txtBirthday.DateTime = AuthorizeConstant.Users.Birthday;
+            txtPassword.Text = AuthorizeConstant.Users.Password;
+            txtPermission.Text = AuthorizeConstant.Users.Roles;
+            txtPhone.Text = AuthorizeConstant.Users.Phone;
+            txtUsername.Text = AuthorizeConstant.Users.Username;
         }
 
         private void btnOk_Click(object sender, EventArgs e)

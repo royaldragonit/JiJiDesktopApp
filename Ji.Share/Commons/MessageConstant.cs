@@ -15,5 +15,7 @@ namespace Ji.Commons
         public const string InputNoteOrder = "Bạn chưa nhập Lưu Ý cho đơn hàng";
         public const string SaleOffOverRange= "Giảm giá phải là số và không quá 100%";
         public const string TableNoOrder= "Bàn này chưa gọi món nào";
+        public const string ServerNotResponse="Server không phản hồi, vui lòng kiểm tra lại Server";
+        public const string ConfigureStoreError="Có lỗi khi cấu hình cài đặt cho cửa hàng";
     }
 }
