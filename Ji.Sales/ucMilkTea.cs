@@ -147,8 +147,7 @@ namespace Ji.Sales
                 tbx.Appearance.BackColor = Color.Yellow;
                 tbx.Appearance.ForeColor = Color.Black;
             }
-            //chkBarCode.Visible = Extension.Setup["showBarCode"].ToBoolean();
-            chkBarCode.Visible = true;
+            chkBarCode.Visible = Configure.Setup.ShowBarCode.Value;
         }
         /// <summary>
         /// Hàm TabPage Click để set đang chọn ở Tầng nào
@@ -224,7 +223,7 @@ namespace Ji.Sales
                                 // report.ExportToPdf(Environment.SpecialFolder.MyDocuments.ToString());
                                 var cachedReportSource = new CachedReportSource(report, storage);
                                 var printTool = new ReportPrintTool(report);
-                                printTool.PrinterSettings.PrinterName = Extension.Setup["defaultPrinter"].ToString();
+                                printTool.PrinterSettings.PrinterName = Configure.Setup.DefaultPrinter;
                                 printTool.Print();
                             });
                         });
@@ -418,7 +417,7 @@ namespace Ji.Sales
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (gridControl1.DataSource == null)
-                UI.Warning("Bàn này chưa gọi món nào");
+                UI.Warning(MessageConstant.TableNoOrder);
             else
             {
                 UI.ShowSplashForm();
@@ -572,12 +571,12 @@ namespace Ji.Sales
         /// <param name="e"></param>
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
-            if (gridControl1.DataSource == null && ((DataTable)gridControl1.DataSource).Rows.Count > 0)
+            if (gridControl1.DataSource == null && ((IEnumerable<Ji_GetDetailBillResult>)gridControl1.DataSource).Count() > 0)
             {
                 if (UI.Question("Bạn có chắc muốn hủy đơn hàng này không?"))
                 {
-                    int ds1 = API.DeleteOrder(Floor, Table);
-                    if (ds1 > 0)
+                   bool isRemoveSuccess= _orderServices.CancelOrder(Table, Floor);
+                    if (isRemoveSuccess)
                     {
                         ReloadOrders();
                         LoadData(Floor, Table);
@@ -615,13 +614,13 @@ namespace Ji.Sales
                     if (rs > 0)
                         UI.SaveInformation();
                     else
-                        UI.Warning("Có lỗi khi lưu Lưu Ý :( vui lòng thử lại nhé");
+                        UI.Warning(MessageConstant.ErrorSaveNote);
                 }
                 else
-                    UI.Warning("Bạn chưa Order, vui lòng Order trước khi Note");
+                    UI.Warning(MessageConstant.OrderBeforeNote);
             }
             else
-                UI.Warning("Bạn chưa nhập Lưu Ý cho đơn hàng");
+                UI.Warning(MessageConstant.InputNoteOrder);
         }
 
         private void cbListTopping_MeasureListBoxItem(object sender, MeasureItemEventArgs e)
@@ -635,7 +634,7 @@ namespace Ji.Sales
             {
                 if (!e.Value.ToString().IsNumber())
                 {
-                    UI.Warning("Giảm giá phải là số và không quá 100%");
+                    UI.Warning(MessageConstant.SaleOffOverRange);
                     gridView1.SetRowCellValue(e.RowHandle, "cSaleOff", 0);
                 }
             }
@@ -647,7 +646,7 @@ namespace Ji.Sales
             {
                 if (e.Value.ToInt() > 100 || e.Value.ToInt() < 0)
                 {
-                    UI.Warning("Giảm giá phải là số và không quá 100%");
+                    UI.Warning(MessageConstant.SaleOffOverRange);
                     gridView1.SetRowCellValue(e.RowHandle, "cSaleOff", 0);
                     return;
                 }
@@ -674,7 +673,7 @@ namespace Ji.Sales
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             if (gridControl1.DataSource == null)
-                UI.Warning("Bàn này chưa gọi món nào");
+                UI.Warning(MessageConstant.TableNoOrder);
             else
             {
                 if (((DataTable)gridControl1.DataSource).Rows.Count > 0)
@@ -722,17 +721,15 @@ namespace Ji.Sales
                             PercentSale = 0;
                             break;
                     }
-                    if (!Extension.Setup["warningCheckout"].ToBoolean() || UI.Question("Xác nhận thanh toán?"))
+                    if (!Configure.Setup.WarningCheckout || UI.Question("Xác nhận thanh toán?"))
                     {
                         try
                         {
-                            if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
-                                SplashScreenManager.ShowForm(typeof(Pleasewait));
+                            UI.ShowSplashForm();
                             PreviewPrinting printing = new PreviewPrinting();
                             if (chkBarCode.Checked)
                                 printing.BarCode = true;
-                            var ds = ReadyPrinting();
-                            // printing.dataSource = ds;
+                             printing.dataSource = ReadyPrinting();
                             //Khi bấm In mới lưu xuống Database
                             if (DialogResult.OK == printing.ShowDialog())
                             {
@@ -740,16 +737,27 @@ namespace Ji.Sales
                                 if (!string.IsNullOrEmpty(txtCustomerName.Text))
                                     CustomerName = txtCustomerName.EditValue.ToString();
                                 PercentSale += txtDiscountPercent.Text.ToInt();
-                                var ds1 = ((DataTable)gridControl1.DataSource);
-                                int t = 0;
-                                foreach (DataRow item in ds1.Rows)
-                                {
-                                    t += item["cTotal"].ToInt();
-                                }
-                                int discount = t * PercentSale / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
+                                var dataSource = (IEnumerable<Ji_GetDetailBillResult>)gridControl1.DataSource;
+                                int total = dataSource.Sum(x => x.cTotal).ToInt();
+                                int discount = total * PercentSale / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
                                 if (!string.IsNullOrEmpty(txtCustomerMoney.Text))
                                     CustomerMoney = txtCustomerMoney.EditValue.ToInt();
-                                if (API.API_ReportBill<int>(Extension.GetAppSetting("API") + "Report/GetReport", API.Access_Token, gridControl1.Tag.ToInt(), discount, CustomerName, "0978.123.900", DateTime.Now, CustomerMoney, "Thu Ngân", DateTime.Now, (txtCustomerMoney.ToInt() - t + discount).ToVND(), t - discount, ds1, CustomerID, Delivery) != -1)
+                                CheckoutModel checkoutModel = new CheckoutModel();
+                                checkoutModel.OrderId = gridControl1.Tag.ToInt();
+                                checkoutModel.Discount = discount;
+                                checkoutModel.CustomerName = CustomerName;
+                                checkoutModel.Phone = "0978.123.900";
+                                checkoutModel.DischargOn = DateTime.Now;
+                                checkoutModel.CustomerMoney = CustomerMoney;
+                                checkoutModel.Cashier = "Thu Ngân";
+                                checkoutModel.TimeCheckout = DateTime.Now;
+                                checkoutModel.CustomerRefund = (txtCustomerMoney.ToInt() - total + discount).ToVND();
+                                checkoutModel.TotalMoney = total - discount;
+                                checkoutModel.CustomerId = CustomerID;
+                                checkoutModel.DeliveryType = Delivery;
+                                checkoutModel.OrderDetail = dataSource;
+                               bool isCheckoutSuccess= _orderServices.Checkout(checkoutModel);
+                                if (isCheckoutSuccess)
                                 {
                                     LoadData(Floor, Table);
                                     //Reset lại text ban đầu
@@ -777,7 +785,7 @@ namespace Ji.Sales
                     }
                 }
                 else
-                    UI.Warning("Bàn này chưa gọi món nào");
+                    UI.Warning(MessageConstant.TableNoOrder);
             }
         }
     }

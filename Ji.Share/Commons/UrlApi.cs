@@ -15,6 +15,7 @@ namespace Ji.Commons
         public const string ListFloor = "api/System/ListFloor";
         public const string InitCashier = "api/System/InitCashier";
         public const string SetDefaultDLL = "api/System/SetDefaultDLL";
+        public const string GetConfigureStore = "api/System/GetConfigureStore";
         #endregion
         #region Product API
         public const string ListMilkTea = "api/Product/ListMilkTea";
@@ -26,10 +27,12 @@ namespace Ji.Commons
         #endregion
         #region Order API
         public const string ListOrder = "api/Order/ListOrder";
+        public const string CancelOrder = "api/Order/CancelOrder";
         public const string AddOrderItem = "api/Order/AddOrderItem";
         public const string CalculationTotalMoneyOrder = "api/Order/CalculationTotalMoneyOrder";
         public const string ListOrderDetail = "api/Order/ListOrderDetail";
         public const string RemoveOrderItems = "api/Order/RemoveOrderItems";
+        public const string Checkout = "api/Order/Checkout";
         #endregion
         public static string BackEnd = "api/Deployment/BackEnd";
         public static string FrontEnd = "api/Deployment/FrontEnd";

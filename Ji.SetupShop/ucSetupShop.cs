@@ -11,6 +11,7 @@ using Ji.Sales;
 using Ji.Model;
 using Ji.Core;
 using Newtonsoft.Json.Linq;
+using Ji.Model.Billing;
 
 namespace Ji.SetupShop
 {

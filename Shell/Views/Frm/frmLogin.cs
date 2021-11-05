@@ -27,9 +27,11 @@ namespace Shell.Views.Frm
     public partial class frmLogin : ClientForm
     {
         private readonly ILoginServices _loginServices;
+        private readonly ISystemServices _systemServices;
         public frmLogin()
         {
             _loginServices = _loginServices.GetServices();
+            _systemServices = _systemServices.GetServices();
             InitializeComponent();
         }
         /// <summary>
@@ -39,8 +41,7 @@ namespace Shell.Views.Frm
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
-                SplashScreenManager.ShowForm(typeof(WaitCheck));
+            UI.ShowSplashForm();
             //Nếu tồn tại File lưu mật khẩu
             if (File.Exists("Information.xml"))
             {
@@ -58,7 +59,7 @@ namespace Shell.Views.Frm
                 {
                     AuthorizeConstant.Users = result.Data.User;
                     AuthorizeConstant.Token = result.Data.Token;
-
+                    Configure.Setup= _systemServices.GetConfigureStore();
                     if (chkRememberPassword.Checked)
                     {
                         new XDocument(
@@ -100,7 +101,7 @@ namespace Shell.Views.Frm
         {
             if (File.Exists("Information.xml"))
             {
-                if (!string.IsNullOrEmpty(Extension.GetInfoByXML("Information.xml","User")) && !string.IsNullOrEmpty(Extension.GetInfoByXML("Information.xml", "Password")))
+                if (!string.IsNullOrEmpty(Extension.GetInfoByXML("Information.xml", "User")) && !string.IsNullOrEmpty(Extension.GetInfoByXML("Information.xml", "Password")))
                 {
                     UI.ShowSplashForm();
                     LoginRequest login = new LoginRequest();
@@ -112,6 +113,7 @@ namespace Shell.Views.Frm
                     {
                         AuthorizeConstant.Users = result.Data.User;
                         AuthorizeConstant.Token = result.Data.Token;
+                        Configure.Setup = _systemServices.GetConfigureStore();
                         DialogResult = DialogResult.OK;
                         Close();
                     }

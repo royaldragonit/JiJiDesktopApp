@@ -19,5 +19,7 @@ namespace Ji.Services.Interface
         int CalculationTotalMoneyOrder();
         bool RemoveOrderItems(OrderDeleteItem item);
         List<Ji_GetDetailBillResult> AddOrderItems(List<AddListOrder> listOrders);
+        bool CancelOrder(int table, int floor);
+        bool Checkout(CheckoutModel request);
     }
 }

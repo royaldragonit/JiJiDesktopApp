@@ -105,6 +105,7 @@
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\AuthorizeConstant.cs" />
+    <Compile Include="Commons\Configure.cs" />
     <Compile Include="Commons\MessageConstant.cs" />
     <Compile Include="Commons\UrlApi.cs" />
     <Compile Include="Controls\DragonComboBoox.cs">
@@ -145,6 +146,7 @@
     <Compile Include="Model\Entities\LFloor.cs" />
     <Compile Include="Model\Entities\LTopping.cs" />
     <Compile Include="Model\Entities\LUsers.cs" />
+    <Compile Include="Model\Entities\SetupShop.cs" />
     <Compile Include="Model\Entities\ToppingCustom.cs" />
     <Compile Include="Model\Formula.cs" />
     <Compile Include="Model\Ji_GetAllMilkTeaOrder.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Model\Menus.cs" />
     <Compile Include="Model\Messenger.cs" />
     <Compile Include="Model\OrderDetailV2.cs" />
+    <Compile Include="Model\OrderModels\CheckoutModel.cs" />
     <Compile Include="Model\OrderModels\OrderDeleteItem.cs" />
     <Compile Include="Model\OrderModels\OrderDetailRequest.cs" />
     <Compile Include="Model\Pay.cs" />

@@ -37,5 +37,11 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<bool>>(UrlApi.SetDefaultDLL+"?dll="+ dll+"&className="+className);
             return data.Data;
         }
+
+        public SetupShop GetConfigureStore()
+        {
+            var data = API.Get<ResultCustomModel<SetupShop>>(UrlApi.GetConfigureStore);
+            return data.Data;
+        }
     }
 }

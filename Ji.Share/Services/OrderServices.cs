@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Ji.Services
 {
-    public class OrderServices: IOrderServices
+    public class OrderServices : IOrderServices
     {
         public List<Ji_GetDetailBillResult> AddOrderItems(List<AddListOrder> listOrders)
         {
@@ -24,6 +24,12 @@ namespace Ji.Services
         public int CalculationTotalMoneyOrder()
         {
             var data = API.Get<ResultCustomModel<int>>(UrlApi.CalculationTotalMoneyOrder);
+            return data.Data;
+        }
+
+        public bool CancelOrder(int table, int floor)
+        {
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.CancelOrder + "?table=" + table + "&floor=" + floor);
             return data.Data;
         }
 
@@ -40,6 +46,11 @@ namespace Ji.Services
         public bool RemoveOrderItems(OrderDeleteItem item)
         {
             var data = API.Post<ResultCustomModel<bool>>(UrlApi.RemoveOrderItems, item);
+            return data.Data;
+        }
+        public bool Checkout(CheckoutModel item)
+        {
+            var data = API.Post<ResultCustomModel<bool>>(UrlApi.Checkout, item);
             return data.Data;
         }
     }

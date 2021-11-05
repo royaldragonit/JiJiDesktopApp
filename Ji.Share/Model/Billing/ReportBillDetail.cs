@@ -13,6 +13,7 @@ namespace Ji.Model.Billing
         public string Topping { get; set; }
         public int cIndex { get; set; }
         public int Quantity { get; set; }
+        public int Table { get; set; }
         public DateTime TimeCheckout { get; set; }
         public string CustomerName { get; set; }
         public string CustomerRefund { get; set; }

@@ -1190,9 +1190,9 @@
             this.lblTotalMoneyOrder.Appearance.Options.UseForeColor = true;
             this.lblTotalMoneyOrder.Location = new System.Drawing.Point(110, 9);
             this.lblTotalMoneyOrder.Name = "lblTotalMoneyOrder";
-            this.lblTotalMoneyOrder.Size = new System.Drawing.Size(86, 19);
+            this.lblTotalMoneyOrder.Size = new System.Drawing.Size(50, 19);
             this.lblTotalMoneyOrder.TabIndex = 3;
-            this.lblTotalMoneyOrder.Text = "Thêm món";
+            this.lblTotalMoneyOrder.Text = "0 VNĐ";
             // 
             // labelControl4
             // 

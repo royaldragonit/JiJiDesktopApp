@@ -15,5 +15,6 @@ namespace Ji.Services.Interface
         List<LFloor> ListFloor();
         InitCashierModel InitCashier(OrderDetailRequest orderDetailRequest);
         bool SetDefaultDLL(string dll, string className);
+        SetupShop GetConfigureStore();
     }
 }
