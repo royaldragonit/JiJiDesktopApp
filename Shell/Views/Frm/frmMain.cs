@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraSplashScreen;
 using Ji;
+using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
 using Ji.Services.Interface;
@@ -69,8 +70,8 @@ namespace Shell.Views.Frm
         public void LoadControl()
         {
             UI.ShowSplashForm();
-            var menu = _systemServices.ListSystemMenu();
-            var menu2 = menu.Select(x => new
+            Configure.ListSystemMenu = _systemServices.ListSystemMenu();
+            var menu2 = Configure.ListSystemMenu.Select(x => new
             {
                 x.Category,
                 x.CategoryNonUnicode
@@ -80,7 +81,7 @@ namespace Shell.Views.Frm
                 ToolStripMenuItem MenuItems = new ToolStripMenuItem(cat.Category);
                 MenuItems.Name = cat.CategoryNonUnicode;
                 JiMenu.Items.Add(MenuItems);
-                var lstMenu2 = menu.Where(x => x.CategoryNonUnicode.Equals(cat.CategoryNonUnicode));
+                var lstMenu2 = Configure.ListSystemMenu.Where(x => x.CategoryNonUnicode.Equals(cat.CategoryNonUnicode));
                 foreach (var item in lstMenu2)
                 {
                     ToolStripMenuItem SubMenuItem = new ToolStripMenuItem(item.Name);
@@ -98,7 +99,7 @@ namespace Shell.Views.Frm
                 }
             }
             #region Load DLL mặc định
-            var menu3 = menu.FirstOrDefault(x =>x.DefaultDLL);
+            var menu3 = Configure.ListSystemMenu.FirstOrDefault(x =>x.DefaultDLL);
             if (menu3 != null)
             {
                 ClientControl control = null;

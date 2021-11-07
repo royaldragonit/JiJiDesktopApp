@@ -35,10 +35,16 @@
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl9 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl8 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl10 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl12 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl36 = new DevExpress.XtraEditors.PanelControl();
+            this.txtTable = new DevExpress.XtraEditors.TextEdit();
+            this.panelControl35 = new DevExpress.XtraEditors.PanelControl();
+            this.btnConfigureFloor = new DevExpress.XtraEditors.SimpleButton();
+            this.panelFloor = new DevExpress.XtraEditors.PanelControl();
+            this.cbFloor = new System.Windows.Forms.ComboBox();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl10 = new DevExpress.XtraEditors.PanelControl();
-            this.chkBarCode = new DevExpress.XtraEditors.CheckEdit();
             this.panelControl31 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl32 = new DevExpress.XtraEditors.PanelControl();
             this.txtFaceBook = new DevExpress.XtraEditors.TextEdit();
@@ -59,6 +65,8 @@
             this.txtAbbreviation = new DevExpress.XtraEditors.TextEdit();
             this.panelControl24 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.panelBarCode = new DevExpress.XtraEditors.PanelControl();
+            this.chkBarCode = new DevExpress.XtraEditors.CheckEdit();
             this.panelControl11 = new DevExpress.XtraEditors.PanelControl();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.imgLogo = new DevExpress.XtraEditors.PictureEdit();
@@ -102,7 +110,15 @@
             this.panelControl8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).BeginInit();
             this.panelControl10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkBarCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl12)).BeginInit();
+            this.panelControl12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl36)).BeginInit();
+            this.panelControl36.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTable.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl35)).BeginInit();
+            this.panelControl35.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelFloor)).BeginInit();
+            this.panelFloor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl31)).BeginInit();
             this.panelControl31.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl32)).BeginInit();
@@ -131,6 +147,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAbbreviation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl24)).BeginInit();
             this.panelControl24.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelBarCode)).BeginInit();
+            this.panelBarCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkBarCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).BeginInit();
             this.panelControl11.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -226,18 +245,109 @@
             // 
             // panelControl8
             // 
+            this.panelControl8.Controls.Add(this.panelControl10);
             this.panelControl8.Controls.Add(this.btnSave);
             this.panelControl8.Controls.Add(this.btnPreview);
-            this.panelControl8.Controls.Add(this.panelControl10);
             this.panelControl8.Controls.Add(this.panelControl31);
             this.panelControl8.Controls.Add(this.panelControl28);
             this.panelControl8.Controls.Add(this.panelControl25);
             this.panelControl8.Controls.Add(this.panelControl22);
+            this.panelControl8.Controls.Add(this.panelBarCode);
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl8.Location = new System.Drawing.Point(2, 2);
             this.panelControl8.Name = "panelControl8";
             this.panelControl8.Size = new System.Drawing.Size(418, 274);
             this.panelControl8.TabIndex = 2;
+            // 
+            // panelControl10
+            // 
+            this.panelControl10.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl10.Controls.Add(this.panelControl12);
+            this.panelControl10.Controls.Add(this.panelFloor);
+            this.panelControl10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl10.Location = new System.Drawing.Point(2, 162);
+            this.panelControl10.Name = "panelControl10";
+            this.panelControl10.Size = new System.Drawing.Size(414, 33);
+            this.panelControl10.TabIndex = 8;
+            // 
+            // panelControl12
+            // 
+            this.panelControl12.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl12.Controls.Add(this.panelControl36);
+            this.panelControl12.Controls.Add(this.panelControl35);
+            this.panelControl12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl12.Location = new System.Drawing.Point(119, 0);
+            this.panelControl12.Name = "panelControl12";
+            this.panelControl12.Size = new System.Drawing.Size(295, 33);
+            this.panelControl12.TabIndex = 3;
+            // 
+            // panelControl36
+            // 
+            this.panelControl36.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl36.Controls.Add(this.txtTable);
+            this.panelControl36.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl36.Location = new System.Drawing.Point(0, 0);
+            this.panelControl36.Name = "panelControl36";
+            this.panelControl36.Size = new System.Drawing.Size(222, 33);
+            this.panelControl36.TabIndex = 4;
+            // 
+            // txtTable
+            // 
+            this.txtTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTable.Location = new System.Drawing.Point(0, 0);
+            this.txtTable.Name = "txtTable";
+            this.txtTable.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.txtTable.Properties.Appearance.Options.UseFont = true;
+            this.txtTable.Size = new System.Drawing.Size(222, 30);
+            this.txtTable.TabIndex = 3;
+            // 
+            // panelControl35
+            // 
+            this.panelControl35.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl35.Controls.Add(this.btnConfigureFloor);
+            this.panelControl35.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelControl35.Location = new System.Drawing.Point(222, 0);
+            this.panelControl35.Name = "panelControl35";
+            this.panelControl35.Size = new System.Drawing.Size(73, 33);
+            this.panelControl35.TabIndex = 3;
+            // 
+            // btnConfigureFloor
+            // 
+            this.btnConfigureFloor.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.btnConfigureFloor.Appearance.Options.UseFont = true;
+            this.btnConfigureFloor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnConfigureFloor.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnConfigureFloor.ImageOptions.Image")));
+            this.btnConfigureFloor.Location = new System.Drawing.Point(0, 0);
+            this.btnConfigureFloor.Name = "btnConfigureFloor";
+            this.btnConfigureFloor.Size = new System.Drawing.Size(73, 33);
+            this.btnConfigureFloor.TabIndex = 0;
+            this.btnConfigureFloor.Text = "Sửa";
+            this.btnConfigureFloor.Click += new System.EventHandler(this.btnConfigureFloor_Click);
+            // 
+            // panelFloor
+            // 
+            this.panelFloor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelFloor.Controls.Add(this.cbFloor);
+            this.panelFloor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelFloor.Location = new System.Drawing.Point(0, 0);
+            this.panelFloor.Name = "panelFloor";
+            this.panelFloor.Padding = new System.Windows.Forms.Padding(5);
+            this.panelFloor.Size = new System.Drawing.Size(119, 33);
+            this.panelFloor.TabIndex = 2;
+            // 
+            // cbFloor
+            // 
+            this.cbFloor.DisplayMember = "Name";
+            this.cbFloor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbFloor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFloor.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.cbFloor.FormattingEnabled = true;
+            this.cbFloor.Location = new System.Drawing.Point(5, 5);
+            this.cbFloor.Name = "cbFloor";
+            this.cbFloor.Size = new System.Drawing.Size(109, 27);
+            this.cbFloor.TabIndex = 9;
+            this.cbFloor.ValueMember = "Affect";
+            this.cbFloor.SelectedIndexChanged += new System.EventHandler(this.cbFloor_SelectedIndexChanged);
             // 
             // btnSave
             // 
@@ -272,35 +382,13 @@
             this.btnPreview.Text = "Xem trước mẫu in";
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
-            // panelControl10
-            // 
-            this.panelControl10.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl10.Controls.Add(this.chkBarCode);
-            this.panelControl10.Location = new System.Drawing.Point(2, 126);
-            this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(414, 32);
-            this.panelControl10.TabIndex = 6;
-            // 
-            // chkBarCode
-            // 
-            this.chkBarCode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkBarCode.EditValue = true;
-            this.chkBarCode.Location = new System.Drawing.Point(0, 0);
-            this.chkBarCode.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
-            this.chkBarCode.Name = "chkBarCode";
-            this.chkBarCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.chkBarCode.Properties.Appearance.Options.UseFont = true;
-            this.chkBarCode.Properties.Caption = "Hiển thị máy in mã vạch";
-            this.chkBarCode.Size = new System.Drawing.Size(414, 23);
-            this.chkBarCode.TabIndex = 0;
-            // 
             // panelControl31
             // 
             this.panelControl31.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl31.Controls.Add(this.panelControl32);
             this.panelControl31.Controls.Add(this.panelControl33);
             this.panelControl31.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl31.Location = new System.Drawing.Point(2, 95);
+            this.panelControl31.Location = new System.Drawing.Point(2, 131);
             this.panelControl31.Name = "panelControl31";
             this.panelControl31.Size = new System.Drawing.Size(414, 31);
             this.panelControl31.TabIndex = 5;
@@ -353,7 +441,7 @@
             this.panelControl28.Controls.Add(this.panelControl29);
             this.panelControl28.Controls.Add(this.panelControl30);
             this.panelControl28.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl28.Location = new System.Drawing.Point(2, 64);
+            this.panelControl28.Location = new System.Drawing.Point(2, 100);
             this.panelControl28.Name = "panelControl28";
             this.panelControl28.Size = new System.Drawing.Size(414, 31);
             this.panelControl28.TabIndex = 3;
@@ -406,7 +494,7 @@
             this.panelControl25.Controls.Add(this.panelControl26);
             this.panelControl25.Controls.Add(this.panelControl27);
             this.panelControl25.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl25.Location = new System.Drawing.Point(2, 33);
+            this.panelControl25.Location = new System.Drawing.Point(2, 69);
             this.panelControl25.Name = "panelControl25";
             this.panelControl25.Size = new System.Drawing.Size(414, 31);
             this.panelControl25.TabIndex = 2;
@@ -459,7 +547,7 @@
             this.panelControl22.Controls.Add(this.panelControl23);
             this.panelControl22.Controls.Add(this.panelControl24);
             this.panelControl22.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl22.Location = new System.Drawing.Point(2, 2);
+            this.panelControl22.Location = new System.Drawing.Point(2, 38);
             this.panelControl22.Margin = new System.Windows.Forms.Padding(20);
             this.panelControl22.Name = "panelControl22";
             this.panelControl22.Size = new System.Drawing.Size(414, 31);
@@ -506,6 +594,29 @@
             this.labelControl1.Size = new System.Drawing.Size(96, 19);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Tên viết tắt";
+            // 
+            // panelBarCode
+            // 
+            this.panelBarCode.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelBarCode.Controls.Add(this.chkBarCode);
+            this.panelBarCode.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelBarCode.Location = new System.Drawing.Point(2, 2);
+            this.panelBarCode.Name = "panelBarCode";
+            this.panelBarCode.Size = new System.Drawing.Size(414, 36);
+            this.panelBarCode.TabIndex = 7;
+            // 
+            // chkBarCode
+            // 
+            this.chkBarCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkBarCode.EditValue = true;
+            this.chkBarCode.Location = new System.Drawing.Point(0, 0);
+            this.chkBarCode.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.chkBarCode.Name = "chkBarCode";
+            this.chkBarCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.chkBarCode.Properties.Appearance.Options.UseFont = true;
+            this.chkBarCode.Properties.Caption = "Hiển thị máy in mã vạch";
+            this.chkBarCode.Size = new System.Drawing.Size(414, 36);
+            this.chkBarCode.TabIndex = 0;
             // 
             // panelControl11
             // 
@@ -852,7 +963,15 @@
             this.panelControl8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).EndInit();
             this.panelControl10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chkBarCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl12)).EndInit();
+            this.panelControl12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl36)).EndInit();
+            this.panelControl36.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtTable.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl35)).EndInit();
+            this.panelControl35.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelFloor)).EndInit();
+            this.panelFloor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl31)).EndInit();
             this.panelControl31.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl32)).EndInit();
@@ -885,6 +1004,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl24)).EndInit();
             this.panelControl24.ResumeLayout(false);
             this.panelControl24.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelBarCode)).EndInit();
+            this.panelBarCode.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkBarCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).EndInit();
             this.panelControl11.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -990,9 +1112,17 @@
         private DevExpress.XtraEditors.TextEdit txtFaceBook;
         private DevExpress.XtraEditors.PanelControl panelControl33;
         private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraEditors.PanelControl panelControl10;
         private DevExpress.XtraEditors.PanelControl panelControl34;
         private System.Windows.Forms.GroupBox groupBox4;
         private DevExpress.XtraEditors.CheckEdit chkWaringcheckout;
+        private DevExpress.XtraEditors.PanelControl panelBarCode;
+        private DevExpress.XtraEditors.PanelControl panelControl10;
+        private DevExpress.XtraEditors.TextEdit txtTable;
+        private DevExpress.XtraEditors.PanelControl panelFloor;
+        private DevExpress.XtraEditors.PanelControl panelControl12;
+        private DevExpress.XtraEditors.PanelControl panelControl35;
+        private DevExpress.XtraEditors.PanelControl panelControl36;
+        private DevExpress.XtraEditors.SimpleButton btnConfigureFloor;
+        private System.Windows.Forms.ComboBox cbFloor;
     }
 }

@@ -14,6 +14,8 @@ using Newtonsoft.Json.Linq;
 using Ji.Model.Billing;
 using Ji.Commons;
 using Ji.Services.Interface;
+using Ji.Model.Entities;
+using Ji.SetupShop.Views.Frm;
 
 namespace Ji.SetupShop
 {
@@ -30,13 +32,17 @@ namespace Ji.SetupShop
             ListPrinter.SelectedIndex = 0;
             if (ListPrinter.Properties.Items.Contains(Configure.Setup.DefaultPrinter))
                 ListPrinter.SelectedItem = Configure.Setup.DefaultPrinter;
+            LoadControl();
             BindingData();
         }
 
 
         public void LoadControl()
         {
-            throw new NotImplementedException();
+            if (Configure.SetupFloor != null)
+            {
+                cbFloor.DataSource = Configure.SetupFloor;
+            }
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
@@ -145,6 +151,23 @@ namespace Ji.SetupShop
             {
                 Logo = file.FileName.ConvertFileToBase64();
                 imgLogo.Image = Image.FromFile(file.FileName).Resize(250, 250);
+            }
+        }
+
+        private void btnConfigureFloor_Click(object sender, EventArgs e)
+        {
+            using (frmConfigureFloor frm = new frmConfigureFloor())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void cbFloor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           var selectedZone= cbFloor.SelectedItem as LFloor;
+            if (selectedZone != null)
+            {
+                txtTable.Text = selectedZone.CountTable.ToString();
             }
         }
     }

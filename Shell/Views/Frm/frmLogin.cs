@@ -60,6 +60,7 @@ namespace Shell.Views.Frm
                     AuthorizeConstant.Users = result.Data.User;
                     AuthorizeConstant.Token = result.Data.Token;
                     Configure.Setup= _systemServices.GetConfigureStore();
+                    Configure.SetupFloor = _systemServices.ListFloor();
                     if (chkRememberPassword.Checked)
                     {
                         new XDocument(
@@ -114,6 +115,7 @@ namespace Shell.Views.Frm
                         AuthorizeConstant.Users = result.Data.User;
                         AuthorizeConstant.Token = result.Data.Token;
                         Configure.Setup = _systemServices.GetConfigureStore();
+                        Configure.SetupFloor = _systemServices.ListFloor();
                         DialogResult = DialogResult.OK;
                         Close();
                     }

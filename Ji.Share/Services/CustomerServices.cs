@@ -23,5 +23,11 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<LCustomer>>(UrlApi.GetCustomer + "?phone=" + phone);
             return data.Data;
         }
+
+        public List<LCustomer> ListCustomer()
+        {
+            var data = API.Get<ResultCustomModel<List<LCustomer>>>(UrlApi.ListCustomer);
+            return data.Data;
+        }
     }
 }

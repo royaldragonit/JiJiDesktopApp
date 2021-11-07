@@ -41,6 +41,9 @@
     <Reference Include="DevExpress.Sparkline.v19.1.Core, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Ji.Share, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Ji.Share.dll</HintPath>
@@ -84,6 +87,18 @@
     <Compile Include="ucSetupShop.Designer.cs">
       <DependentUpon>ucSetupShop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Frm\frmConfigureFloor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Frm\frmConfigureFloor.Designer.cs">
+      <DependentUpon>frmConfigureFloor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Uc\ucConfigureFloor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Uc\ucConfigureFloor.Designer.cs">
+      <DependentUpon>ucConfigureFloor.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -96,6 +111,12 @@
     </Compile>
     <EmbeddedResource Include="ucSetupShop.resx">
       <DependentUpon>ucSetupShop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Frm\frmConfigureFloor.resx">
+      <DependentUpon>frmConfigureFloor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Uc\ucConfigureFloor.resx">
+      <DependentUpon>ucConfigureFloor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

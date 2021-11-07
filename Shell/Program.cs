@@ -91,6 +91,7 @@ namespace Shell
             services.AddTransient<IProductServices, ProductServices>();
             services.AddTransient<ICustomerServices, CustomerServices>();
             services.AddTransient<IRevenueServices, RevenueServices>();
+            services.AddTransient<IStaffServices, StaffServices>();
             API.ServiceProvider = services.BuildServiceProvider();
         }
         static void EndProcess()

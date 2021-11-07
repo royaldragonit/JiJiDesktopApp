@@ -1,4 +1,5 @@
-﻿using Ji.Model.CustomModels;
+﻿using Ji.Model.Billing;
+using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,7 @@ namespace Ji.Services.Interface
     {
         InitRevenueModel InitRevenue(string facId);
         List<ji_Report_RevenueTodayResult> RevenueDistance(DateTime fromDate, DateTime toDate);
+        List<ji_BillDetailResult> RevenueDetail(int billID);
+        List<ReportBillDetail> ReprintRevenue(int billID);
     }
 }

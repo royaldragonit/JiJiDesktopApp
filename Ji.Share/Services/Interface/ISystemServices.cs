@@ -17,5 +17,8 @@ namespace Ji.Services.Interface
         bool SetDefaultDLL(string dll, string className);
         SetupShop GetConfigureStore();
         bool ConfigureStore(SetupShop setup);
+        bool DeleteFloor(int floorId);
+        bool ModifyFloor(string floorName,int table,int floorId);
+        int AddFloor(string floorName, int table);
     }
 }

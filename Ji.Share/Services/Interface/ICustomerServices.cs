@@ -12,5 +12,6 @@ namespace Ji.Services.Interface
     {
         ResultCustomModel<int> AddCustomer(LCustomer customer);
         LCustomer GetCustomer(string phone);
+        List<LCustomer> ListCustomer();
     }
 }

@@ -1,9 +1,11 @@
 ﻿using DevExpress.XtraPrinting.Caching;
 using DevExpress.XtraReports.UI;
 using Ji.Bill;
+using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
 using Ji.Model.Billing;
+using Ji.Model.Entities;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -22,15 +24,14 @@ namespace Ji.Sales
     {
         public List<ReportBillDetail> dataSource;
         public string type = "print";
-        JObject setup = Extension.Setup;
         public PreviewPrinting()
         {
             InitializeComponent();
             foreach (string printer in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
                 ListPrinter.Properties.Items.Add(printer);
             ListPrinter.SelectedIndex = 0;
-            //if (ListPrinter.Properties.Items.Contains(setup["defaultPrinter"]))
-            //    ListPrinter.SelectedItem = setup["defaultPrinter"];
+            if (ListPrinter.Properties.Items.Contains(Configure.Setup.DefaultPrinter))
+                ListPrinter.SelectedItem = Configure.Setup.DefaultPrinter;
         }
 
         rptBill report = new rptBill();
@@ -45,7 +46,7 @@ namespace Ji.Sales
             Preview.DocumentSource = report;
             //Set cho máy in mã vạch
             rptBarCode.ShowPrintMarginsWarning = false;
-            List<dynamic> barcode = new List<dynamic>();
+            List<ReportBillDetail> barcode = new List<ReportBillDetail>();
             foreach (var item in dataSource)
             {
                 for (int i = 0; i < item.Quantity; i++)
@@ -63,9 +64,6 @@ namespace Ji.Sales
             {
                 BeginInvoke((Action)delegate ()
                 {
-                    //var storage = new MemoryDocumentStorage();
-                    //// report.ExportToPdf(Environment.SpecialFolder.MyDocuments.ToString());
-                    //var cachedReportSource = new CachedReportSource(report, storage);
                     var printTool = new ReportPrintTool(report);
                     printTool.PrinterSettings.PrinterName = ListPrinter.SelectedItem.ToString();
                     //In mã vạch
@@ -75,12 +73,8 @@ namespace Ji.Sales
                         PrintBarCode.PrinterSettings.PrinterName = "BarCode";
                         PrintBarCode.Print();
                     }
-                    if (setup["numberPrintBill"].ToInt() == 2)
-                    {
-                        printTool.Print();
-                        printTool.Print();
-                    }
-                    else
+                    printTool.Print();
+                    if (Configure.Setup.NumberPrintBill == 2)
                         printTool.Print();
                     DialogResult = DialogResult.OK;
                     Close();

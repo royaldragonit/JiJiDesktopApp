@@ -62,16 +62,10 @@ namespace Ji.Revenue
             using (frmBillDetail frm = new frmBillDetail())
             {
                 frm.BillID = BillID;
-                try
-                {
-                    var ds = API.GetBillDetail<BillDetails>(Extension.GetAppSetting("API") + "Report/GetBillsDetail", API.Access_Token, BillID).ToList();
-                    frm.dataSource = ds;
-                    frm.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    UI.Error(ex);
-                }
+                List<ji_BillDetailResult> revenueDetail = _revenueServices.RevenueDetail(BillID);
+                frm.dataSource = revenueDetail;
+                frm._revenueServices= _revenueServices;
+                frm.ShowDialog();
             }
         }
         /// <summary>

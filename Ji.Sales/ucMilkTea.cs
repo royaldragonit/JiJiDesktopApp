@@ -114,10 +114,10 @@ namespace Ji.Sales
                 foreach (var item in initCashier.ListFloor)
                 {
                     XtraTabPage tp = new XtraTabPage();
-                    tp.Name = "TabFloor" + item.Affect;
+                    tp.Name = "TabFloor" + item.Id;
                     tp.BackColor = Color.FromArgb(255, 192, 192);
                     tp.Click += Tp_Click;
-                    tp.Tag = item.Affect;
+                    tp.Tag = item.Id;
                     tp.Text = item.Name;
                     TabControlListTable.TabPages.Add(tp);
                     //Số bàn trên 1 hàng

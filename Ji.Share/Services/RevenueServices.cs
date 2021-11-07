@@ -1,5 +1,6 @@
 ﻿using Ji.Commons;
 using Ji.Core;
+using Ji.Model.Billing;
 using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using Ji.Services.Interface;
@@ -18,9 +19,22 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<InitRevenueModel>>(UrlApi.InitRevenue);
             return data.Data;
         }
-        public List<ji_Report_RevenueTodayResult> RevenueDistance(DateTime fromDate,DateTime toDate)
+
+        public List<ReportBillDetail> ReprintRevenue(int billID)
         {
-            var data = API.Get<ResultCustomModel<List<ji_Report_RevenueTodayResult>>>(UrlApi.RevenueDistance+ "?fromDate="+fromDate+"&toDate="+toDate);
+            var data = API.Get<ResultCustomModel<List<ReportBillDetail>>>(UrlApi.ReprintRevenue + "?billID=" + billID);
+            return data.Data;
+        }
+
+        public List<ji_BillDetailResult> RevenueDetail(int billID)
+        {
+            var data = API.Get<ResultCustomModel<List<ji_BillDetailResult>>>(UrlApi.RevenueDetail + "?billID=" + billID);
+            return data.Data;
+        }
+
+        public List<ji_Report_RevenueTodayResult> RevenueDistance(DateTime fromDate, DateTime toDate)
+        {
+            var data = API.Get<ResultCustomModel<List<ji_Report_RevenueTodayResult>>>(UrlApi.RevenueDistance + "?fromDate=" + fromDate + "&toDate=" + toDate);
             return data.Data;
         }
     }

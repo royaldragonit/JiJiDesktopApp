@@ -16,6 +16,9 @@ namespace Ji.Commons
         public const string InitCashier = "api/System/InitCashier";
         public const string SetDefaultDLL = "api/System/SetDefaultDLL";
         public const string GetConfigureStore = "api/System/GetConfigureStore";
+        public const string DeleteFloor = "api/System/DeleteFloor";
+        public const string ModifyFloor = "api/System/ModifyFloor";
+        public const string AddFloor = "api/System/AddFloor";
         #endregion
         #region Product API
         public const string ListMilkTea = "api/Product/ListMilkTea";
@@ -24,6 +27,7 @@ namespace Ji.Commons
         #region Customer API
         public const string AddCustomer = "api/Customer/AddCustomer";
         public const string GetCustomer = "api/Customer/GetCustomer";
+        public const string ListCustomer = "api/Customer/ListCustomer";
         #endregion
         #region Order API
         public const string ListOrder = "api/Order/ListOrder";
@@ -37,6 +41,13 @@ namespace Ji.Commons
         #region Revenue API
         public const string InitRevenue = "api/Revenue/InitRevenue";
         public const string RevenueDistance = "api/Revenue/RevenueDistance";
+        public const string RevenueDetail = "api/Revenue/RevenueDetail";
+        public const string ReprintRevenue = "api/Revenue/ReprintRevenue";
+        #endregion
+        #region Staff API
+
+        public static string ListStaff = "api/Staff/ListStaff";
+        public static string GetUserPermissionId = "api/Staff/GetUserPermissionId";
         #endregion
         public static string BackEnd = "api/Deployment/BackEnd";
         public static string FrontEnd = "api/Deployment/FrontEnd";

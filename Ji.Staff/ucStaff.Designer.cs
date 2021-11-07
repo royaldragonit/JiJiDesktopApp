@@ -42,6 +42,7 @@
             this.ColumnPermisson = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnPhone = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnCreateOn = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PanelPermisson = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -190,7 +191,8 @@
             this.ColumnAdress,
             this.ColumnPermisson,
             this.ColumnPhone,
-            this.ColumnCreateOn});
+            this.ColumnCreateOn,
+            this.ColumnId});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -308,6 +310,12 @@
             this.ColumnCreateOn.Name = "ColumnCreateOn";
             this.ColumnCreateOn.Visible = true;
             this.ColumnCreateOn.VisibleIndex = 6;
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.Caption = "UserId";
+            this.ColumnId.FieldName = "Id";
+            this.ColumnId.Name = "ColumnId";
             // 
             // PanelPermisson
             // 
@@ -769,5 +777,6 @@
         private DevExpress.XtraEditors.SimpleButton btnAddUser;
         private DevExpress.XtraEditors.SimpleButton btnUpdateUser;
         private DevExpress.XtraGrid.Columns.GridColumn ColumnCreateOn;
+        private DevExpress.XtraGrid.Columns.GridColumn ColumnId;
     }
 }

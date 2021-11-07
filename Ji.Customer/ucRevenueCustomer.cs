@@ -12,74 +12,68 @@ using Ji.Core;
 using Ji.Revenue.Models;
 using RestSharp;
 using System.Net;
+using Ji.Services.Interface;
 
 namespace Ji.Customer
 {
-  public partial class ucRevenueCustomer : ClientControl
-  {
-    public int CustomerID { get; set; }
-
-    public ucRevenueCustomer()
+    public partial class ucRevenueCustomer : ClientControl
     {
-      InitializeComponent();
-    }
-
-    private void btnViewDetail_Click(object sender, EventArgs e)
-    {
-      var row = gridView1.FocusedRowHandle;
-      int BillID = gridView1.GetRowCellValue(row, "cOrderID").ToString().ToInt();
-      using (frmBillDetail frm = new frmBillDetail())
-      {
-        frm.BillID = BillID;
-        try
+        public int CustomerID { get; set; }
+        private readonly IRevenueServices _revenueServices;
+        public ucRevenueCustomer()
         {
-          var ds = API.GetBillDetail<BillDetails>(Extension.GetAppSetting("API") + "Report/GetBillsDetail", API.Access_Token, BillID).ToList();
-          frm.dataSource = ds;
-          frm.ShowDialog();
+            InitializeComponent();
+            _revenueServices = _revenueServices.GetServices();
         }
-        catch (Exception ex)
+
+        private void btnViewDetail_Click(object sender, EventArgs e)
         {
-          UI.Error(ex);
+            var row = gridView1.FocusedRowHandle;
+            int BillID = gridView1.GetRowCellValue(row, "cOrderID").ToString().ToInt();
+            using (frmBillDetail frm = new frmBillDetail())
+            {
+                frm.BillID = BillID;
+                frm.dataSource = _revenueServices.RevenueDetail(BillID);
+                frm.ShowDialog();
+            }
         }
-      }
-    }
-    private void LoadData()
-    {
-      gridControl1.DataSource = null;
-      var ds = GetRevenueCustomer(Extension.GetAppSetting("API") + "Report/GetRevenueCustomer", API.Access_Token, DateTime.Now)?.ToList();
-      gridControl1.DataSource = ds;
-    }
-
-    private IEnumerable<Revenue.Revenue> GetRevenueCustomer(string v, string access_Token, DateTime now)
-    {
-      var client = new RestClient(v);
-      client.Timeout = -1;
-      var request = new RestRequest(Method.POST);
-      request.AddHeader("Authorization", API.Token_Type + access_Token);
-      request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-      request.AddParameter("CustomerID", CustomerID);
-      var response = client.Post<List<Revenue.Revenue>>(request);
-      if (response.StatusCode == HttpStatusCode.OK)
-        return response.Data;
-      return null;
-    }
-
-    private void btnDelete_Click(object sender, EventArgs e)
-    {
-      if (UI.Question("Bạn có chắc chắn muốn xóa phần doanh thu này không?"))
-      {
-        int OrderID = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "cOrderID")?.ToInt() ?? 0;
-        int remove = API.RemoveRevenue(OrderID);
-        if (remove > 0)
+        private void LoadData()
         {
-          LoadData();
+            gridControl1.DataSource = null;
+            var dataSource = _revenueServices.RevenueDistance(DateTime.Now.AddYears(-3), DateTime.Now);
+            gridControl1.DataSource = dataSource;
         }
-      }
-    }
 
-    private void ucRevenueCustomer_Load(object sender, EventArgs e)
-    {
-      LoadData();
+        private IEnumerable<Revenue.Revenue> GetRevenueCustomer(string v, string access_Token, DateTime now)
+        {
+            var client = new RestClient(v);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", API.Token_Type + access_Token);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("CustomerID", CustomerID);
+            var response = client.Post<List<Revenue.Revenue>>(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+                return response.Data;
+            return null;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (UI.Question("Bạn có chắc chắn muốn xóa phần doanh thu này không?"))
+            {
+                int OrderID = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "cOrderID")?.ToInt() ?? 0;
+                int remove = API.RemoveRevenue(OrderID);
+                if (remove > 0)
+                {
+                    LoadData();
+                }
+            }
+        }
+
+        private void ucRevenueCustomer_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
     }
-  }
 }

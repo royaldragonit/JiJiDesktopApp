@@ -49,5 +49,23 @@ namespace Ji.Services
             var data = API.Post<ResultCustomModel<bool>>(UrlApi.GetConfigureStore,setup);
             return data.Data;
         }
+
+        public bool DeleteFloor(int floorId)
+        {
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.DeleteFloor);
+            return data.Data;
+        }
+
+        public bool ModifyFloor(string floorName, int table, int floorId)
+        {
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.ModifyFloor + "?floorName=" + floorName + "&table=" + table+"&floorId="+floorId);
+            return data.Data;
+        }
+
+        public int AddFloor(string floorName, int table)
+        {
+            var data = API.Get<ResultCustomModel<int>>(UrlApi.AddFloor + "?floorName=" + floorName+"&table="+table) ;
+            return data.Data;
+        }
     }
 }

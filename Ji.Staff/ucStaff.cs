@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using Ji.Core;
 using DevExpress.XtraEditors;
 using Ji.Model;
+using Ji.Commons;
+using Ji.Services.Interface;
+using Ji.Model.Entities;
 
 namespace Ji.Staff
 {
@@ -18,11 +21,13 @@ namespace Ji.Staff
         /// <summary>
         /// Lưu tất cả User vào biến này để tái sử dụng khỏi truy vấn Database
         /// </summary>
-        private List<Users> user = new List<Users>();
+        private List<LUsers> lstUser;
         private int UserID { get; set; }
+        private readonly IStaffServices _staffServices;
         public ucStaff()
         {
             InitializeComponent();
+            _staffServices = _staffServices.GetServices();
         }
 
         private void ucStaff_Load(object sender, EventArgs e)
@@ -33,21 +38,20 @@ namespace Ji.Staff
         public void LoadControl()
         {
             PanelPermisson.Controls.Clear();
-            var ds = API.API_GetAllApplication<Dictionary<string, string>>(Extension.GetAppSetting("API") + "Application/GetAllApplication", API.Access_Token);
             int NumberTableInRow = (PanelPermisson.Width - 6) / 5;
             int Width = (PanelPermisson.Width - 6) / NumberTableInRow;
             int i = 0;
-            foreach (var item in ds)
+            foreach (var item in Configure.ListSystemMenu)
             {
                 CheckEdit chk = new CheckEdit();
-                if (item["permissionBasic"].ToBoolean())
+                if (item.PermissionBasic)
                 {
                     chk.Enabled = false;
                     chk.Checked = true;
                 }
-                chk.Name = item["nameNonUnicode"];
-                chk.Text = item["name"];
-                chk.Tag = item["id"];
+                chk.Name = item.NameNonUnicode;
+                chk.Text = item.Name;
+                chk.Tag = item.Id;
                 chk.Width = NumberTableInRow;
                 var font1 = chk.Font;
                 chk.Font = new Font("Arial", 12, FontStyle.Bold);
@@ -67,7 +71,7 @@ namespace Ji.Staff
                 else
                 {
                     //Lấy User dựa vào UserID ra
-                    Users user = this.user.FirstOrDefault(x => x.ID == UserID && txtUsername.Text.ToLower().Equals(x.Username.ToLower()));
+                    LUsers user = this.lstUser.FirstOrDefault(x => x.Id == UserID && txtUsername.Text.ToLower().Equals(x.Username.ToLower()));
                     if (user == null)
                         UI.Warning("Không được phép thay đổi tên đăng nhập, chỉ có thể thêm mới");
                     else
@@ -92,7 +96,7 @@ namespace Ji.Staff
                             user.FullName = txtName.Text;
                             user.Birthday = txtBirthday.DateTime;
                             user.Address = txtAddress.Text;
-                            rs = API.UpdateUser(user, ListAppID);
+                            //   rs = API.UpdateUser(user, ListAppID);
                         }
                         //Nếu thay đổi mật khẩu
                         else
@@ -104,7 +108,7 @@ namespace Ji.Staff
                                 user.Password = txtPassword.Text.ToMD5();
                                 user.Birthday = txtBirthday.DateTime;
                                 user.Address = txtAddress.Text;
-                                rs = API.UpdateUser(user, ListAppID);
+                                //     rs = API.UpdateUser(user, ListAppID);
                             }
                         }
                         if (!string.IsNullOrEmpty(rs))
@@ -120,7 +124,7 @@ namespace Ji.Staff
             if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtUsername.Text) && !string.IsNullOrEmpty(txtPhone.Text) && !string.IsNullOrEmpty(txtPassword.Text))
             {
                 //Lấy User dựa vào UserID ra
-                Users user = this.user.FirstOrDefault(x => txtUsername.Text.ToLower().Equals(x.Username.ToLower()));
+                LUsers user = this.lstUser.FirstOrDefault(x => txtUsername.Text.ToLower().Equals(x.Username.ToLower()));
                 if (user != null)
                 {
                     UI.Warning("Tên tài khoản đã tồn tại, vui lòng chọn một tên tài khoản khác");
@@ -139,7 +143,7 @@ namespace Ji.Staff
                     users.Password = txtPassword.Text;
                     users.Phone = txtPhone.Text;
                     users.Username = txtUsername.Text;
-                    rs = API.CreateUser(user);
+                    // rs = API.CreateUser(user);
                     if (!string.IsNullOrEmpty(rs))
                         UI.SaveInformation();
                     else
@@ -152,13 +156,15 @@ namespace Ji.Staff
 
         public void BindingData()
         {
-            gridControl1.DataSource = null;
-            var ds = API.GetUsers<Users>(Extension.GetAppSetting("API") + "Application/GetUsers", API.Access_Token)?.ToList();
+            List<LUsers> ds = _staffServices.ListStaff();
             gridControl1.DataSource = ds;
             if (ds != null && ds.Count() > 0)
-                user = ds;
-            gridControl1.Tag = ds?[0]?.ID;
-            UserID = ds?[0]?.ID ?? 0;
+            {
+                lstUser = ds;
+                gridControl1.Tag = ds?[0]?.Id;
+                UserID = ds?[0]?.Id ?? 0;
+            }
+
         }
 
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -173,8 +179,8 @@ namespace Ji.Staff
             txtPhone.Text = gridView1.GetRowCellValue(row, "Phone")?.ToString();
             txtUsername.Text = gridView1.GetRowCellValue(row, "Username")?.ToString();
             txtPassword.Text = gridView1.GetRowCellValue(row, "Password")?.ToString();
-            gridControl1.Tag = gridView1.GetRowCellValue(row, "ID")?.ToString();
-            UserID = gridView1.GetRowCellValue(row, "ID").ToInt();
+            gridControl1.Tag = gridView1.GetRowCellValue(row, "Id")?.ToString();
+            UserID = gridView1.GetRowCellValue(row, "Id").ToInt();
             foreach (var control in PanelPermisson.Controls)
             {
                 if (control is CheckEdit)
@@ -184,22 +190,18 @@ namespace Ji.Staff
                         checkEdit.Checked = false;
                 }
             }
-            string ListAppID = API.GetPermissionUser(UserID);
-            if (!string.IsNullOrEmpty(ListAppID))
+            List<int> ListAppID = _staffServices.GetUserPermissionId(UserID);
+            foreach (var item in ListAppID)
             {
-                var arr = ListAppID.Split(',');
-                for (int i = 0; i < arr.Count(); i++)
+                foreach (var control in PanelPermisson.Controls)
                 {
-                    foreach (var control in PanelPermisson.Controls)
+                    if (control is CheckEdit)
                     {
-                        if (control is CheckEdit)
+                        CheckEdit checkEdit = (CheckEdit)control;
+                        if (checkEdit.Enabled && checkEdit.Tag.ToInt() == item)
                         {
-                            CheckEdit checkEdit = (CheckEdit)control;
-                            if (checkEdit.Enabled && checkEdit.Tag.ToInt() == arr[i].VNDToNumber())
-                            {
-                                checkEdit.Checked = true;
-                                break;
-                            }
+                            checkEdit.Checked = true;
+                            break;
                         }
                     }
                 }

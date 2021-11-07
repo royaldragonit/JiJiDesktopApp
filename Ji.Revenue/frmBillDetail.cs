@@ -1,7 +1,10 @@
 ﻿using Ji.Core;
 using Ji.Model;
+using Ji.Model.Billing;
+using Ji.Model.Entities;
 using Ji.Revenue.Models;
 using Ji.Sales;
+using Ji.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +20,8 @@ namespace Ji.Revenue
     public partial class frmBillDetail : ClientForm
     {
         public int BillID = 0;
-        public List<BillDetails> dataSource;
+        public List<ji_BillDetailResult> dataSource;
+        public IRevenueServices _revenueServices;
 
         public frmBillDetail()
         {
@@ -31,11 +35,10 @@ namespace Ji.Revenue
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-                PreviewPrinting printing = new PreviewPrinting();
-                //var dataSource = API.API_RePrinter<ReportBillDetail>(Extension.GetAppSetting("API") + "Print/RePrinter", API.Access_Token, BillID).ToList();
-                //// var dataSource = db.ji_Checkout(gridControl1.Tag.ToInt(), 1, 0, CustomerName, "0978.123.900", DateTime.Now, CustomerMoney).ToList();
-                //printing.dataSource = dataSource;
-                printing.ShowDialog();
-            }
+            PreviewPrinting printing = new PreviewPrinting();
+            List<ReportBillDetail> dataReprint = _revenueServices.ReprintRevenue(BillID);
+            printing.dataSource = dataReprint;
+            printing.ShowDialog();
+        }
     }
 }
