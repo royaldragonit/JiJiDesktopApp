@@ -13,6 +13,7 @@ using Ji.Model;
 using Ji.Commons;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
+using Ji.Model.StaffModels;
 
 namespace Ji.Staff
 {
@@ -70,49 +71,23 @@ namespace Ji.Staff
                     UI.Warning("Không tìm thấy tài khoản mà bạn yêu cầu");
                 else
                 {
-                    //Lấy User dựa vào UserID ra
-                    LUsers user = this.lstUser.FirstOrDefault(x => x.Id == UserID && txtUsername.Text.ToLower().Equals(x.Username.ToLower()));
-                    if (user == null)
-                        UI.Warning("Không được phép thay đổi tên đăng nhập, chỉ có thể thêm mới");
+                    StaffInput staff = new StaffInput();
+                    staff.StaffId = UserID.ToInt();
+                    staff.Active = true;
+                    staff.Address = txtAddress.Text;
+                    staff.Birthday = txtBirthday.DateTime;
+                    staff.CreateOn = DateTime.Now;
+                    staff.FullName = txtName.Text;
+                    staff.Password = txtPassword.Text;
+                    staff.Phone = txtPhone.Text;
+                    staff.Username = txtUsername.Text;
+                    staff.ListPermissionId = ListPermissionId();
+                    var data = _staffServices.CreateStaff(staff);
+                    if (data.Success)
+                        UI.SaveInformation();
                     else
                     {
-                        string ListAppID = string.Empty;
-                        foreach (var control in PanelPermisson.Controls)
-                        {
-                            if (control is CheckEdit)
-                            {
-                                CheckEdit checkEdit = (CheckEdit)control;
-                                if (checkEdit.Checked && checkEdit.Enabled)
-                                    ListAppID += checkEdit.Tag.ToString() + ",";
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(ListAppID))
-                            ListAppID = ListAppID.Substring(0, ListAppID.Length - 1);
-                        //Nếu không thay đổi mật khẩu khi đăng nhập
-                        string rs = string.Empty;
-                        if (txtPassword.Text.ToLower().Equals(user.Password))
-                        {
-                            user.Phone = txtPhone.Text;
-                            user.FullName = txtName.Text;
-                            user.Birthday = txtBirthday.DateTime;
-                            user.Address = txtAddress.Text;
-                            //   rs = API.UpdateUser(user, ListAppID);
-                        }
-                        //Nếu thay đổi mật khẩu
-                        else
-                        {
-                            if (UI.Question("Cập nhật thông tin bao gồm mật khẩu?"))
-                            {
-                                user.Phone = txtPhone.Text;
-                                user.FullName = txtName.Text;
-                                user.Password = txtPassword.Text.ToMD5();
-                                user.Birthday = txtBirthday.DateTime;
-                                user.Address = txtAddress.Text;
-                                //     rs = API.UpdateUser(user, ListAppID);
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(rs))
-                            UI.SaveInformation();
+                        UI.ShowError(data.Message["vn"]);
                     }
                 }
             }
@@ -123,37 +98,42 @@ namespace Ji.Staff
         {
             if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtUsername.Text) && !string.IsNullOrEmpty(txtPhone.Text) && !string.IsNullOrEmpty(txtPassword.Text))
             {
-                //Lấy User dựa vào UserID ra
-                LUsers user = this.lstUser.FirstOrDefault(x => txtUsername.Text.ToLower().Equals(x.Username.ToLower()));
-                if (user != null)
-                {
-                    UI.Warning("Tên tài khoản đã tồn tại, vui lòng chọn một tên tài khoản khác");
-                    txtUsername.Focus();
-                }
+
+                StaffInput staff = new StaffInput();
+                staff.Active = true;
+                staff.Address = txtAddress.Text;
+                staff.Birthday = txtBirthday.DateTime;
+                staff.CreateOn = DateTime.Now;
+                staff.FullName = txtName.Text;
+                staff.Password = txtPassword.Text;
+                staff.Phone = txtPhone.Text;
+                staff.Username = txtUsername.Text;
+                staff.ListPermissionId = ListPermissionId();
+                var data = _staffServices.CreateStaff(staff);
+                if (data.Success)
+                    UI.SaveInformation();
                 else
                 {
-                    //Nếu không thay đổi mật khẩu khi đăng nhập
-                    string rs = string.Empty;
-                    Users users = new Users();
-                    users.Active = true;
-                    users.Address = txtAddress.Text;
-                    users.Birthday = txtBirthday.DateTime;
-                    users.CreateOn = DateTime.Now;
-                    users.FullName = txtName.Text;
-                    users.Password = txtPassword.Text;
-                    users.Phone = txtPhone.Text;
-                    users.Username = txtUsername.Text;
-                    // rs = API.CreateUser(user);
-                    if (!string.IsNullOrEmpty(rs))
-                        UI.SaveInformation();
-                    else
-                        UI.Warning("Lỗi! Chưa thêm tài khoản vào CSDL được!");
+                    UI.ShowError(data.Message["vn"]);
                 }
             }
             else
                 UI.Warning("Các thông tin bắt buộc khi : Tên, Tên tài khoản, Mật khẩu , Số điện thoại");
         }
-
+        private List<int> ListPermissionId()
+        {
+            List<int> data = new List<int>();
+            foreach (var control in PanelPermisson.Controls)
+            {
+                if (control is CheckEdit)
+                {
+                    CheckEdit checkEdit = (CheckEdit)control;
+                    if (checkEdit.Checked && checkEdit.Enabled)
+                        data.Add(checkEdit.Tag.ToInt());
+                }
+            }
+            return data;
+        }
         public void BindingData()
         {
             List<LUsers> ds = _staffServices.ListStaff();

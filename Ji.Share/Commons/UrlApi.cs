@@ -45,9 +45,16 @@ namespace Ji.Commons
         public const string ReprintRevenue = "api/Revenue/ReprintRevenue";
         #endregion
         #region Staff API
-
         public static string ListStaff = "api/Staff/ListStaff";
+        public static string CreateStaff = "api/Staff/CreateStaff";
+        public static string ModifyStaff = "api/Staff/ModifyStaff";
         public static string GetUserPermissionId = "api/Staff/GetUserPermissionId";
+        #endregion
+
+        #region Recipe API
+        public static string ListRecipe = "api/Recipe/ListRecipe";
+        public static string ListResourceRecipe = "api/Recipe/ListResourceRecipe";
+        
         #endregion
         public static string BackEnd = "api/Deployment/BackEnd";
         public static string FrontEnd = "api/Deployment/FrontEnd";

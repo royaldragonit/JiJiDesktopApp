@@ -11,37 +11,32 @@ using Ji.Core;
 using DevExpress.XtraGrid.Views.Grid;
 using RestSharp;
 using System.Net;
+using Ji.Services.Interface;
+using Ji.Model.Entities;
 
 namespace Ji.Recipe
 {
     public partial class ucRecipe : ClientControl
     {
         private int FoodID { get; set; } = 0;
+        private readonly IProductServices _productServices;
+        private readonly IRecipeServices _recipeServices;
         public ucRecipe()
         {
             InitializeComponent();
+            _productServices = _productServices.GetServices();
+            _recipeServices = _recipeServices.GetServices();
             LoadData();
         }
         private void LoadData()
         {
-            var ds = API.GetAllFood<L_Food>(Extension.GetAppSetting("API") + "Application/GetAllFood", API.Access_Token);
+            var dsMilkTea = _productServices.ListMilkTea();
             SearchFood.Properties.DataSource = null;
             SearchFood.Properties.ValueMember = "ID";
             SearchFood.Properties.DisplayMember = "FoodName";
-            SearchFood.Properties.DataSource = ds;
-            var dataSource = SetDataSourceGridControl<GetRecipe>();
+            SearchFood.Properties.DataSource = dsMilkTea;
+            List<ji_GetRecipeResult> dataSource = _recipeServices.ListRecipe();
             gridControl1.DataSource = dataSource;
-        }
-        private IEnumerable<T> SetDataSourceGridControl<T>()
-        {
-            var client = new RestClient(Extension.GetAppSetting("API") + "Recipe/GetRecipe");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
-            var response = client.Post<List<T>>(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Data;
-            return null;
         }
         /// <summary>
         /// Hàm xem chi tiết công thức
@@ -62,6 +57,7 @@ namespace Ji.Recipe
                 recipe.ID = RecipeID;
                 recipe.FoodID = FoodID;
                 frmViewRecipe frmViewRecipe = new frmViewRecipe();
+                frmViewRecipe._recipeServices = _recipeServices;
                 frmViewRecipe.RecipeID = RecipeID;
                 frmViewRecipe.FoodID = FoodID;
                 frmViewRecipe.Recipe = recipe;
@@ -85,7 +81,7 @@ namespace Ji.Recipe
             {
                 UI.ShowSplashForm();
                 Model.Recipe recipe = API.AddRecipe(DateTime.Now, FoodID);
-                if(recipe==null)
+                if (recipe == null)
                 {
                     UI.Warning("Lỗi khi thêm công thức, vui lòng thử lại hoặc liên hệ Supporter Ji Ji");
                     return;

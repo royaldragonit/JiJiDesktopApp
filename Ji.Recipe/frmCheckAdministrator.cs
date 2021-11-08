@@ -1,4 +1,5 @@
-﻿using Ji.Core;
+﻿using Ji.Commons;
+using Ji.Core;
 using Ji.Model;
 using Newtonsoft.Json.Linq;
 using System;
@@ -28,8 +29,7 @@ namespace Ji.Recipe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            JObject users = Extension.Setup;
-            if (users["userPassword"].ToString().ToLower() == txtPassword.Text.ToMD5().ToLower())
+            if (AuthorizeConstant.Users.Password == txtPassword.Text.ToMD5().ToLower())
             {
                 DialogResult = DialogResult.OK;
                 Close();

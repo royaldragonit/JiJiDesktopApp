@@ -1,4 +1,6 @@
-﻿using Ji.Model.Entities;
+﻿using Ji.Model.CustomModels;
+using Ji.Model.Entities;
+using Ji.Model.StaffModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +13,7 @@ namespace Ji.Services.Interface
     {
         List<LUsers> ListStaff();
         List<int> GetUserPermissionId(int userID);
+        ResultCustomModel<bool> CreateStaff(StaffInput staff);
+        ResultCustomModel<bool> ModifyStaff(StaffInput staff);
     }
 }

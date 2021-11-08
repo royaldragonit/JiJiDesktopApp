@@ -1,4 +1,6 @@
 ﻿using Ji.Core;
+using Ji.Model.Entities;
+using Ji.Services.Interface;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Ji.Recipe
         public string RecipeName { get; set; }
         public int FoodID { get; set; }
         public Model.Recipe Recipe { get; set; }
+        public IRecipeServices _recipeServices;
 
         public frmViewRecipe()
         {
@@ -31,18 +34,7 @@ namespace Ji.Recipe
         }
         private void LoadData()
         {
-            var client = new RestClient(Extension.GetAppSetting("API") + "Recipe/GetResourceRecipe");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
-            request.AddParameter("RecipeID", RecipeID);
-            var response = client.Post<List<GetResourceRecipe>>(request);
-            List<GetResourceRecipe> ds = new List<GetResourceRecipe>();
-            if (response.StatusCode == HttpStatusCode.OK)
-                ds = response.Data;
-            else
-                ds = null;
-            gridControl1.DataSource = null;
+            List<ji_GetResourceRecipeResult> ds = _recipeServices.ListResourceRecipe(RecipeID);
             gridControl1.DataSource = ds;
             if (ds.Count() > 0)
                 txtRecipe.Text = ds?[0]?.Note ?? "";

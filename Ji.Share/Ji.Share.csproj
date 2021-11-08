@@ -138,6 +138,8 @@
     <Compile Include="Model\Categories.cs" />
     <Compile Include="Model\CustomModels\InitRevenueModel.cs" />
     <Compile Include="Model\Entities\ji_BillDetailResult.cs" />
+    <Compile Include="Model\Entities\ji_GetRecipeResult.cs" />
+    <Compile Include="Model\Entities\ji_GetResourceRecipeResult.cs" />
     <Compile Include="Model\Entities\ji_PreviewPrintResult.cs" />
     <Compile Include="Model\Entities\ji_Report_RevenueResult.cs" />
     <Compile Include="Model\Entities\ji_Report_RevenueTodayResult.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="Model\Resource.cs" />
     <Compile Include="Model\ResourcesRecipe.cs" />
     <Compile Include="Model\SetupShops.cs" />
+    <Compile Include="Model\StaffModels\StaffInput.cs" />
     <Compile Include="Model\Topping.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="Pleasewait.cs">
@@ -186,6 +189,7 @@
     <Compile Include="Services\Interface\ILoginServices.cs" />
     <Compile Include="Services\Interface\IOrderServices.cs" />
     <Compile Include="Services\Interface\IProductServices.cs" />
+    <Compile Include="Services\Interface\IRecipeServices.cs" />
     <Compile Include="Services\Interface\IRevenueServices.cs" />
     <Compile Include="Services\Interface\IStaffServices.cs" />
     <Compile Include="Services\Interface\ISystemServices.cs" />
@@ -193,6 +197,7 @@
     <Compile Include="Services\LoginServices.cs" />
     <Compile Include="Services\OrderServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
+    <Compile Include="Services\RecipeServices.cs" />
     <Compile Include="Services\RevenueServices.cs" />
     <Compile Include="Services\StaffServices.cs" />
     <Compile Include="Services\SystemServices.cs" />
@@ -250,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\CustomerModels\" />
+    <Folder Include="Model\RecipeModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
