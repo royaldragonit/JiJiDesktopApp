@@ -42,6 +42,7 @@
             this.ColumnImage = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnCategoryID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColumnFileName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PanelTop = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
@@ -72,7 +73,6 @@
             this.btnUpdate = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl16 = new DevExpress.XtraEditors.PanelControl();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
-            this.ColumnFileName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.PanelWrapper)).BeginInit();
             this.PanelWrapper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PanelContainer)).BeginInit();
@@ -290,6 +290,12 @@
             this.gridColumn1.Caption = "Food ID";
             this.gridColumn1.FieldName = "cFoodID";
             this.gridColumn1.Name = "gridColumn1";
+            // 
+            // ColumnFileName
+            // 
+            this.ColumnFileName.Caption = "FileName";
+            this.ColumnFileName.FieldName = "FileName";
+            this.ColumnFileName.Name = "ColumnFileName";
             // 
             // PanelTop
             // 
@@ -614,12 +620,6 @@
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // ColumnFileName
-            // 
-            this.ColumnFileName.Caption = "FileName";
-            this.ColumnFileName.FieldName = "FileName";
-            this.ColumnFileName.Name = "ColumnFileName";
             // 
             // ucMenu
             // 
