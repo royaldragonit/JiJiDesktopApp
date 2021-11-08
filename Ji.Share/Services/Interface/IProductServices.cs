@@ -1,4 +1,5 @@
-﻿using Ji.Model.Entities;
+﻿using Ji.Model.CustomerModels;
+using Ji.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Ji.Services.Interface
     {
         List<Ji_GetAllMilkTeaOrderResult> ListMilkTea();
         List<LTopping> ListTopping();
+        List<Material> ListCategory();
+        List<Material> ListMenu();
     }
 }

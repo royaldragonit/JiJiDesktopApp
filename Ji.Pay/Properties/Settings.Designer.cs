@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ji.Pay.Properties
+namespace Ji.Payment.Properties
 {
 
 

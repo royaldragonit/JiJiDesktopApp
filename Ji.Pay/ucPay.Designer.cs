@@ -1,4 +1,4 @@
-﻿namespace Ji.Pay
+﻿namespace Ji.Payment
 {
     partial class ucPay
     {

@@ -1,4 +1,4 @@
-﻿namespace Ji.Pay
+﻿namespace Ji.Payment
 {
     partial class frmMain
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.ucPay1 = new Ji.Pay.ucPay();
+            this.ucPay1 = new ucPay();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.SuspendLayout();

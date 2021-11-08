@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ji.Pay
+namespace Ji.Payment
 {
     public partial class frmMain : ClientForm
     {

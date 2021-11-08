@@ -10,28 +10,26 @@ using System.Windows.Forms;
 using Ji.Core;
 using Ji.Model;
 using DevExpress.XtraGrid.Views.Grid;
+using Ji.Services.Interface;
+using Ji.Model.Entities;
 
-namespace Ji.Pay
+namespace Ji.Payment
 {
     public partial class ucPay : ClientControl, IClientControl
     {
+        private readonly IPayServices _payServices;
         public ucPay()
         {
             InitializeComponent();
+            _payServices = _payServices.GetServices();
         }
 
         public void BindingData()
         {
-            var ds = API.GetPayToDay<Pays>(Extension.GetAppSetting("API") + "Pay/GetPayToDay", API.Access_Token, DateTime.Now);
-            gridControl1.DataSource = null;
+            List<Pay> ds = _payServices.ListPay(DateTime.Now, DateTime.Now);
             gridControl1.DataSource = ds;
             txtDateTime.DateTime = DateTime.Now;
-            int total = 0;
-            foreach (var item in ds)
-            {
-                total += item.Money;
-            }
-            lblTotalPay.Text = total.ToVND();
+            lblTotalPay.Text = ds.Sum(x => x.Money).ToVND();
         }
 
         public void LoadControl()
@@ -43,8 +41,14 @@ namespace Ji.Pay
         {
             if (!string.IsNullOrEmpty(txtCreateBy.Text) && !string.IsNullOrEmpty(txtReason.Text) && !string.IsNullOrEmpty(txtMoney.Text) && !string.IsNullOrEmpty(txtDateTime.Text))
             {
-                bool ds = API.AddPay(Extension.GetAppSetting("API") + "Pay/AddPay", API.Access_Token, txtMoney.Text.ToInt(), txtReason.Text, txtCreateBy.Text, Convert.ToDateTime(txtDateTime.Text), TypePay.Properties.Items[ChooseType.SelectedIndex].Description);
-                if (ds)
+                Pay p = new Pay();
+                p.Money = txtMoney.Text.ToInt();
+                p.CreateBy = txtCreateBy.Text;
+                p.CTypePay = TypePay.Properties.Items[ChooseType.SelectedIndex].Description;
+                p.Time = txtDateTime.Text.ToDateTime();
+                p.Reason = txtReason.Text;
+                bool isSuccess = _payServices.AddPay(p);
+                if (isSuccess)
                 {
                     UI.SaveInformation();
                     BindingData();
@@ -71,17 +75,9 @@ namespace Ji.Pay
                 {
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
-                        var ds = API.PayDistanceFromTo<Pays>(Extension.GetAppSetting("API") + "Pay/PayDistanceFromTo", API.Access_Token, frm.FromDate, frm.ToDate);
-                        gridControl1.DataSource = null;
+                        var ds = _payServices.ListPay(frm.FromDate, frm.ToDate);
                         gridControl1.DataSource = ds;
-                        int total = 0;
-                        if (ds != null)
-                            foreach (var item in ds)
-                            {
-                                total += item.Money;
-                            }
-                        lblTotalPay.Text = total.ToVND();
-
+                        lblTotalPay.Text = ds.Sum(x=>x.Money).ToVND();
                     }
                 }
             }

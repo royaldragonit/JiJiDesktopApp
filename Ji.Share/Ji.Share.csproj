@@ -136,6 +136,7 @@
     <Compile Include="Model\AddListOrder.cs" />
     <Compile Include="Model\Billing\ReportBillDetail.cs" />
     <Compile Include="Model\Categories.cs" />
+    <Compile Include="Model\CustomerModels\Material.cs" />
     <Compile Include="Model\CustomModels\InitRevenueModel.cs" />
     <Compile Include="Model\Entities\ji_BillDetailResult.cs" />
     <Compile Include="Model\Entities\ji_GetRecipeResult.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Services\Interface\ICustomerServices.cs" />
     <Compile Include="Services\Interface\ILoginServices.cs" />
     <Compile Include="Services\Interface\IOrderServices.cs" />
+    <Compile Include="Services\Interface\IPayServices.cs" />
     <Compile Include="Services\Interface\IProductServices.cs" />
     <Compile Include="Services\Interface\IRecipeServices.cs" />
     <Compile Include="Services\Interface\IRevenueServices.cs" />
@@ -196,6 +198,7 @@
     <Compile Include="Services\ISales.cs" />
     <Compile Include="Services\LoginServices.cs" />
     <Compile Include="Services\OrderServices.cs" />
+    <Compile Include="Services\PayServices.cs" />
     <Compile Include="Services\ProductServices.cs" />
     <Compile Include="Services\RecipeServices.cs" />
     <Compile Include="Services\RevenueServices.cs" />
@@ -254,7 +257,6 @@
     <None Include="Resources\arrow_down.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\CustomerModels\" />
     <Folder Include="Model\RecipeModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

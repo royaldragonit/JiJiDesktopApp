@@ -6,11 +6,14 @@ using System.Windows.Forms;
 using Ji.Core;
 using Ji.Model;
 using DevExpress.XtraSplashScreen;
+using Ji.Services.Interface;
+using Ji.Model.CustomerModels;
 
 namespace Ji.Menu
 {
     public partial class ucMenu : ClientControl, IClientControl
     {
+        private readonly IProductServices _productServices;
         string img { get; set; }
         int FoodID { get; set; }
         bool Status { get; set; }
@@ -18,6 +21,7 @@ namespace Ji.Menu
         {
             InitializeComponent();
             gridView1.IndicatorWidth = 30;
+            _productServices = _productServices.GetServices();
         }
         /// <summary>
         /// Hàm thay đổi hình ảnh của món
@@ -77,9 +81,9 @@ namespace Ji.Menu
 
         public void BindingData()
         {
-            IEnumerable<Menus> menu = API.LoadAllMenu<Menus>(Extension.GetAppSetting("API") + "Application/LoadAllMenu", API.Access_Token);
+            List<Material> menu = _productServices.ListMenu();
             GridMenu.DataSource = menu;
-            if (menu?.Count() > 0)
+            if (menu.Count() > 0)
             {
                 gridView1.FocusedRowHandle = 0;
                 LoadImage(0);
@@ -88,19 +92,19 @@ namespace Ji.Menu
         }
         private void LoadCategory()
         {
-            var ds = API.GetAllCategory<Categories>(Extension.GetAppSetting("API") + "Application/GetAllCategory", API.Access_Token)?.ToList();
+            var ds = _productServices.ListCategory();
             cbCategory.Properties.DisplayMember = "Name";
             cbCategory.Properties.ValueMember = "ID";
             cbCategory.Properties.DataSource = ds;
         }
-        private void LoadImage(int row)
+        private async void LoadImage(int row)
         {
             string FileName = gridView1.GetRowCellValue(row, "FileName")?.ToString();
             if (!string.IsNullOrEmpty(FileName))
             {
-                pictureEdit1.LoadAsync(Extension.GetAppSetting("Host")+FileName);
-                pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-                pictureEdit1.Size = new Size(new Point(80,60));
+                //await pictureEdit1.LoadAsync(Extension.GetAppSetting("Host") + FileName);
+                //pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+                //pictureEdit1.Size = new Size(new Point(80, 60));
             }
         }
         private void ucMenu_Load(object sender, EventArgs e)

@@ -23,6 +23,8 @@ namespace Ji.Commons
         #region Product API
         public const string ListMilkTea = "api/Product/ListMilkTea";
         public const string ListTopping = "api/Product/ListTopping";
+        public const string ListCategory = "api/Product/ListCategory";
+        public const string ListMenu = "api/Product/ListMenu";
         #endregion
         #region Customer API
         public const string AddCustomer = "api/Customer/AddCustomer";
@@ -50,11 +52,13 @@ namespace Ji.Commons
         public static string ModifyStaff = "api/Staff/ModifyStaff";
         public static string GetUserPermissionId = "api/Staff/GetUserPermissionId";
         #endregion
-
         #region Recipe API
         public static string ListRecipe = "api/Recipe/ListRecipe";
-        public static string ListResourceRecipe = "api/Recipe/ListResourceRecipe";
-        
+        public static string ListResourceRecipe = "api/Recipe/ListResourceRecipe";     
+        #endregion
+        #region Pay API
+        public static string ListPay = "api/Pay/ListPay";
+        public static string AddPay = "api/Pay/AddPay";
         #endregion
         public static string BackEnd = "api/Deployment/BackEnd";
         public static string FrontEnd = "api/Deployment/FrontEnd";
