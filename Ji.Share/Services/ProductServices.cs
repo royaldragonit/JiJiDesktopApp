@@ -36,5 +36,10 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<List<LTopping>>>(UrlApi.ListTopping);
             return data.Data;
         }
+        public int GetPriceFood(int foodId)
+        {
+            var data = API.Get<int>(UrlApi.GetPriceFood+ "?foodId="+ foodId);
+            return data;
+        }
     }
 }

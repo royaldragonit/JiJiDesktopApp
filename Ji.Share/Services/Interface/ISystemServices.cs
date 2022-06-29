@@ -19,6 +19,6 @@ namespace Ji.Services.Interface
         bool ConfigureStore(SetupShop setup);
         bool DeleteFloor(int floorId);
         bool ModifyFloor(string floorName,int table,int floorId);
-        int AddFloor(string floorName, int table);
+        ResultCustomModel<int> AddFloor(string floorName, int table);
     }
 }

@@ -13,7 +13,7 @@ namespace Ji.Model.Entities
         public DateTime Time { get; set; }
         public string CreateBy { get; set; }
         public int Money { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
         public string CTypePay { get; set; }
     }
 }

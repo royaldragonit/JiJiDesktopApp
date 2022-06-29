@@ -12,7 +12,7 @@ namespace Ji.Model.Entities
         public DateTime CreateOn { get; set; }
         public int Table { get; set; }
         public int AffectFloor { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
         public string Note { get; set; }
     }
 }

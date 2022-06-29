@@ -1,4 +1,7 @@
 ﻿using Ji.Core;
+using Ji.Model.CustomModels;
+using Ji.Model.Entities;
+using Ji.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +16,10 @@ namespace Ji.Poached
 {
     public partial class frmAddResource : ClientForm
     {
+        private readonly IInventoryServices _inventoryServices;
         public frmAddResource()
         {
+            _inventoryServices = _inventoryServices.GetServices();
             InitializeComponent();
             cbUnit.SelectedIndex = 0;
         }
@@ -41,8 +46,16 @@ namespace Ji.Poached
                 {
                     if (UI.Question("Bạn có chắc là thêm nguyên liệu này không?"))
                     {
-                        int rs = API.AddResource(txtResourceName.Text,txtBrandName.Text,txtPrice.Text,txtQuantity.Text,txtQuantityInAUnit.Text,cbUnit.SelectedItem.ToString());
-                        if (rs > 0)
+                        Resource resource = new Resource();
+                        resource.QuantityInAUnit = txtQuantityInAUnit.Text.ToInt();
+                        resource.SupplierName = txtBrandName.Text;
+                        resource.Quantity = txtQuantity.Text.ToInt();
+                        resource.Price = txtPrice.Text.ToInt();
+                        resource.Name = txtResourceName.Text;
+                        resource.MoneyInAUnit = (double)txtPrice.Text.ToInt() / txtQuantity.Text.ToInt();
+                        resource.Unit = cbUnit.SelectedItem.ToString();
+                        ResultCustomModel<bool> rs = _inventoryServices.AddResource(resource);
+                        if (rs.Success)
                             UI.SaveInformation();
                         DialogResult = DialogResult.OK;
                     }
@@ -71,7 +84,7 @@ namespace Ji.Poached
             }
             if (!string.IsNullOrEmpty(txtQuantity.Text))
             {
-                if (!string.IsNullOrEmpty(txtPrice.Text)&&txtPrice.Text.ToInt()>0)
+                if (!string.IsNullOrEmpty(txtPrice.Text) && txtPrice.Text.ToInt() > 0)
                 {
                     txtPriceBinding.Text = ((float)(txtPrice.Text.ToInt() / txtQuantity.Text.ToInt())).ToVND();
                 }

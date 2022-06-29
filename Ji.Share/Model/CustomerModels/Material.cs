@@ -18,6 +18,6 @@ namespace Ji.Model.CustomerModels
         public int cSaleOff { get; set; }
         public string cCategory { get; set; }
         public bool cStatus { get; set; }
-        public string FacID { get; set; }
+        public int FacId { get; set; }
     }
 }

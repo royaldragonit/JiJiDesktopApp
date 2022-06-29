@@ -8,16 +8,17 @@ namespace Ji.Model
 {
     public class Menus
     {
-        public int cFoodID { get; set; }
-        public int cIndex { get; set; }
-        public string cFoodName { get; set; }
-        public string cImage { get; set; }
-        public string cPrice { get; set; }
-        public int cSaleOff { get; set; }
+        public int FoodID { get; set; }
+        public string FoodName { get; set; }
+        public string Image { get; set; }
+        public string Price { get; set; }
+        public int SaleOff { get; set; }
         public string Unit { get; set; }
         public string cCategory { get; set; }
-        public int cCategoryID { get; set; }
-        public bool cStatus { get; set; }
+        public int CategoryID { get; set; }
+        public int CreateBy { get; set; }
+        public bool Active { get; set; }
+
         public string FileName { get; set; }
     }
 }

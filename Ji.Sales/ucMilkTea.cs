@@ -96,22 +96,16 @@ namespace Ji.Sales
         /// </summary>
         public void RemoveAllChildControl()
         {
-            if (initCashier.ListFloor != null)
-            {
-                foreach (var item in initCashier.ListFloor)
-                {
-                    XtraTabPage tp = this.Controls.Find("TabFloor" + item.Affect, true).FirstOrDefault() as XtraTabPage;
-                    TabControlListTable.TabPages.Remove(tp);
-                }
-            }
+            TabControlListTable.TabPages.Clear();
         }
         public void LoadControl()
         {
+            RemoveAllChildControl();
             int NumberTableInRow = (TabControlListTable.Width - 6) / 7;
             int Width = (TabControlListTable.Width - 6) / (NumberTableInRow == 0 ? 1 : NumberTableInRow);
             if (initCashier.ListFloor != null)
             {
-                foreach (var item in initCashier.ListFloor)
+                foreach (var item in Configure.SetupFloor)
                 {
                     XtraTabPage tp = new XtraTabPage();
                     tp.Name = "TabFloor" + item.Id;
@@ -144,8 +138,11 @@ namespace Ji.Sales
                 //Set bàn đầu tiên Selected
                 SetColorTable();
                 SimpleButton tbx = Controls.Find("btnTable1", true).FirstOrDefault() as SimpleButton;
-                tbx.Appearance.BackColor = Color.Yellow;
-                tbx.Appearance.ForeColor = Color.Black;
+                if (tbx != null)
+                {
+                    tbx.Appearance.BackColor = Color.Yellow;
+                    tbx.Appearance.ForeColor = Color.Black;
+                }
             }
             chkBarCode.Visible = Configure.Setup.ShowBarCode.Value;
         }
@@ -169,48 +166,17 @@ namespace Ji.Sales
             {
                 chat.On<int, int>("CallPrintBill", (Table, Floor) =>
                 {
-                    var dataPrint = API.GetDataOrder(Floor, Table).ToDataTable();
-                    if (dataPrint != null && dataPrint.Rows.Count > 0)
+                    var dataPrint = _orderServices.GetListOrderByTable(Floor, Table);
+                    if (dataPrint != null && dataPrint.Count > 0)
                     {
-                        int t = 0;
-                        foreach (DataRow item in dataPrint.Rows)
-                        {
-                            t = item["cTotal"].ToInt();
-
-                        }
-                        int discount = t * txtDiscountPercent.Text?.ToInt() ?? 0 / 100 - txtDiscountMoney.Text?.ToInt() ?? 0;
-                        int totalMoney = t - discount;
+                        int discount = dataPrint.Sum(x => x.cTotal) * txtDiscountPercent.Text?.ToInt() ?? 0 / 100 - txtDiscountMoney.Text?.ToInt() ?? 0;
+                        int totalMoney = dataPrint.Sum(x => x.cTotal) - discount;
                         int CustomerMoney = -1;
                         string CustomerName = "Khách yêu ♥";
                         if (!string.IsNullOrEmpty(txtCustomerName.EditValue.ToString()))
                             CustomerName = txtCustomerName.Text;
                         if (!string.IsNullOrEmpty(txtCustomerMoney.EditValue.ToString()))
                             CustomerMoney = txtCustomerMoney.Text.ToInt();
-                        //List<ReportBillDetail> lst = new List<ReportBillDetail>();
-                        //foreach (DataRow item in dataPrint.Rows)
-                        //{
-                        //    ReportBillDetail rep = new ReportBillDetail();
-                        //    rep.BillID = item["cOrderID"].ToInt();
-                        //    rep.Cashier = "Thu ngân";
-                        //    rep.Topping = item["cPriceTopping"].ToVND();
-                        //    rep.cIndex = item["cIndex"].ToInt();
-                        //    rep.Quantity = item["cQuantity"].ToInt();
-                        //    rep.TimeCheckout = DateTime.Now;
-                        //    rep.CustomerName = CustomerName;
-                        //    rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
-                        //    rep.Discount = discount;
-                        //    rep.Floor = Floor;
-                        //    rep.FoodName = item["cFood"].ToString();
-                        //    //Đơn giá tiền
-                        //    rep.Money = item["cPrice"].ToVND();
-                        //    //Tiền khách đưa
-                        //    rep.MoneyCustomer = CustomerMoney.ToVND();
-                        //    //tổng tiền sau khi nhân với số lượng và Topping
-                        //    rep.TotalMoney = item["cTotal"].ToVND();
-                        //    //Số tiền cần thanh toán
-                        //    rep.Total = totalMoney.ToVND();
-                        //    lst.Add(rep);
-                        //}
                         rptBill report = new rptBill();
                         report.ShowPrintMarginsWarning = false;
                         // report.DataSource = lst;
@@ -316,6 +282,7 @@ namespace Ji.Sales
                 UI.Warning(MessageConstant.CheckInternet);
                 return;
             }
+            //Nếu không truyền vào thì sẽ gọi API
             if (lstData == null)
             {
                 OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
@@ -553,7 +520,6 @@ namespace Ji.Sales
         {
             if (SplashScreenManager.Default == null)
                 SplashScreenManager.ShowForm(typeof(Pleasewait));
-            RemoveAllChildControl();
             LoadControl();
             LoadData(1, 1);
             if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
@@ -575,7 +541,7 @@ namespace Ji.Sales
             {
                 if (UI.Question("Bạn có chắc muốn hủy đơn hàng này không?"))
                 {
-                   bool isRemoveSuccess= _orderServices.CancelOrder(Table, Floor);
+                    bool isRemoveSuccess = _orderServices.CancelOrder(Table, Floor);
                     if (isRemoveSuccess)
                     {
                         ReloadOrders();
@@ -595,9 +561,10 @@ namespace Ji.Sales
             {
                 frm.FromTable = Table;
                 frm.FromFloor = Floor;
+                frm._orderServices = _orderServices;
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
-                    if (frm.Result > 0)
+                    if (frm.Result)
                         LoadData(Floor, Table);
                 }
             }
@@ -610,8 +577,8 @@ namespace Ji.Sales
                 int OrderID = gridControl1.Tag?.ToInt() ?? 0;
                 if (OrderID > 0)
                 {
-                    int rs = API.SetNoteOrder(OrderID, txtNote.Text);
-                    if (rs > 0)
+                    var rs = _orderServices.SetNoteOrder(OrderID, txtNote.Text);
+                    if (rs.Success)
                         UI.SaveInformation();
                     else
                         UI.Warning(MessageConstant.ErrorSaveNote);
@@ -729,7 +696,7 @@ namespace Ji.Sales
                             PreviewPrinting printing = new PreviewPrinting();
                             if (chkBarCode.Checked)
                                 printing.BarCode = true;
-                             printing.dataSource = ReadyPrinting();
+                            printing.dataSource = ReadyPrinting();
                             //Khi bấm In mới lưu xuống Database
                             if (DialogResult.OK == printing.ShowDialog())
                             {
@@ -756,7 +723,7 @@ namespace Ji.Sales
                                 checkoutModel.CustomerId = CustomerID;
                                 checkoutModel.DeliveryType = Delivery;
                                 checkoutModel.OrderDetail = dataSource;
-                               bool isCheckoutSuccess= _orderServices.Checkout(checkoutModel);
+                                bool isCheckoutSuccess = _orderServices.Checkout(checkoutModel);
                                 if (isCheckoutSuccess)
                                 {
                                     LoadData(Floor, Table);

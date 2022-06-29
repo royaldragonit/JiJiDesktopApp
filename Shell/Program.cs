@@ -60,7 +60,7 @@ namespace Shell
                     //Extension.a();
                     Application.Run(new frmMain());
                     //Nếu User nhấn nút đăng xuất thì quá trình đăng nhập lại bắt đầu
-                    if (API.Access_Token == null)
+                    if (API.AccessToken == null)
                     {
 
                     }
@@ -94,6 +94,9 @@ namespace Shell
             services.AddTransient<IStaffServices, StaffServices>();
             services.AddTransient<IRecipeServices, RecipeServices>();
             services.AddTransient<IPayServices, PayServices>();
+            services.AddTransient<IInventoryServices, InventoryServices>();
+            services.AddTransient<IFacServices, FacServices>();
+            services.AddTransient<IMenuServices, MenuServices>();
             API.ServiceProvider = services.BuildServiceProvider();
         }
         static void EndProcess()

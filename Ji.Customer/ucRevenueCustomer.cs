@@ -49,7 +49,7 @@ namespace Ji.Customer
             var client = new RestClient(v);
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + access_Token);
+            request.AddHeader("Authorization", API.TokenType + access_Token);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddParameter("CustomerID", CustomerID);
             var response = client.Post<List<Revenue.Revenue>>(request);
@@ -63,8 +63,8 @@ namespace Ji.Customer
             if (UI.Question("Bạn có chắc chắn muốn xóa phần doanh thu này không?"))
             {
                 int OrderID = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "cOrderID")?.ToInt() ?? 0;
-                int remove = API.RemoveRevenue(OrderID);
-                if (remove > 0)
+                bool remove = _revenueServices.RemoveRevenue(OrderID);
+                if (remove)
                 {
                     LoadData();
                 }

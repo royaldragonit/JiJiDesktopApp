@@ -14,5 +14,6 @@ namespace Ji.Services.Interface
         List<LTopping> ListTopping();
         List<Material> ListCategory();
         List<Material> ListMenu();
+        int GetPriceFood(int foodId);
     }
 }

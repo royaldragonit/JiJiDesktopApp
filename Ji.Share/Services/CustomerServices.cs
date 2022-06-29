@@ -1,5 +1,6 @@
 ﻿using Ji.Commons;
 using Ji.Core;
+using Ji.Model.CustomerModels;
 using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using Ji.Services.Interface;
@@ -28,6 +29,11 @@ namespace Ji.Services
         {
             var data = API.Get<ResultCustomModel<List<LCustomer>>>(UrlApi.ListCustomer);
             return data.Data;
+        }
+        public List<MessageResponse> GetMessenger(int customerId)
+        {
+            var data = API.Get<List<MessageResponse>>(UrlApi.GetMessenger + "?customerId" + customerId);
+            return data;
         }
     }
 }

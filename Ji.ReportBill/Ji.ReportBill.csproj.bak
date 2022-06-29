@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../bin</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="rptReportBill.repx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="rptReportBill.repx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Reporting.Core" Version="19.1.6" />
+    <PackageReference Include="EntityFramework" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Ji.Share">
+      <HintPath>..\bin\Ji.Share.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="rptReportBill.cs">
+      <DependentUpon>rptReportBill.repx</DependentUpon>
+    </Compile>
+    <Compile Update="rptReportBill.Designer.cs">
+      <DependentUpon>rptReportBill.repx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

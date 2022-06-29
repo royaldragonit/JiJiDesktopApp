@@ -10,6 +10,7 @@ namespace Ji.Model.Entities
     {
         public long? cIndex { get; set; }
         public string FoodName { get; set; }
+        public string cToppingID { get; set; }
         public int cPriceTopping { get; set; }
         public int cQuantity { get; set; }
         public int? cPrice { get; set; }

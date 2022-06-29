@@ -12,14 +12,21 @@ using System.Data.SqlClient;
 using Ji.Core;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
+using Ji.Services.Interface;
+using Ji.Model.RecipeModels;
+using Ji.Model.CustomModels;
 
 namespace Ji_CongThuc
 {
     public partial class ucCongThuc : ClientControl
     {
         private string CongThucID;
+        private readonly IProductServices  _productServices;
+        private readonly IRecipeServices  _recipeServices;
         public ucCongThuc()
         {
+            _productServices = _productServices.GetServices();
+            _recipeServices = _recipeServices.GetServices();
             InitializeComponent();
             LoadCongThuc();
             LoadCategory();
@@ -44,7 +51,7 @@ namespace Ji_CongThuc
         private void LoadCongThuc()
         {
             //var ds = db.ji_LoadMilk().ToList();
-            var ds = API.GetAllFormula<Ji.Model.Formula>(Extension.GetAppSetting("API") + "Application/GetAllFormula", API.Access_Token)?.ToList();
+            var ds = _recipeServices.ListRecipe();
             gridControl1.DataSource = ds;
         }
         /// <summary>
@@ -52,7 +59,7 @@ namespace Ji_CongThuc
         /// </summary>
         private void LoadCategory()
         {
-            var ds = API.GetAllCategory<Ji.Model.Categories>(Extension.GetAppSetting("API") + "Application/GetAllCategory", API.Access_Token)?.ToList();
+            var ds = _productServices.ListCategory();
             searchLookUpEdit1.Properties.DataSource = ds;
         }
         private void txtSearch_EditValueChanged(object sender, EventArgs e)
@@ -96,14 +103,18 @@ namespace Ji_CongThuc
             }
             if (CongThucID == "")
                 CongThucID = Guid.NewGuid().ToString();
-            string FoodName = txtTen.Text.ToString();
-            string ThanhPhan = memoTP.Text.ToString();
-            string CongThuc = memoCT.Text.ToString();
-            int CategoryID = searchLookUpEdit1.EditValue.ToInt();
-            string Unit = txtLoai.Text.ToString();
-            int Price = txtGia.ToInt();
-            int ds = API.SaveFormula(Extension.GetAppSetting("API") + "Formula/SaveFormula", API.Access_Token, Guid.Parse(CongThucID), CategoryID, ThanhPhan, CongThuc, FoodName, Unit, Price, 0, Extension.Setup["userID"].ToInt());
-            if (ds > 0)
+            SaveRecipeInput saveRecipe = new SaveRecipeInput();
+            saveRecipe.FoodName = txtTen.Text.ToString(); 
+            saveRecipe.Component = memoTP.Text.ToString(); 
+            saveRecipe.Formula = memoCT.Text.ToString(); 
+            saveRecipe.Unit = txtLoai.Text.ToString();
+            saveRecipe.Price = txtGia.ToInt();
+            saveRecipe.CategoryID = searchLookUpEdit1.EditValue.ToInt();
+            saveRecipe.CreateBy = Extension.Setup["userID"].ToInt();
+            saveRecipe.FormulaID = Guid.Parse(CongThucID);
+
+            ResultCustomModel<bool> result= _recipeServices.SaveRecipe(saveRecipe);
+            if (result.Success)
             {
                 AutoCloseMsgbox.Show("Đã lưu", "Thông báo", 500);
                 LoadCongThuc();

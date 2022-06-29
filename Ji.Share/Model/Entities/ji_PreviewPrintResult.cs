@@ -24,6 +24,6 @@ namespace Ji.Model.Entities
         public string Total { get; set; }
         public int? BillID { get; set; }
         public int? Discount { get; set; }
-        public string FacID { get; set; }
+        public int FacId { get; set; }
     }
 }

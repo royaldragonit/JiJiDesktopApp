@@ -14,6 +14,6 @@ namespace Ji.Model.Entities
         public int Affect { get; set; }
         public bool? Active { get; set; }
         public int Id { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
     }
 }

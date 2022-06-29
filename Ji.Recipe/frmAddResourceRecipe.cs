@@ -1,6 +1,9 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
 using Ji.Core;
 using Ji.Model;
+using Ji.Model.CustomModels;
+using Ji.Model.Entities;
+using Ji.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,19 +21,23 @@ namespace Ji.Recipe
         public string RecipeName { get; set; }
         public Model.Recipe recipe { get; set; }
         public int FoodID { get; set; }
+        public readonly IRecipeServices _recipeServices;
+        public readonly IInventoryServices _inventoryServices;
         public frmAddResourceRecipe()
         {
             InitializeComponent();
+            _recipeServices= _recipeServices.GetServices();
+            _inventoryServices = _inventoryServices.GetServices();
             Text += " " + RecipeName;
             LoadData();
         }
         private void LoadData()
         {
-            var ds = API.GetResources<Resource>();
+            IEnumerable<Resource> data = _inventoryServices.GetResources();
             SearchResource.Properties.DataSource = null;
             SearchResource.Properties.ValueMember = "ID";
             SearchResource.Properties.DisplayMember = "Name";
-            SearchResource.Properties.DataSource = ds;
+            SearchResource.Properties.DataSource = data;
         }
         /// <summary>
         /// Hàm thêm nguyên liệu vào công thức
@@ -46,17 +53,12 @@ namespace Ji.Recipe
                 resources.Quantity = txtQuantity.Text.ToInt();
                 resources.ResourcesID = SearchResource.EditValue.ToInt();
                 resources.RecipeID = recipe.ID;
-                int rs = API.AddResourceRecipe(txtPriceCost.Text.VNDToNumber(), txtQuantity.Text.ToInt(), SearchResource.EditValue.ToInt(), recipe.ID);
-                if (rs == 0)
+                ResultCustomModel<bool> result = _recipeServices.AddResourceRecipe(resources);
+                if (!result.Success)
                 {
-                    UI.Warning("Nguyên liệu này đã có trong công thức, vui lòng kiểm tra lại");
+                    UI.Warning(result.Message["vn"]);
                     SearchResource.EditValue = null;
                     txtQuantity.Text = "0";
-                    return;
-                }
-                else if (rs == -1)
-                {
-                    UI.Warning("Đã xảy ra lỗi trong quá trình thêm nguyên liệu, vui lòng liên hệ Admin để biết thêm thông tin");
                     return;
                 }
                 else

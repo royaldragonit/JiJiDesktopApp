@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraSplashScreen;
+using Ji.Commons;
 
 namespace Shell.Views.Loader
 {
@@ -27,6 +28,13 @@ namespace Shell.Views.Loader
 
         public enum SplashScreenCommand
         {
+        }
+
+        private void PleaseWaiting_Load(object sender, EventArgs e)
+        {
+            txtAddress.Text = Configure.Setup.Address;
+            txtFacebook.Text = Configure.Setup.Address;
+            txtPhone.Text = Configure.Setup.Hotline;
         }
     }
 }

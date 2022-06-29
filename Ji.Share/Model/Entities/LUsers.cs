@@ -18,7 +18,7 @@ namespace Ji.Model.Entities
         public string Image { get; set; }
         public string Roles { get; set; }
         public string Token { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
         public DateTime Birthday { get; set; }
         public DateTime CreateOn { get; set; }
     }

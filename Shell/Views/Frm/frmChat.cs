@@ -13,15 +13,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
 using Ji.Model;
+using Ji.Model.CustomerModels;
+using Ji.Services.Interface;
 
 namespace Shell.Views.Frm
 {
     public partial class frmChat : ClientForm
     {
         public HubConnection hubConnection;
+        public readonly ICustomerServices _customerServices;
         int SupporterID { get; set; } = 0;
         public frmChat()
         {
+            _customerServices= _customerServices.GetServices();
             InitializeComponent();
         }
         private void btnSend_Click(object sender, EventArgs e)
@@ -91,14 +95,14 @@ namespace Shell.Views.Frm
         }
         private void LoadData()
         {
-            List<Messenger> ds = API.LoadMessenger(Extension.Setup["userID"].ToInt())?.ToList();
+            List<MessageResponse> ds = _customerServices.GetMessenger(Extension.Setup["userID"].ToInt());
             if (ds != null)
             {
                 foreach (var item in ds)
                 {
                     LoadControl(item.Message, item.SupporterName, !item.SupporterSend);
                 }
-                SupporterID = ds[0].SupporterID;
+                SupporterID = ds[0].SupporterId;
                 txtMessage.Enabled = true;
                 btnSend.Enabled = true;
             }

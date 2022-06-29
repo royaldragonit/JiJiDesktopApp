@@ -1,4 +1,5 @@
 ﻿using Ji.Core;
+using Ji.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,17 +17,19 @@ namespace Ji.Recipe
         public int RecipeID { get; set; } = 0;
         public string RecipeNote { get; set; }
 
+        private readonly IRecipeServices _recipeServices;
         public frmAddRecipe()
         {
             InitializeComponent();
+            _recipeServices = _recipeServices.GetServices();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtRecipe.Text))
             {
-                int rs = API.UpdateRecipe(RecipeID, txtRecipe.Text);
-                if (rs > 0)
+                var isSuccess = _recipeServices.UpdateRecipe(RecipeID, txtRecipe.Text);
+                if (isSuccess.Success)
                 {
                     UI.SaveInformation();
                     DialogResult = DialogResult.OK;

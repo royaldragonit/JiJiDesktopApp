@@ -1,4 +1,5 @@
-﻿using Ji.Model.CustomModels;
+﻿using Ji.Model.CustomerModels;
+using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace Ji.Services.Interface
         ResultCustomModel<int> AddCustomer(LCustomer customer);
         LCustomer GetCustomer(string phone);
         List<LCustomer> ListCustomer();
+        List<MessageResponse> GetMessenger(int customerId);
     }
 }

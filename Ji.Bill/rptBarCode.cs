@@ -6,19 +6,19 @@ using DevExpress.XtraReports.UI;
 using Ji.Model;
 using Ji.Core;
 using Newtonsoft.Json.Linq;
+using Ji.Commons;
 
 namespace Ji.Bill
 {
-    public partial class rptBarCode : DevExpress.XtraReports.UI.XtraReport
+    public partial class rptBarCode : XtraReport
     {
         public rptBarCode()
         {
             InitializeComponent();
-            JObject setup = Extension.Setup;
-            if (setup != null)
+            if (Configure.Setup != null)
             {
-                lblShopName.Text = setup["shopName"].ToString();
-                lblAddress.Text = setup["address"].ToString();              
+                lblShopName.Text = Configure.Setup.ShopName;
+                lblAddress.Text = Configure.Setup.Address;              
             }
         }
 

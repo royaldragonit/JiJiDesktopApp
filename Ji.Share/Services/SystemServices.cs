@@ -34,19 +34,19 @@ namespace Ji.Services
 
         public bool SetDefaultDLL(string dll, string className)
         {
-            var data = API.Get<ResultCustomModel<bool>>(UrlApi.SetDefaultDLL+"?dll="+ dll+"&className="+className);
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.SetDefaultDLL + "?dll=" + dll + "&className=" + className);
             return data.Data;
         }
 
         public SetupShop GetConfigureStore()
-        {
-            var data = API.Get<ResultCustomModel<SetupShop>>(UrlApi.GetConfigureStore);
+        {   
+            var data =  API.Get<ResultCustomModel<SetupShop>>(UrlApi.GetConfigureStore);          
             return data.Data;
         }
 
         public bool ConfigureStore(SetupShop setup)
         {
-            var data = API.Post<ResultCustomModel<bool>>(UrlApi.GetConfigureStore,setup);
+            var data = API.Post<ResultCustomModel<bool>>(UrlApi.GetConfigureStore, setup);
             return data.Data;
         }
 
@@ -58,14 +58,14 @@ namespace Ji.Services
 
         public bool ModifyFloor(string floorName, int table, int floorId)
         {
-            var data = API.Get<ResultCustomModel<bool>>(UrlApi.ModifyFloor + "?floorName=" + floorName + "&table=" + table+"&floorId="+floorId);
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.ModifyFloor + "?floorName=" + floorName + "&table=" + table + "&floorId=" + floorId);
             return data.Data;
         }
 
-        public int AddFloor(string floorName, int table)
+        public ResultCustomModel<int> AddFloor(string floorName, int table)
         {
-            var data = API.Get<ResultCustomModel<int>>(UrlApi.AddFloor + "?floorName=" + floorName+"&table="+table) ;
-            return data.Data;
+            var data = API.Get<ResultCustomModel<int>>(UrlApi.AddFloor + "?floorName=" + floorName + "&table=" + table);
+            return data;
         }
     }
 }

@@ -123,8 +123,8 @@ namespace Ji.Revenue
             if (UI.Question("Bạn có chắc chắn muốn xóa phần doanh thu này không?"))
             {
                 int OrderID = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "cOrderID")?.ToInt() ?? 0;
-                int remove = API.RemoveRevenue(OrderID);
-                if (remove > 0)
+                bool remove = _revenueServices.RemoveRevenue(OrderID);
+                if (remove)
                 {
                     var temp = SaveRevenue.FirstOrDefault(x => x.cOrderID == OrderID);
                     SaveRevenue.Remove(temp);

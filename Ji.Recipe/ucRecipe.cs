@@ -13,6 +13,7 @@ using RestSharp;
 using System.Net;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
+using Ji.Model.CustomModels;
 
 namespace Ji.Recipe
 {
@@ -80,15 +81,15 @@ namespace Ji.Recipe
             using (frmAddResourceRecipe frm = new frmAddResourceRecipe())
             {
                 UI.ShowSplashForm();
-                Model.Recipe recipe = API.AddRecipe(DateTime.Now, FoodID);
-                if (recipe == null)
+                ResultCustomModel<Model.Recipe> recipe = _recipeServices.AddRecipe(FoodID,note:"");
+                if (!recipe.Success)
                 {
                     UI.Warning("Lỗi khi thêm công thức, vui lòng thử lại hoặc liên hệ Supporter Ji Ji");
                     return;
                 }
                 frm.RecipeName = SearchFood.EditValue.ToString();
                 frm.FoodID = FoodID;
-                frm.recipe = recipe;
+                frm.recipe = recipe.Data;
                 UI.CloseSplashForm();
                 if (frm.ShowDialog() == DialogResult.OK)
                 {

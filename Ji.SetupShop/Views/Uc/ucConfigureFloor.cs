@@ -1,5 +1,6 @@
 ﻿using Ji.Commons;
 using Ji.Core;
+using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using Ji.Services.Interface;
 using System;
@@ -41,8 +42,8 @@ namespace Ji.SetupShop.Views.Uc
             {
                 int rowSelected = gridView1.FocusedRowHandle;
                 int floorId = gridView1.GetRowCellValue(rowSelected, "Id").ToInt();
-                bool isModify = _systemServices.ModifyFloor(txtZone.Text, txtNumberTable.Text.ToInt(), floorId);
-                if (isModify)
+                bool isModifyOk = _systemServices.ModifyFloor(txtZone.Text, txtNumberTable.Text.ToInt(), floorId);
+                if (isModifyOk)
                 {
                     var floor = Configure.SetupFloor.FirstOrDefault(x => x.Id == floorId);
                     Configure.SetupFloor.Remove(floor);
@@ -59,11 +60,11 @@ namespace Ji.SetupShop.Views.Uc
         {
             if (!string.IsNullOrEmpty(txtZone.Text) && txtNumberTable.Text.IsNumber())
             {
-                int floorId = _systemServices.AddFloor(txtZone.Text, txtNumberTable.Text.ToInt());
-                if (floorId > 0)
+                ResultCustomModel<int> result = _systemServices.AddFloor(txtZone.Text, txtNumberTable.Text.ToInt());
+                if (result.Success)
                 {
                     var floor = new LFloor();
-                    floor.Id = floorId;
+                    floor.Id = result.Data;
                     floor.FacId = Configure.Setup.FacId;
                     floor.CountTable = txtNumberTable.Text.ToInt();
                     floor.Name = txtZone.Text;

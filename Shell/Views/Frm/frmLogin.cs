@@ -7,6 +7,7 @@ using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
 using Ji.Model.CustomModels;
+using Ji.Model.Entities;
 using Ji.Model.LoginModels;
 using Ji.Services.Interface;
 using Newtonsoft.Json;
@@ -59,7 +60,7 @@ namespace Shell.Views.Frm
                 {
                     AuthorizeConstant.Users = result.Data.User;
                     AuthorizeConstant.Token = result.Data.Token;
-                    Configure.Setup= _systemServices.GetConfigureStore();
+                    Configure.Setup = _systemServices.GetConfigureStore();
                     Configure.SetupFloor = _systemServices.ListFloor();
                     if (chkRememberPassword.Checked)
                     {
@@ -110,7 +111,7 @@ namespace Shell.Views.Frm
                     login.Password = Extension.GetInfoByXML("Information.xml", "Password");
                     ResultCustomModel<LoginResultModel> result = _loginServices.UserLogin(login);
                     UI.CloseSplashForm();
-                    if (result!=null&&result.Success)
+                    if (result != null && result.Success)
                     {
                         AuthorizeConstant.Users = result.Data.User;
                         AuthorizeConstant.Token = result.Data.Token;

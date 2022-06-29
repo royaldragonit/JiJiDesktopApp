@@ -17,6 +17,6 @@ namespace Ji.Model.Entities
         public DateTime CreateOn { get; set; }
         public bool? Active { get; set; }
         public int PriceInput { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
     }
 }

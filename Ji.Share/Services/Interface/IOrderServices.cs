@@ -17,9 +17,12 @@ namespace Ji.Services.Interface
         List<Orders> ListOrder();
         List<Ji_GetDetailBillResult> ListOrderDetail(OrderDetailRequest orderDetailRequest);
         int CalculationTotalMoneyOrder();
+        ResultCustomModel<bool> SetNoteOrder(int orderId, string note);
         bool RemoveOrderItems(OrderDeleteItem item);
         List<Ji_GetDetailBillResult> AddOrderItems(List<AddListOrder> listOrders);
         bool CancelOrder(int table, int floor);
+        List<OrderDetail> GetListOrderByTable(int table, int floor);
         bool Checkout(CheckoutModel request);
+        bool ConvertTable(int fromFloor, int fromTable, int toTable);
     }
 }

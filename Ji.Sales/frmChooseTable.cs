@@ -1,5 +1,7 @@
 ﻿using Ji.Core;
 using Ji.Model;
+using Ji.Model.OrderModels;
+using Ji.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,12 +18,13 @@ namespace Ji.Sales
     {
         public int FromTable { get; set; }
         public int ToTable { get; set; }
-        public int Result { get; set; }
+        public bool Result { get; set; }
         public int FromFloor { get; internal set; }
-
+        public IOrderServices _orderServices { get; set; }
         public frmChooseTable()
         {
             InitializeComponent();
+
         }
 
         private void btnOk(object sender, EventArgs e)
@@ -29,14 +32,17 @@ namespace Ji.Sales
             if (!txtTable.Text.IsNumber())
                 return;
             ToTable = txtTable.Text.ToInt();
-            var ds = API.GetDataOrder(FromFloor, ToTable).ToDataTable();
-            if (ds == null || ds.Rows.Count == 0)
+            OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
+            orderDetailRequest.Table = ToTable;
+            orderDetailRequest.Floor = FromFloor;
+            var lstData = _orderServices.ListOrderDetail(orderDetailRequest);
+            if (lstData.Count==0)
             {
 
                 if (UI.Question("Bạn có chắc chắn chuyển bàn " + FromTable + " đến bàn " + ToTable))
                 {
-                    int ds1 = API.ConvertTable(FromFloor, FromTable, ToTable);
-                    Result = ds1;
+                    bool result = _orderServices.ConvertTable(FromFloor, FromTable, ToTable);
+                    Result = result;
                     DialogResult = DialogResult.OK;
                 }
             }

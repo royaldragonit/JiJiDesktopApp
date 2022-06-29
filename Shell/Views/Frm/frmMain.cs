@@ -25,14 +25,16 @@ namespace Shell.Views.Frm
     {
         private readonly HubConnection hubConnection;
         private readonly ISystemServices _systemServices;
+        private readonly IOrderServices _orderServices;
         public frmMain()
         {
             _systemServices= _systemServices.GetServices();
+            _orderServices = _orderServices.GetServices();
             InitializeComponent();
             hubConnection = new HubConnectionBuilder()
                 .WithUrl(Extension.GetAppSetting("Server") + "/ChatHub", options =>
                 {
-                    options.Headers.Add("Authorization", API.Token_Type+API.Access_Token);
+                    options.Headers.Add("Authorization", API.TokenType+API.AccessToken);
                 })
                 .AddJsonProtocol()
                 .Build();
@@ -187,7 +189,7 @@ namespace Shell.Views.Frm
                         {
                             if (UI.Question("Bạn có muốn đăng xuất không?"))
                             {
-                                API.Access_Token = null;
+                                API.AccessToken = null;
                                 //Xóa tài khoản
                                 if (File.Exists("Information.xml"))
                                     File.Delete("Information.xml");
@@ -257,7 +259,7 @@ namespace Shell.Views.Frm
                     NotifyNewOrder();
                     frmNewOrder frm = new frmNewOrder();
                     frm.hubConnection = hubConnection;
-                    var ds = API.GetDataOrder(Floor, Table).ToDataTable();
+                    var ds = _orderServices.GetListOrderByTable(Table,Floor);
                     frm.DataSource = ds;
                     frm.ShowDialog();
                 });

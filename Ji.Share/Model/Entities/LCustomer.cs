@@ -12,6 +12,6 @@ namespace Ji.Model.Entities
         public string FullName { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
     }
 }

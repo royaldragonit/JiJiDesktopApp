@@ -53,5 +53,22 @@ namespace Ji.Services
             var data = API.Post<ResultCustomModel<bool>>(UrlApi.Checkout, item);
             return data.Data;
         }
+
+        public bool ConvertTable(int fromFloor, int fromTable, int toTable)
+        {
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.ConvertTable + "?FromFloor=" + fromFloor + "&FromTable=" + fromTable + "&ToTable=" + toTable);
+            return data.Data;
+        }
+        public List<OrderDetail> GetListOrderByTable(int table, int floor)
+        {
+            var data = API.Get<List<OrderDetail>>(UrlApi.GetListOrderByTable + "?table=" + table + "&floor=" + floor);
+            return data;
+        }
+
+        public ResultCustomModel<bool> SetNoteOrder(int orderId, string note)
+        {
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.SetNoteOrder + "?orderId=" + orderId + "&note=" + note);
+            return data;
+        }
     }
 }

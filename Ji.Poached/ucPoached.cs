@@ -8,21 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ji.Core;
+using Ji.Services.Interface;
 
 namespace Ji.Poached
 {
     public partial class ucPoached : ClientControl
     {
         public bool CheckData = true;
+        private readonly IProductServices _productServices;
         public ucPoached()
         {
             InitializeComponent();
+            _productServices = _productServices.GetServices();
             BindingData();
         }
 
         public void BindingData()
         {
-            var ds = API.GetAllFood<L_Food>(Extension.GetAppSetting("API") + "Application/GetAllFood", API.Access_Token).ToList();
+            var ds = _productServices.ListMilkTea();
             if (ds.Count()==0)
             {
                 CheckData = false;
@@ -50,8 +53,8 @@ namespace Ji.Poached
             }
             else
             {
-                string Price = API.GetPriceFood(SearchFood.EditValue.ToInt());
-                RadioPrice.Properties.Items[RadioPrice.SelectedIndex].Description = Price;
+                int price = _productServices.GetPriceFood(SearchFood.EditValue.ToInt());
+                RadioPrice.Properties.Items[RadioPrice.SelectedIndex].Description = price.ToVND();
                 txtPrice.Visible = false;
             }
         }

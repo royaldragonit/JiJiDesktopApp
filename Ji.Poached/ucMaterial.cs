@@ -12,15 +12,20 @@ using Ji.Model;
 using DevExpress.XtraGrid.Views.Grid;
 using RestSharp;
 using System.Net;
+using Ji.Services.Interface;
+using Ji.Model.Entities;
+using Ji.Model.InventoryModels;
 
 namespace Ji.Poached
 {
     public partial class ucMaterial : ClientControl, IClientControl
     {
-        List<Resource> ds = new List<Resource>();
+        List<Resource> ds;
+        private readonly IInventoryServices _inventoryServices;
         public ucMaterial()
         {
             InitializeComponent();
+            _inventoryServices = _inventoryServices.GetServices();
             BindingData();
         }
 
@@ -56,7 +61,7 @@ namespace Ji.Poached
                     frm.ResourceID = SearchFood.EditValue.ToInt();
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
-                        
+
                     }
                 }
             }
@@ -65,15 +70,8 @@ namespace Ji.Poached
         }
         private HistoryImportResource GetHistoryImport(int resourceID)
         {
-            var client = new RestClient(Extension.GetAppSetting("API") + "Poached/GetLastImport");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
-            request.AddParameter("ResourceID", resourceID);
-            var response = client.Post<HistoryImportResource>(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Data;
-            return null;
+            HistoryImportResource data = _inventoryServices.LastImport(resourceID);
+            return data;
         }
         public void LoadControl()
         {
@@ -82,13 +80,11 @@ namespace Ji.Poached
 
         public void BindingData()
         {
-            List<Resource> ds = API.GetResources<Resource>()?.ToList();
+            List<Resource> ds = _inventoryServices.ListResources();
             this.ds = ds;
-            SearchFood.Properties.DataSource = null;
             SearchFood.Properties.DataSource = ds;
             SearchFood.Properties.ValueMember = "ID";
             SearchFood.Properties.DisplayMember = "Name";
-            gridControl1.DataSource = null;
             gridControl1.DataSource = ds;
             if (ds != null && ds.Count > 0)
             {
@@ -108,7 +104,7 @@ namespace Ji.Poached
             string fieldName = "ID"; // or other field name  
             int ResourceID = view.GetRowCellValue(rowHandle, fieldName).ToInt();
             Resource resource = ds.FirstOrDefault(x => x.ID == ResourceID);
-            var GetHistory=GetHistoryImport(ResourceID);
+            var GetHistory = GetHistoryImport(ResourceID);
             if (GetHistory != null)
             {
                 lblTextHistory.Text = "Lần cuối nhập hàng vào ngày " + GetHistory.CreateBy.ToString() + " - SL: " + GetHistory.Quantity + " - Giá: " + GetHistory.Price;
@@ -118,7 +114,7 @@ namespace Ji.Poached
             if (resource != null)
             {
                 txtQuantity.Text = "1";
-                txtPoached.Text = ((float)resource.Quantity/resource.QuantityInAUnit).ToString();
+                txtPoached.Text = ((float)resource.Quantity / resource.QuantityInAUnit).ToString();
                 RadioPrice.Properties.Items[0].Description = resource.Price.ToVND();
             }
         }
@@ -140,7 +136,7 @@ namespace Ji.Poached
         /// <param name="e"></param>
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            
+
         }
 
         private void btnInput_Click(object sender, EventArgs e)
@@ -166,8 +162,8 @@ namespace Ji.Poached
                 }
                 else
                     Price = RadioPrice.Properties.Items[0].Description.VNDToNumber();
-                int rs = AddResourcePoached(SearchFood.EditValue.ToInt(), txtQuantity.Text.ToInt(), Price, PriceOld);
-                if (rs == 2)
+                bool isSuccess = AddResourcePoached(SearchFood.EditValue.ToInt(), txtQuantity.Text.ToInt(), Price, PriceOld);
+                if (isSuccess)
                 {
                     BindingData();
                     UI.SaveInformation();
@@ -179,21 +175,15 @@ namespace Ji.Poached
                 UI.Warning("Bạn chưa chọn nguyên liệu để nhập");
             UI.CloseSplashForm();
         }
-        private int AddResourcePoached(int ResourceID, int Quantity,int Price,int PriceOld)
+        private bool AddResourcePoached(int ResourceID, int Quantity, int Price, int PriceOld)
         {
-            var client = new RestClient(Extension.GetAppSetting("API") + "Poached/AddResourcePoached");
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddParameter("Quantity", Quantity);
-            request.AddParameter("Price", Price);
-            request.AddParameter("PriceOld", PriceOld);
-            request.AddParameter("ResourceID", ResourceID);
-            var response = client.Post(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-                return response.Content.VNDToNumber();
-            return 0;
+            AddResourceInput input = new AddResourceInput();
+            input.Price = Price;
+            input.ResourceID = ResourceID;
+            input.Quantity = Quantity;
+            input.PriceOld = PriceOld;
+            bool isSuccess = _inventoryServices.AddResourceToInventory(input);
+            return isSuccess;
         }
         private void txtQuantity_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {

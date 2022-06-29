@@ -16,6 +16,6 @@ namespace Ji.Model
         public System.DateTime CreateOn { get; set; }
         public bool Active { get; set; }
         public int PriceInput { get; set; }
-        public string FacID { get; set; }
+        public int FacId { get; set; }
     }
 }

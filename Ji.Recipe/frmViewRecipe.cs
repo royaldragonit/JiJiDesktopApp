@@ -67,7 +67,7 @@ namespace Ji.Recipe
             var client = new RestClient(Extension.GetAppSetting("API") + "Recipe/RemoveResource");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Authorization", API.Token_Type + API.Access_Token);
+            request.AddHeader("Authorization", API.TokenType + API.AccessToken);
             request.AddParameter("ResourcesID", ResourcesID);
             var response = client.Post(request);
             int ds = 0;

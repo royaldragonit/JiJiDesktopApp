@@ -100,15 +100,15 @@ namespace Ji.SetupShop
         {
             if (Configure.Setup != null)
             {
-                txtAbbreviation.Text = Configure.Setup.Abbreviation.ToString();
-                txtAddress.Text = Configure.Setup.Address.ToString();
-                txtPhone.Text = Configure.Setup.Hotline.ToString();
-                txtNameShop.Text = Configure.Setup.ShopName.ToString();
-                txtSlogan.Text = Configure.Setup.Slogan.ToString();
-                txtFaceBook.Text = Configure.Setup.FaceBook.ToString();
-                chkWaringcheckout.Checked = Configure.Setup.WarningCheckout.ToString().ToBoolean();
+                txtAbbreviation.Text = Configure.Setup.Abbreviation;
+                txtAddress.Text = Configure.Setup.Address;
+                txtPhone.Text = Configure.Setup.Hotline;
+                txtNameShop.Text = Configure.Setup.ShopName;
+                txtSlogan.Text = Configure.Setup.Slogan;
+                txtFaceBook.Text = Configure.Setup.FaceBook;
+                chkWaringcheckout.Checked = Configure.Setup.WarningCheckout;
                 chkBarCode.Checked = Configure.Setup.ShowBarCode.Value;
-                if (!string.IsNullOrEmpty(Configure.Setup.Logo.ToString()))
+                if (!string.IsNullOrEmpty(Configure.Setup.Logo))
                 {
                     imgLogo.Image = Configure.Setup.Logo.Base64ToImage().Resize(250, 250);
                 }

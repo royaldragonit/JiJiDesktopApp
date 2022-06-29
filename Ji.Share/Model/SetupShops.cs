@@ -16,7 +16,7 @@ namespace Ji.Model
     public int NumberPrintBill { get; set; }
     public string Logo { get; set; }
     public string DefaultPrinter { get; set; }
-    public string FacID { get; set; }
+    public int FacId { get; set; }
     public string FaceBook { get; set; }
     public string Address { get; set; }
     public string Hotline { get; set; }

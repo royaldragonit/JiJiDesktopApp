@@ -31,7 +31,7 @@ namespace Ji.Model.Entities
         /// Máy in mặc định
         /// </summary>
         public string DefaultPrinter { get; set; }
-        public string FacId { get; set; }
+        public int FacId { get; set; }
         public string FaceBook { get; set; }
         public string Address { get; set; }
         public string Hotline { get; set; }

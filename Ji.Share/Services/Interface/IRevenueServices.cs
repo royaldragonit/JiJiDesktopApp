@@ -11,9 +11,10 @@ namespace Ji.Services.Interface
 {
     public interface IRevenueServices
     {
-        InitRevenueModel InitRevenue(string facId);
+        InitRevenueModel InitRevenue(int facId);
         List<ji_Report_RevenueTodayResult> RevenueDistance(DateTime fromDate, DateTime toDate);
         List<ji_BillDetailResult> RevenueDetail(int billID);
         List<ReportBillDetail> ReprintRevenue(int billID);
+        bool RemoveRevenue(int orderID);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Ji.Core;
 using Ji.Model.Entities;
+using Ji.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,26 +19,27 @@ namespace Ji.Sales
         public int FoodID = -1;
         public int Floor = -1;
         public int Table = -1;
+        private readonly IProductServices _productServices;
         public frmTopping()
         {
+            _productServices = _productServices.GetServices();
             InitializeComponent();
-            var ds = API.API_GetAllTopping<LTopping>(Extension.GetAppSetting("API") + "Application/GetAllTopping");
-            ChooseTopping.DataSource = ds;
+            ChooseTopping.DataSource = _productServices.ListTopping();
             ChooseTopping.ValueMember = "ID";
             ChooseTopping.DisplayMember = "ToppingName";
         }
-        
+
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            int[] listID = new int[ChooseTopping.CheckedItems.Count+1];
+            int[] listID = new int[ChooseTopping.CheckedItems.Count + 1];
             int i = 0;
-            foreach (LTopping item in ChooseTopping.CheckedItems )
+            foreach (LTopping item in ChooseTopping.CheckedItems)
             {
                 listID[i++] = item.Id;
             }
             if (listID.Count() == 0)
             {
-                
+
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,9 +39,67 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Utils.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v19.1.Core, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v19.1, Version=19.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=108.0.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.108.0.1\lib\netstandard2.0\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp.Serializers.NewtonsoftJson, Version=108.0.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.Serializers.NewtonsoftJson.108.0.1\lib\netstandard2.0\RestSharp.Serializers.NewtonsoftJson.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.5.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,15 +111,157 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BoolConverter.cs" />
+    <Compile Include="Base\ValidateAPIAttribute.cs" />
+    <Compile Include="Base\Modules.cs" />
+    <Compile Include="ChooseDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChooseDate.Designer.cs">
+      <DependentUpon>ChooseDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ClientControl.Designer.cs">
+      <DependentUpon>ClientControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commons\AuthorizeConstant.cs" />
+    <Compile Include="Commons\Configure.cs" />
+    <Compile Include="Commons\MessageConstant.cs" />
+    <Compile Include="Commons\UrlApi.cs" />
+    <Compile Include="Controls\DragonComboBoox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DragonComboBoox.Designer.cs">
+      <DependentUpon>DragonComboBoox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragonListComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DragonListComboBox.Designer.cs">
+      <DependentUpon>DragonListComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\API.cs" />
+    <Compile Include="Core\AutoCloseMsgbox.cs" />
+    <Compile Include="Core\CashDrawer.cs" />
+    <Compile Include="Core\Extension.cs" />
+    <Compile Include="Core\frmNewCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\frmNewCustomer.Designer.cs">
+      <DependentUpon>frmNewCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\GridcontrolDevexpress.cs" />
+    <Compile Include="Core\UI.cs" />
+    <Compile Include="IClientControl.cs" />
+    <Compile Include="Model\AddListOrder.cs" />
+    <Compile Include="Model\Billing\ReportBillDetail.cs" />
+    <Compile Include="Model\Categories.cs" />
+    <Compile Include="Model\CustomerModels\Material.cs" />
+    <Compile Include="Model\CustomerModels\MessageResponse.cs" />
+    <Compile Include="Model\CustomModels\InitRevenueModel.cs" />
+    <Compile Include="Model\Entities\HistoryImportResource.cs" />
+    <Compile Include="Model\Entities\ji_BillDetailResult.cs" />
+    <Compile Include="Model\Entities\ji_GetRecipeResult.cs" />
+    <Compile Include="Model\Entities\ji_GetResourceRecipeResult.cs" />
+    <Compile Include="Model\Entities\ji_PreviewPrintResult.cs" />
+    <Compile Include="Model\Entities\ji_Report_RevenueResult.cs" />
+    <Compile Include="Model\Entities\ji_Report_RevenueTodayResult.cs" />
+    <Compile Include="Model\Entities\LCustomer.cs" />
+    <Compile Include="Model\CustomModels\InitCashierModel.cs" />
+    <Compile Include="Model\CustomModels\ResultCustomModel.cs" />
+    <Compile Include="Model\Entities\Ji_GetDetailBillResult.cs" />
+    <Compile Include="Model\Entities\Orders.cs" />
+    <Compile Include="Model\Entities\Ji_GetAllMilkTeaOrderResult.cs" />
+    <Compile Include="Model\Entities\ji_GetApplicationResult.cs" />
+    <Compile Include="Model\Entities\LFloor.cs" />
+    <Compile Include="Model\Entities\LTopping.cs" />
+    <Compile Include="Model\Entities\LUsers.cs" />
+    <Compile Include="Model\Entities\Pay.cs" />
+    <Compile Include="Model\Entities\SetupShop.cs" />
+    <Compile Include="Model\Entities\ToppingCustom.cs" />
+    <Compile Include="Model\FacModels\RegisterFacility.cs" />
+    <Compile Include="Model\Formula.cs" />
+    <Compile Include="Model\InventoryModels\AddResourceInput.cs" />
+    <Compile Include="Model\Ji_GetAllMilkTeaOrder.cs" />
+    <Compile Include="Model\Ji_GetDetailBill.cs" />
+    <Compile Include="Model\LoginModels\LoginRequest.cs" />
+    <Compile Include="Model\LoginModels\LoginResultModel.cs" />
+    <Compile Include="Model\Menus.cs" />
+    <Compile Include="Model\Messenger.cs" />
+    <Compile Include="Model\OrderDetailV2.cs" />
+    <Compile Include="Model\OrderModels\CheckoutModel.cs" />
+    <Compile Include="Model\OrderModels\OrderDeleteItem.cs" />
+    <Compile Include="Model\OrderModels\OrderDetailRequest.cs" />
+    <Compile Include="Model\Pay.cs" />
+    <Compile Include="Model\Recipe.cs" />
+    <Compile Include="Model\RecipeModels\SaveRecipeInput.cs" />
+    <Compile Include="Model\ReportBillDetail.cs" />
+    <Compile Include="Model\OrderDetail.cs" />
+    <Compile Include="Model\Entities\Resource.cs" />
+    <Compile Include="Model\ResourcesRecipe.cs" />
+    <Compile Include="Model\SetupShops.cs" />
+    <Compile Include="Model\StaffModels\StaffInput.cs" />
+    <Compile Include="Model\Topping.cs" />
+    <Compile Include="Model\Users.cs" />
+    <Compile Include="Pleasewait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pleasewait.Designer.cs">
+      <DependentUpon>Pleasewait.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CustomerServices.cs" />
+    <Compile Include="Services\FacServices.cs" />
+    <Compile Include="Services\Interface\ICustomerServices.cs" />
+    <Compile Include="Services\Interface\IFacServices.cs" />
+    <Compile Include="Services\Interface\IInventoryServices.cs" />
+    <Compile Include="Services\Interface\ILoginServices.cs" />
+    <Compile Include="Services\Interface\IOrderServices.cs" />
+    <Compile Include="Services\Interface\IPayServices.cs" />
+    <Compile Include="Services\Interface\IProductServices.cs" />
+    <Compile Include="Services\Interface\IRecipeServices.cs" />
+    <Compile Include="Services\Interface\IRevenueServices.cs" />
+    <Compile Include="Services\Interface\IStaffServices.cs" />
+    <Compile Include="Services\Interface\ISystemServices.cs" />
+    <Compile Include="Services\InventoryServices.cs" />
+    <Compile Include="Services\ISales.cs" />
+    <Compile Include="Services\LoginServices.cs" />
+    <Compile Include="Services\OrderServices.cs" />
+    <Compile Include="Services\PayServices.cs" />
+    <Compile Include="Services\ProductServices.cs" />
+    <Compile Include="Services\RecipeServices.cs" />
+    <Compile Include="Services\RevenueServices.cs" />
+    <Compile Include="Services\StaffServices.cs" />
+    <Compile Include="Services\MenuServices.cs" />
+    <Compile Include="Services\SystemServices.cs" />
+    <EmbeddedResource Include="ChooseDate.resx">
+      <DependentUpon>ChooseDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientControl.resx">
+      <DependentUpon>ClientControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DragonComboBoox.resx">
+      <DependentUpon>DragonComboBoox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DragonListComboBox.resx">
+      <DependentUpon>DragonListComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\frmNewCustomer.resx">
+      <DependentUpon>frmNewCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pleasewait.resx">
+      <DependentUpon>Pleasewait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -70,6 +273,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,5 +287,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\783px-Arrow_down_red.svg.png" />
+    <None Include="Resources\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
 </Project>

@@ -8,12 +8,14 @@ using Ji.Model;
 using DevExpress.XtraSplashScreen;
 using Ji.Services.Interface;
 using Ji.Model.CustomerModels;
+using Ji.Services;
 
 namespace Ji.Menu
 {
     public partial class ucMenu : ClientControl, IClientControl
     {
         private readonly IProductServices _productServices;
+        private readonly IMenuServices _menuServices;
         string img { get; set; }
         int FoodID { get; set; }
         bool Status { get; set; }
@@ -22,6 +24,7 @@ namespace Ji.Menu
             InitializeComponent();
             gridView1.IndicatorWidth = 30;
             _productServices = _productServices.GetServices();
+            _menuServices = _menuServices.GetServices();
         }
         /// <summary>
         /// Hàm thay đổi hình ảnh của món
@@ -52,15 +55,16 @@ namespace Ji.Menu
                         if (txtPrice.Text.IsNumber())
                         {
                             Menus menus = new Menus();
-                            menus.cCategoryID = cbCategory.EditValue.ToInt();
-                            menus.cSaleOff = frm.SaleOff;
-                            menus.cPrice = txtPrice.Text;
-                            menus.cStatus = Status;
+                            menus.CategoryID = cbCategory.EditValue.ToInt();
+                            menus.SaleOff = frm.SaleOff;
+                            menus.Price = txtPrice.Text;
+                            menus.Active = Status;
                             menus.Unit = cbUnit.SelectedItem.ToString();
-                            menus.cImage = img;
-                            menus.cFoodName = txtName.Text;
-                            menus.cCategory = cbCategory.Text;
-                            if (API.AddMenu(menus).VNDToNumber() == 1)
+                            menus.Image = img;
+                            menus.FoodName = txtName.Text;
+                            menus.CreateBy = Extension.Setup["userID"].ToInt();
+                            bool ok = _menuServices.AddMenu(menus);
+                            if (ok)
                                 UI.SaveInformation();
                             else
                                 UI.Warning("Đã xảy ra lỗi, vui lòng thử lại hoặc liên hệ Supporter để được trợ giúp");
@@ -143,17 +147,17 @@ namespace Ji.Menu
                         if (txtPrice.Text.IsNumber())
                         {
                             Menus menus = new Menus();
-                            menus.cCategoryID = cbCategory.EditValue.ToInt();
-                            menus.cSaleOff = frm.SaleOff;
-                            menus.cPrice = txtPrice.Text;
-                            menus.cStatus = Status;
-                            menus.cFoodID = FoodID;
+                            menus.CategoryID = cbCategory.EditValue.ToInt();
+                            menus.SaleOff = frm.SaleOff;
+                            menus.Price = txtPrice.Text;
+                            menus.Active = Status;
+                            menus.FoodID = FoodID;
                             menus.Unit = cbUnit.SelectedItem.ToString();
-                            menus.cImage = img;
-                            menus.cFoodName = txtName.Text;
+                            menus.Image = img;
+                            menus.FoodName = txtName.Text;
                             menus.cCategory = cbCategory.Text;
-                            int rs = API.UpdateMenu(menus).VNDToNumber();
-                            if (rs > 0)
+                            bool ok = _menuServices.UpdateMenu(menus);
+                            if (ok)
                                 UI.SaveInformation();
                             else
                                 UI.Warning("Đã xảy ra lỗi, vui lòng thử lại hoặc liên hệ Supporter để được trợ giúp");
@@ -171,7 +175,11 @@ namespace Ji.Menu
         {
             if (SplashScreenManager.Default == null)
                 SplashScreenManager.ShowForm(typeof(Pleasewait));
-            API.SetActiveMenu(FoodID);
+            bool ok = _menuServices.SetActiveMenu(FoodID);
+            if (ok)
+            {
+                UI.SaveInformation();
+            }
             if (SplashScreenManager.Default != null && SplashScreenManager.Default.IsSplashFormVisible)
                 SplashScreenManager.CloseForm();
         }

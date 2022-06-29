@@ -15,7 +15,7 @@ namespace Ji.Model
         public int? Createdby { get; set; }
         public DateTime? CreatedOn { get; set; }
         public string FoodName { get; set; }
-        public string FacID { get; set; }
+        public int FacId { get; set; }
         public string Unit { get; set; }
         public int? Price { get; set; }
         public int? PriceInput { get; set; }

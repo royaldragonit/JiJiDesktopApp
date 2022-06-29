@@ -14,10 +14,16 @@ namespace Ji.Services
 {
     public class RevenueServices : IRevenueServices
     {
-        public InitRevenueModel InitRevenue(string facId)
+        public InitRevenueModel InitRevenue(int facId)
         {
             var data = API.Get<ResultCustomModel<InitRevenueModel>>(UrlApi.InitRevenue);
             return data.Data;
+        }
+
+        public bool RemoveRevenue(int orderID)
+        {
+            var data = API.Get<bool>(UrlApi.RemoveRevenue + "?orderId=" + orderID);
+            return data;
         }
 
         public List<ReportBillDetail> ReprintRevenue(int billID)

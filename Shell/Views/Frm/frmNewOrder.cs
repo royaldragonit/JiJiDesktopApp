@@ -1,6 +1,7 @@
 ﻿using Ji;
 using Ji.Core;
 using Ji.Model;
+using Ji.Services.Interface;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,11 @@ namespace Shell.Views.Frm
     {
         internal HubConnection hubConnection;
 
-        public DataTable DataSource { get; set; }
+        public List<OrderDetail> DataSource { get; set; }
+        private readonly IOrderServices _orderServices;
         public frmNewOrder()
         {
+            _orderServices = _orderServices.GetServices();
             InitializeComponent();
         }
         public void CallOrder()
@@ -30,10 +33,10 @@ namespace Shell.Views.Frm
             {
                 if (gridView1.DataSource != null)
                 {
-                    var ds1 = API.GetDataOrder(Floor, Table).ToDataTable();
+                    var ds1 = _orderServices.GetListOrderByTable(Table, Floor);
                     check = true;
                     var ds = (DataTable)gridView1.DataSource;
-                    foreach (DataRow item in ds1.Rows)
+                    foreach (var item in ds1)
                     {
                         ds.Rows.Add(item);
                     }

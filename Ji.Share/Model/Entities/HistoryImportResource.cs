@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ji.Poached
+namespace Ji.Model.Entities
 {
     public class HistoryImportResource
     {
@@ -14,6 +14,6 @@ namespace Ji.Poached
         public double Price { get; set; }
         public int Quantity { get; set; }
         public DateTime? CreateBy { get; set; }
-        public string FacID { get; set; }
+        public int FacId { get; set; }
     }
 }
