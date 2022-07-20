@@ -329,7 +329,6 @@
     <Compile Include="Views\Uc\ucListFacility.Designer.cs">
       <DependentUpon>ucListFacility.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Views\Frm\frmChat.resx">
       <DependentUpon>frmChat.cs</DependentUpon>
     </EmbeddedResource>
@@ -416,6 +415,10 @@
     <None Include="Resources\logo.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Ji.Chat\Ji.Chat.csproj">
+      <Project>{03ba1547-1f37-42d0-bbc8-543fb99003ad}</Project>
+      <Name>Ji.Chat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ji.Sales\Ji.Sales.csproj">
       <Project>{c1071b03-4bdb-4e17-91a3-1d370ece1ef0}</Project>
       <Name>Ji.Sales</Name>

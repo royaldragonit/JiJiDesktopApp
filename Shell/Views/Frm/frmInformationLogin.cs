@@ -1,4 +1,6 @@
 ﻿using Ji;
+using Ji.Chat.Views;
+using Ji.Chat.Views.Shared;
 using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
@@ -15,7 +17,7 @@ using System.Windows.Forms;
 
 namespace Shell.Views.Frm
 {
-    public partial class frmInformationLogin : ClientForm
+    public partial class frmInformationLogin : BeautyForm
     {
         private JObject users = Extension.Setup;
         public frmInformationLogin()
@@ -42,11 +44,6 @@ namespace Shell.Views.Frm
         {
             UI.Information("Hiện tại, để thay đổi thông tin User! Vui lòng liên hệ Supporter hoặc truy cập vào Web để thay đổi");
             return;
-            if (users["userPassword"].ToString().ToLower() == txtPassword.Text.ToMD5().ToLower())
-            {
-                DialogResult = DialogResult.OK;
-                Close();
-            }
         }
     }
 }

@@ -14,6 +14,7 @@ using Ji.Revenue.Models;
 using Ji.Revenue;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
+using Ji.Views;
 
 namespace Ji.Customer
 {

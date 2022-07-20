@@ -16,6 +16,7 @@ using Ji.Commons;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
 using Ji.SetupShop.Views.Frm;
+using Ji.Views;
 
 namespace Ji.SetupShop
 {

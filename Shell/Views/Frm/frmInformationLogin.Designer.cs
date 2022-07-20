@@ -131,7 +131,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtUsername.Properties.Appearance.Options.UseFont = true;
-            this.txtUsername.Size = new System.Drawing.Size(445, 26);
+            this.txtUsername.Size = new System.Drawing.Size(500, 26);
             this.txtUsername.TabIndex = 2;
             // 
             // panelControl1
@@ -146,7 +146,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(568, 237);
+            this.panelControl1.Size = new System.Drawing.Size(623, 270);
             this.panelControl1.TabIndex = 3;
             // 
             // panelControl20
@@ -156,7 +156,7 @@
             this.panelControl20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl20.Location = new System.Drawing.Point(2, 194);
             this.panelControl20.Name = "panelControl20";
-            this.panelControl20.Size = new System.Drawing.Size(564, 41);
+            this.panelControl20.Size = new System.Drawing.Size(619, 74);
             this.panelControl20.TabIndex = 9;
             // 
             // btnSave
@@ -190,7 +190,7 @@
             this.panelControl17.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl17.Location = new System.Drawing.Point(2, 162);
             this.panelControl17.Name = "panelControl17";
-            this.panelControl17.Size = new System.Drawing.Size(564, 32);
+            this.panelControl17.Size = new System.Drawing.Size(619, 32);
             this.panelControl17.TabIndex = 8;
             // 
             // panelControl18
@@ -199,7 +199,7 @@
             this.panelControl18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl18.Location = new System.Drawing.Point(113, 2);
             this.panelControl18.Name = "panelControl18";
-            this.panelControl18.Size = new System.Drawing.Size(449, 28);
+            this.panelControl18.Size = new System.Drawing.Size(504, 28);
             this.panelControl18.TabIndex = 3;
             // 
             // txtBirthday
@@ -214,7 +214,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtBirthday.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtBirthday.Size = new System.Drawing.Size(445, 26);
+            this.txtBirthday.Size = new System.Drawing.Size(500, 26);
             this.txtBirthday.TabIndex = 0;
             // 
             // panelControl19
@@ -244,7 +244,7 @@
             this.panelControl14.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl14.Location = new System.Drawing.Point(2, 130);
             this.panelControl14.Name = "panelControl14";
-            this.panelControl14.Size = new System.Drawing.Size(564, 32);
+            this.panelControl14.Size = new System.Drawing.Size(619, 32);
             this.panelControl14.TabIndex = 7;
             // 
             // panelControl15
@@ -253,7 +253,7 @@
             this.panelControl15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl15.Location = new System.Drawing.Point(113, 2);
             this.panelControl15.Name = "panelControl15";
-            this.panelControl15.Size = new System.Drawing.Size(449, 28);
+            this.panelControl15.Size = new System.Drawing.Size(504, 28);
             this.panelControl15.TabIndex = 3;
             // 
             // txtPermission
@@ -264,7 +264,7 @@
             this.txtPermission.Name = "txtPermission";
             this.txtPermission.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtPermission.Properties.Appearance.Options.UseFont = true;
-            this.txtPermission.Size = new System.Drawing.Size(445, 26);
+            this.txtPermission.Size = new System.Drawing.Size(500, 26);
             this.txtPermission.TabIndex = 2;
             // 
             // panelControl16
@@ -294,7 +294,7 @@
             this.panelControl11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl11.Location = new System.Drawing.Point(2, 98);
             this.panelControl11.Name = "panelControl11";
-            this.panelControl11.Size = new System.Drawing.Size(564, 32);
+            this.panelControl11.Size = new System.Drawing.Size(619, 32);
             this.panelControl11.TabIndex = 6;
             // 
             // panelControl12
@@ -303,7 +303,7 @@
             this.panelControl12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl12.Location = new System.Drawing.Point(113, 2);
             this.panelControl12.Name = "panelControl12";
-            this.panelControl12.Size = new System.Drawing.Size(449, 28);
+            this.panelControl12.Size = new System.Drawing.Size(504, 28);
             this.panelControl12.TabIndex = 3;
             // 
             // txtPhone
@@ -313,7 +313,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtPhone.Properties.Appearance.Options.UseFont = true;
-            this.txtPhone.Size = new System.Drawing.Size(445, 26);
+            this.txtPhone.Size = new System.Drawing.Size(500, 26);
             this.txtPhone.TabIndex = 2;
             // 
             // panelControl13
@@ -343,7 +343,7 @@
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl8.Location = new System.Drawing.Point(2, 66);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(564, 32);
+            this.panelControl8.Size = new System.Drawing.Size(619, 32);
             this.panelControl8.TabIndex = 5;
             // 
             // panelControl9
@@ -352,7 +352,7 @@
             this.panelControl9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl9.Location = new System.Drawing.Point(113, 2);
             this.panelControl9.Name = "panelControl9";
-            this.panelControl9.Size = new System.Drawing.Size(449, 28);
+            this.panelControl9.Size = new System.Drawing.Size(504, 28);
             this.panelControl9.TabIndex = 3;
             // 
             // txtAddress
@@ -362,7 +362,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtAddress.Properties.Appearance.Options.UseFont = true;
-            this.txtAddress.Size = new System.Drawing.Size(445, 26);
+            this.txtAddress.Size = new System.Drawing.Size(500, 26);
             this.txtAddress.TabIndex = 2;
             // 
             // panelControl10
@@ -392,7 +392,7 @@
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl5.Location = new System.Drawing.Point(2, 34);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(564, 32);
+            this.panelControl5.Size = new System.Drawing.Size(619, 32);
             this.panelControl5.TabIndex = 4;
             // 
             // panelControl6
@@ -401,7 +401,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl6.Location = new System.Drawing.Point(113, 2);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(449, 28);
+            this.panelControl6.Size = new System.Drawing.Size(504, 28);
             this.panelControl6.TabIndex = 3;
             // 
             // txtPassword
@@ -412,7 +412,7 @@
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtPassword.Properties.Appearance.Options.UseFont = true;
             this.txtPassword.Properties.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(445, 26);
+            this.txtPassword.Size = new System.Drawing.Size(500, 26);
             this.txtPassword.TabIndex = 2;
             // 
             // panelControl7
@@ -442,7 +442,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl2.Location = new System.Drawing.Point(2, 2);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(564, 32);
+            this.panelControl2.Size = new System.Drawing.Size(619, 32);
             this.panelControl2.TabIndex = 3;
             // 
             // panelControl4
@@ -451,7 +451,7 @@
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl4.Location = new System.Drawing.Point(113, 2);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(449, 28);
+            this.panelControl4.Size = new System.Drawing.Size(504, 28);
             this.panelControl4.TabIndex = 3;
             // 
             // panelControl3
@@ -468,7 +468,7 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 237);
+            this.ClientSize = new System.Drawing.Size(623, 270);
             this.Controls.Add(this.panelControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

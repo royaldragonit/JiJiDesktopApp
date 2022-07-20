@@ -13,6 +13,7 @@ using Ji.Revenue.Models;
 using RestSharp;
 using System.Net;
 using Ji.Services.Interface;
+using Ji.Views;
 
 namespace Ji.Customer
 {

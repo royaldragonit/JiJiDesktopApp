@@ -10,6 +10,8 @@ namespace Ji.Model.LoginModels
     public class LoginResultModel
     {
         public LUsers User { get; set; }
+        public Bhxh BHXH { get; set; }
+        public Supporter Supporter { get; set; }
         public string Token { get; set; }
     }
 }

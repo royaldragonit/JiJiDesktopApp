@@ -10,6 +10,7 @@ using Ji.Model.CustomModels;
 using Ji.Model.Entities;
 using Ji.Model.LoginModels;
 using Ji.Services.Interface;
+using Ji.Views;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Shell.Model;

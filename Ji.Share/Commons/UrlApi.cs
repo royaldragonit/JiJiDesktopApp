@@ -10,6 +10,8 @@ namespace Ji.Commons
     {
         public static string Url { get; set; }
         public const string Login = "Login";
+        public const string SupporterLogin = "Supporter/Login";
+        public const string BHXHLogin = "BHXHLogin";
         #region System API
         public const string ListSystemMenu = "api/System/ListSystemMenu";
         public const string ListFloor = "api/System/ListFloor";
@@ -32,6 +34,7 @@ namespace Ji.Commons
         public const string GetCustomer = "api/Customer/GetCustomer";
         public const string ListCustomer = "api/Customer/ListCustomer";
         public const string GetMessenger = "api/Customer/GetMessenger";
+        public const string ListSupporter = "api/Customer/ListSupporter";
         #endregion
         #region Order API
         public const string ListOrder = "api/Order/ListOrder";

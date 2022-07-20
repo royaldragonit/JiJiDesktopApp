@@ -1,16 +1,6 @@
 ﻿using Ji.Commons;
 using Ji.Core;
-using Ji.Model;
-using Ji.Model.CustomModels;
-using Ji.Model.Entities;
-using Ji.Model.LoginModels;
-using Ji.Model.OrderModels;
-using Ji.Services.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Ji.Model.MenuModels;
 
 namespace Ji.Services
 {

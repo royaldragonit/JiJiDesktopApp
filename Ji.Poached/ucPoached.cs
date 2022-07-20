@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ji.Core;
 using Ji.Services.Interface;
+using Ji.Views;
 
 namespace Ji.Poached
 {

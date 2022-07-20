@@ -12,6 +12,8 @@ using Ji.Model;
 using DevExpress.XtraGrid.Views.Grid;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
+using Ji.Model.PayModels;
+using Ji.Views;
 
 namespace Ji.Payment
 {

@@ -14,6 +14,7 @@ using Ji.Commons;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
 using Ji.Model.StaffModels;
+using Ji.Views;
 
 namespace Ji.Staff
 {

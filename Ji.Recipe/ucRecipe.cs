@@ -14,6 +14,7 @@ using System.Net;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
 using Ji.Model.CustomModels;
+using Ji.Views;
 
 namespace Ji.Recipe
 {
@@ -53,7 +54,7 @@ namespace Ji.Recipe
             frmCheckAdministrator frm = new frmCheckAdministrator();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                Model.Recipe recipe = new Model.Recipe();
+                Model.RecipeModels.Recipe recipe = new Model.RecipeModels.Recipe();
                 recipe.Note = Note;
                 recipe.ID = RecipeID;
                 recipe.FoodID = FoodID;
@@ -81,7 +82,7 @@ namespace Ji.Recipe
             using (frmAddResourceRecipe frm = new frmAddResourceRecipe())
             {
                 UI.ShowSplashForm();
-                ResultCustomModel<Model.Recipe> recipe = _recipeServices.AddRecipe(FoodID,note:"");
+                ResultCustomModel<Model.RecipeModels.Recipe> recipe = _recipeServices.AddRecipe(FoodID,note:"");
                 if (!recipe.Success)
                 {
                     UI.Warning("Lỗi khi thêm công thức, vui lòng thử lại hoặc liên hệ Supporter Ji Ji");

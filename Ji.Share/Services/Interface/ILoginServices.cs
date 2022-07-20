@@ -11,5 +11,7 @@ namespace Ji.Services.Interface
     public interface ILoginServices
     {
         ResultCustomModel<LoginResultModel> UserLogin(LoginRequest login);
+        ResultCustomModel<LoginResultModel> SupporterLogin(LoginRequest login);
+        ResultCustomModel<LoginResultModel> BHXHLogin(LoginRequest login);
     }
 }

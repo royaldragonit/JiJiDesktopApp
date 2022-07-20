@@ -4,6 +4,7 @@ using Ji.Commons;
 using Ji.Core;
 using Ji.Services;
 using Ji.Services.Interface;
+using Ji.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Shell.Views.Frm;
 using System;

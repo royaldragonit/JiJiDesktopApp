@@ -15,6 +15,7 @@ using DevExpress.XtraEditors.Repository;
 using Ji.Services.Interface;
 using Ji.Model.RecipeModels;
 using Ji.Model.CustomModels;
+using Ji.Views;
 
 namespace Ji_CongThuc
 {

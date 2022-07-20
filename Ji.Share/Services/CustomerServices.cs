@@ -30,9 +30,14 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<List<LCustomer>>>(UrlApi.ListCustomer);
             return data.Data;
         }
-        public List<MessageResponse> GetMessenger(int customerId)
+        public List<Supporter> ListSupporter()
         {
-            var data = API.Get<List<MessageResponse>>(UrlApi.GetMessenger + "?customerId" + customerId);
+            var data = API.Get<ResultCustomModel<List<Supporter>>>(UrlApi.ListSupporter);
+            return data.Data;
+        }
+        public List<MessageResponse> GetMessenger(int customerId, int supporterId)
+        {
+            var data = API.Get<List<MessageResponse>>(UrlApi.GetMessenger + "?customerId=" + customerId+ "&supporterId="+ supporterId);
             return data;
         }
     }

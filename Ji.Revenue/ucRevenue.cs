@@ -18,6 +18,7 @@ using Ji.Services.Interface;
 using Ji.Commons;
 using Ji.Model.CustomModels;
 using Ji.Model.Entities;
+using Ji.Views;
 
 namespace Ji.Revenue
 {

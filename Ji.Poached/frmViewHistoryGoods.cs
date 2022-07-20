@@ -1,4 +1,5 @@
 ﻿using Ji.Core;
+using Ji.Views;
 using RestSharp;
 using System;
 using System.Collections.Generic;

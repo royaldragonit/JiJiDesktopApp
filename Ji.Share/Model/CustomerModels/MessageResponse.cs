@@ -13,5 +13,6 @@ namespace Ji.Model.CustomerModels
         public string Message { get; set; }
         public bool SupporterSend { get; set; }
         public string SupporterName { get; set; }
+        public string Time { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Ji.Core;
 using Ji.Services.Interface;
+using Ji.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

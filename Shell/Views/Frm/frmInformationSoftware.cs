@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using Ji;
+using Ji.Chat.Views;
+using Ji.Chat.Views.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Shell.Views.Frm
 {
-    public partial class frmInformationSoftware : ClientForm
+    public partial class frmInformationSoftware : BeautyForm
     {
         public frmInformationSoftware()
         {

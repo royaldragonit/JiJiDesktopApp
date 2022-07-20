@@ -15,6 +15,7 @@ using System.Net;
 using Ji.Services.Interface;
 using Ji.Model.Entities;
 using Ji.Model.InventoryModels;
+using Ji.Views;
 
 namespace Ji.Poached
 {

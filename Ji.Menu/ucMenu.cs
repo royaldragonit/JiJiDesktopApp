@@ -9,6 +9,8 @@ using DevExpress.XtraSplashScreen;
 using Ji.Services.Interface;
 using Ji.Model.CustomerModels;
 using Ji.Services;
+using Ji.Model.MenuModels;
+using Ji.Views;
 
 namespace Ji.Menu
 {

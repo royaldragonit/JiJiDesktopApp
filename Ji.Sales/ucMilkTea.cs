@@ -16,7 +16,6 @@ using System.Threading;
 using DevExpress.XtraPrinting.Caching;
 using DevExpress.XtraReports.UI;
 using Ji.Bill;
-using Ji.Base;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Net;
@@ -26,6 +25,8 @@ using Ji.Model.OrderModels;
 using Ji.Model.CustomModels;
 using Ji.Commons;
 using Ji.Model.Billing;
+using System.Diagnostics;
+using Ji.Views;
 
 namespace Ji.Sales
 {
@@ -389,8 +390,28 @@ namespace Ji.Sales
             {
                 UI.ShowSplashForm();
                 PreviewPrinting printing = new PreviewPrinting();
+
                 if (chkBarCode.Checked)
-                    printing.BarCode = true;
+                {
+                    printing.BarCode = false;
+                    foreach (string item in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
+                    {
+                        if(item == "BarCode")
+                        {
+                            printing.BarCode = true;
+                        }
+                    }
+                    if (!printing.BarCode)
+                    {
+                        UI.Warning("Bạn phải có 1 máy in mã vạch đặt tên là \"BarCode\"");
+                        var Process = new Process();
+                        var ProcessStartInfo = new ProcessStartInfo("cmd", "/C control printers");
+                        ProcessStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        Process.StartInfo = ProcessStartInfo;
+                        Process.Start();
+                        return;
+                    }
+                }
                 var dataSource = ReadyPrinting();
                 UI.CloseSplashForm();
                 if (dataSource != null)

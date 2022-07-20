@@ -1,7 +1,9 @@
 ﻿using Ji;
 using Ji.Core;
 using Ji.Model;
+using Ji.Model.OrderModels;
 using Ji.Services.Interface;
+using Ji.Views;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;

@@ -3,7 +3,9 @@ using Ji.Core;
 using Ji.Model;
 using Ji.Model.CustomModels;
 using Ji.Model.Entities;
+using Ji.Model.RecipeModels;
 using Ji.Services.Interface;
+using Ji.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,7 @@ namespace Ji.Recipe
     public partial class frmAddResourceRecipe : ClientForm
     {
         public string RecipeName { get; set; }
-        public Model.Recipe recipe { get; set; }
+        public Model.RecipeModels.Recipe recipe { get; set; }
         public int FoodID { get; set; }
         public readonly IRecipeServices _recipeServices;
         public readonly IInventoryServices _inventoryServices;

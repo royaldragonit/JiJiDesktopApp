@@ -1,5 +1,4 @@
-﻿using Ji.Attributes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +21,9 @@ namespace Ji.Model.Entities
         [JsonProperty("dll")]
         public string Dll { get; set; }
 
+        [JsonProperty("install")]
+        public string Install { get; set; }
+
         [JsonProperty("className")]
         public string ClassName { get; set; }
 
@@ -36,6 +38,9 @@ namespace Ji.Model.Entities
 
         [JsonProperty("defaultDLL")]
         public bool DefaultDLL { get; set; }
+
+        [JsonProperty("isForm")]
+        public bool IsForm { get; set; }
 
         [JsonProperty("permissionBasic")]
         public bool PermissionBasic { get; set; }

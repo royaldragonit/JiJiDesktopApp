@@ -1,6 +1,7 @@
 ﻿using Ji.Core;
 using Ji.Model.Entities;
 using Ji.Services.Interface;
+using Ji.Views;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Ji.Recipe
         public int RecipeID { get; set; }
         public string RecipeName { get; set; }
         public int FoodID { get; set; }
-        public Model.Recipe Recipe { get; set; }
+        public Model.RecipeModels.Recipe Recipe { get; set; }
         public IRecipeServices _recipeServices;
 
         public frmViewRecipe()

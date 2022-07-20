@@ -112,25 +112,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\BoolConverter.cs" />
-    <Compile Include="Base\ValidateAPIAttribute.cs" />
-    <Compile Include="Base\Modules.cs" />
-    <Compile Include="ChooseDate.cs">
+    <Compile Include="Model\Entities\Bhxh.cs" />
+    <Compile Include="Views\ChooseDate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChooseDate.Designer.cs">
+    <Compile Include="Views\ChooseDate.Designer.cs">
       <DependentUpon>ChooseDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientControl.cs">
+    <Compile Include="Views\ClientControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ClientControl.Designer.cs">
+    <Compile Include="Views\ClientControl.Designer.cs">
       <DependentUpon>ClientControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientForm.cs">
+    <Compile Include="Views\ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientForm.Designer.cs">
+    <Compile Include="Views\ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\AuthorizeConstant.cs" />
@@ -162,9 +160,8 @@
     <Compile Include="Core\GridcontrolDevexpress.cs" />
     <Compile Include="Core\UI.cs" />
     <Compile Include="IClientControl.cs" />
-    <Compile Include="Model\AddListOrder.cs" />
+    <Compile Include="Model\OrderModels\AddListOrder.cs" />
     <Compile Include="Model\Billing\ReportBillDetail.cs" />
-    <Compile Include="Model\Categories.cs" />
     <Compile Include="Model\CustomerModels\Material.cs" />
     <Compile Include="Model\CustomerModels\MessageResponse.cs" />
     <Compile Include="Model\CustomModels\InitRevenueModel.cs" />
@@ -187,35 +184,28 @@
     <Compile Include="Model\Entities\LUsers.cs" />
     <Compile Include="Model\Entities\Pay.cs" />
     <Compile Include="Model\Entities\SetupShop.cs" />
+    <Compile Include="Model\Entities\Supporter.cs" />
     <Compile Include="Model\Entities\ToppingCustom.cs" />
     <Compile Include="Model\FacModels\RegisterFacility.cs" />
-    <Compile Include="Model\Formula.cs" />
     <Compile Include="Model\InventoryModels\AddResourceInput.cs" />
-    <Compile Include="Model\Ji_GetAllMilkTeaOrder.cs" />
-    <Compile Include="Model\Ji_GetDetailBill.cs" />
     <Compile Include="Model\LoginModels\LoginRequest.cs" />
     <Compile Include="Model\LoginModels\LoginResultModel.cs" />
-    <Compile Include="Model\Menus.cs" />
-    <Compile Include="Model\Messenger.cs" />
-    <Compile Include="Model\OrderDetailV2.cs" />
+    <Compile Include="Model\MenuModels\Menus.cs" />
+    <Compile Include="Model\OrderModels\OrderDetailV2.cs" />
     <Compile Include="Model\OrderModels\CheckoutModel.cs" />
     <Compile Include="Model\OrderModels\OrderDeleteItem.cs" />
     <Compile Include="Model\OrderModels\OrderDetailRequest.cs" />
-    <Compile Include="Model\Pay.cs" />
-    <Compile Include="Model\Recipe.cs" />
+    <Compile Include="Model\PayModels\Pay.cs" />
+    <Compile Include="Model\RecipeModels\Recipe.cs" />
     <Compile Include="Model\RecipeModels\SaveRecipeInput.cs" />
-    <Compile Include="Model\ReportBillDetail.cs" />
-    <Compile Include="Model\OrderDetail.cs" />
+    <Compile Include="Model\OrderModels\OrderDetail.cs" />
     <Compile Include="Model\Entities\Resource.cs" />
-    <Compile Include="Model\ResourcesRecipe.cs" />
-    <Compile Include="Model\SetupShops.cs" />
+    <Compile Include="Model\RecipeModels\ResourcesRecipe.cs" />
     <Compile Include="Model\StaffModels\StaffInput.cs" />
-    <Compile Include="Model\Topping.cs" />
-    <Compile Include="Model\Users.cs" />
-    <Compile Include="Pleasewait.cs">
+    <Compile Include="Views\Pleasewait.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pleasewait.Designer.cs">
+    <Compile Include="Views\Pleasewait.Designer.cs">
       <DependentUpon>Pleasewait.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -243,13 +233,13 @@
     <Compile Include="Services\StaffServices.cs" />
     <Compile Include="Services\MenuServices.cs" />
     <Compile Include="Services\SystemServices.cs" />
-    <EmbeddedResource Include="ChooseDate.resx">
+    <EmbeddedResource Include="Views\ChooseDate.resx">
       <DependentUpon>ChooseDate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientControl.resx">
+    <EmbeddedResource Include="Views\ClientControl.resx">
       <DependentUpon>ClientControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientForm.resx">
+    <EmbeddedResource Include="Views\ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DragonComboBoox.resx">
@@ -261,9 +251,10 @@
     <EmbeddedResource Include="Core\frmNewCustomer.resx">
       <DependentUpon>frmNewCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pleasewait.resx">
+    <EmbeddedResource Include="Views\Pleasewait.resx">
       <DependentUpon>Pleasewait.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -274,6 +265,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -286,16 +278,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\783px-Arrow_down_red.svg.png" />
     <None Include="Resources\arrow_down.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Shared\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

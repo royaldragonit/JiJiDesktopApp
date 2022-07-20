@@ -1,6 +1,7 @@
 ﻿using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
+using Ji.Views;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;

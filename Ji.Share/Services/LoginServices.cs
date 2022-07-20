@@ -19,5 +19,15 @@ namespace Ji.Services
             var data = API.Post<ResultCustomModel<LoginResultModel>>(UrlApi.Login, login);
             return data;
         }
+        public ResultCustomModel<LoginResultModel> SupporterLogin(LoginRequest login)
+        {
+            var data = API.Post<ResultCustomModel<LoginResultModel>>(UrlApi.SupporterLogin, login);
+            return data;
+        }
+        public ResultCustomModel<LoginResultModel> BHXHLogin(LoginRequest login)
+        {
+            var data = API.Post<ResultCustomModel<LoginResultModel>>(UrlApi.BHXHLogin, login);
+            return data;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Ji.Model.Entities;
+using Ji.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

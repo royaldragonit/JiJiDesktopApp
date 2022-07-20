@@ -1,9 +1,12 @@
 ﻿using DevExpress.XtraSplashScreen;
 using Ji;
+using Ji.Chat.Views.Shared;
 using Ji.Commons;
 using Ji.Core;
 using Ji.Model;
+using Ji.Model.Entities;
 using Ji.Services.Interface;
+using Ji.Views;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Shell.Views.Loader;
@@ -26,24 +29,20 @@ namespace Shell.Views.Frm
         private readonly HubConnection hubConnection;
         private readonly ISystemServices _systemServices;
         private readonly IOrderServices _orderServices;
+        private readonly ICustomerServices _customerServices;
         public frmMain()
         {
             _systemServices= _systemServices.GetServices();
             _orderServices = _orderServices.GetServices();
+            _customerServices = _customerServices.GetServices();
             InitializeComponent();
             hubConnection = new HubConnectionBuilder()
-                .WithUrl(Extension.GetAppSetting("Server") + "/ChatHub", options =>
+                .WithUrl(Extension.GetAppSetting("Server") + "/chathub", options =>
                 {
-                    options.Headers.Add("Authorization", API.TokenType+API.AccessToken);
+                    options.Headers.Add("Authorization", UrlApi.TokenType + AuthorizeConstant.Token);
                 })
                 .AddJsonProtocol()
                 .Build();
-
-            hubConnection.Closed += async (error) =>
-            {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await hubConnection.StartAsync();
-            };
             LoadControl();
             
         }
@@ -60,7 +59,6 @@ namespace Shell.Views.Frm
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            SaveInfoCustomer();
             CallOrder();
         }
 
@@ -93,10 +91,8 @@ namespace Shell.Views.Frm
                         Image image = item.Image.Base64ToImage();
                         SubMenuItem.Image = image;
                     }
-                    SubMenuItem.Tag = item.Dll + "," + item.ClassName;
+                    SubMenuItem.Tag = item;
                     SubMenuItem.Click += SubMenuItem_Click;
-                    string FileName = item.Dll;
-                    string ClassName = item.ClassName;
                     MenuItems.DropDownItems.Add(SubMenuItem);
                 }
             }
@@ -140,9 +136,10 @@ namespace Shell.Views.Frm
             }
             var MenuItems = sender as ToolStripMenuItem;
             ClientControl control = null;
-            string fileName = MenuItems.Tag.ToString().Split(',')[0];
-            string className = MenuItems.Tag.ToString().Split(',')[1];
-            if (fileName != "0")
+            ji_GetApplicationResult menuItem = MenuItems.Tag as ji_GetApplicationResult;
+            string fileName = menuItem.Dll;
+            string className = menuItem.ClassName;
+            if (!menuItem.IsForm)
             {
                 if (SplashScreenManager.Default == null || !SplashScreenManager.Default.IsSplashFormVisible)
                     SplashScreenManager.ShowForm(typeof(PleaseWaiting));
@@ -171,20 +168,9 @@ namespace Shell.Views.Frm
             }
             else
             {
+                bool isExcept = false;
                 switch (MenuItems.Text)
                 {
-                    case "Thông tin đăng nhập":
-                        {
-                            frmInformationLogin frm = new frmInformationLogin();
-                            frm.ShowDialog();
-                            break;
-                        }
-                    case "Thông tin phần mềm":
-                        {
-                            frmInformationSoftware frm = new frmInformationSoftware();
-                            frm.ShowDialog();
-                            break;
-                        }
                     case "Đăng xuất":
                         {
                             if (UI.Question("Bạn có muốn đăng xuất không?"))
@@ -195,6 +181,7 @@ namespace Shell.Views.Frm
                                     File.Delete("Information.xml");
                                 Close();
                             }
+                            isExcept=true;
                             break;
                         }
                     case "Thoát":
@@ -205,50 +192,27 @@ namespace Shell.Views.Frm
                     case "Zalo":
                         {
                             Process.Start(Extension.GetAppSetting("ZaloLink"));
+                            isExcept = true;
                             break;
                         }
                     case "Facebook":
                         {
                             Process.Start(Extension.GetAppSetting("FBLink"));
-                            break;
-                        }
-                    case "Chat trực tuyến":
-                        {
-                            UI.ShowSplashForm();
-                            //frmChatRealTime frm = new frmChatRealTime();
-                            //frm.hubConnection = hubConnection;
-                            //frm.UserID = Extension.Setup["userID"].ToInt();
-                            //frm.Token ="Bearer "+ API.Access_Token;
-                            //frm.HotLine = Extension.Setup["hotline"].ToString();
-                            //frm.ShopName = Extension.Setup["shopName"].ToString();
-                            //frm.ShowDialog();
+                            isExcept = true;
                             break;
                         }
                     default:
                         {
-                            UI.Warning("Chức năng " + MenuItems.Text + " đang được phát triển! Vui lòng thử lại sau!");
                             break;
                         }
                 }
-
+                if (!isExcept)
+                {
+                    var assembly = Assembly.LoadFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName));
+                    var form = assembly.CreateInstance(menuItem.Install) as BeautyForm;
+                    form.ShowDialog();
+                } 
             }
-        }
-        private async void SaveInfoCustomer()
-        {
-            try
-            {
-                int CustomerID =1;
-                await hubConnection.StartAsync();
-                string ConnectionID = hubConnection.ConnectionId;
-                //Lưu ConnectionID của Supporter lên Server
-                await hubConnection.InvokeAsync("SaveInfoCustomer", ConnectionID, CustomerID);
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
         }
         public void CallOrder()
         {

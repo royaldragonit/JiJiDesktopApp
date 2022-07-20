@@ -1,4 +1,5 @@
 ﻿using Ji;
+using Ji.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

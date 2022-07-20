@@ -2,6 +2,7 @@
 using Ji.Core;
 using Ji.Model.FacModels;
 using Ji.Services.Interface;
+using Ji.Views;
 using RestSharp;
 using System;
 using System.Collections.Generic;

@@ -10,6 +10,8 @@ namespace Ji.Commons
     public static class AuthorizeConstant
     {
         public static LUsers Users { get; set; }
+        public static Bhxh BHXH { get; set; }
+        public static Supporter Supporter { get; set; }
         public static string Token { get; set; } = "";
     }
 }

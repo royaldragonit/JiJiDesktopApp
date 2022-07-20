@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Ji.Model;
 using Ji.Model.CustomerModels;
 using Ji.Services.Interface;
+using Ji.Views;
 
 namespace Shell.Views.Frm
 {
@@ -95,7 +96,7 @@ namespace Shell.Views.Frm
         }
         private void LoadData()
         {
-            List<MessageResponse> ds = _customerServices.GetMessenger(Extension.Setup["userID"].ToInt());
+            List<MessageResponse> ds = _customerServices.GetMessenger(Extension.Setup["userID"].ToInt(),2);
             if (ds != null)
             {
                 foreach (var item in ds)
