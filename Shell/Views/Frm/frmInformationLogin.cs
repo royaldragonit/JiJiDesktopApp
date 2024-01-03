@@ -28,7 +28,7 @@ namespace Shell.Views.Frm
         private void frmInformationLogin_Load(object sender, EventArgs e)
         {
             txtAddress.Text = AuthorizeConstant.Users.Address;
-            txtBirthday.DateTime = AuthorizeConstant.Users.Birthday;
+            txtBirthday.DateTime = AuthorizeConstant.Users.Birthday.Value;
             txtPassword.Text = AuthorizeConstant.Users.Password;
             txtPermission.Text = AuthorizeConstant.Users.Roles;
             txtPhone.Text = AuthorizeConstant.Users.Phone;

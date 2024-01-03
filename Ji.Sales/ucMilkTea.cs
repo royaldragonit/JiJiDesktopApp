@@ -295,11 +295,7 @@ namespace Ji.Sales
             gridControl1.DataSource = lstData;
             int totalOrderMoney = _orderServices.CalculationTotalMoneyOrder();
             lblTotalMoneyOrder.Text = totalOrderMoney.ToVND();
-            int total = 0;
-            foreach (var item in lstData)
-            {
-                total += item.cTotal.Value;
-            }
+            int total = lstData.Sum(x=>x.cTotal.Value);
             txtNote.Text = lstData.Count() > 0 ? lstData.FirstOrDefault()?.Note : "";
             txtTotalTemp.Text = total.ToVND();
             try
@@ -479,7 +475,7 @@ namespace Ji.Sales
             }
             if (SplashScreenManager.Default == null)
                 SplashScreenManager.ShowForm(typeof(Pleasewait));
-            var FoodID = searchFood.EditValue;
+            var food = searchFood.EditValue as Food;
             string ListToppingID = string.Empty;
             int count = cbListTopping.Properties.Items.Count();
             List<int> vs = new List<int>();
@@ -493,14 +489,14 @@ namespace Ji.Sales
                 vs.Sort();
                 ListToppingID = vs.ToStringID();
             }
-            if (FoodID != null)
+            if (food != null)
             {
                 List<AddListOrder> listOrders = new List<AddListOrder>
                 {
                     new AddListOrder
                     {
                         Floor=Floor,
-                        FoodID=FoodID.ToInt(),
+                        FoodID=food.Id,
                         ListTopping=vs,
                         Quantity=1,
                         Table=Table

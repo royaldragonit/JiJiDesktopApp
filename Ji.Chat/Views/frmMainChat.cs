@@ -132,7 +132,7 @@ namespace Ji.Chat.Views
             this.chatHeader1.UserStatusText = statusText;
             this.chatHeader1.UserImage = profileImage;
             Supporter supporter = ClickedUser.Tag as Supporter;
-            var lstMessage = _customerServices.GetMessenger(AuthorizeConstant.Users.Id, supporter.Id);
+            var lstMessage = _customerServices.GetMessenger(AuthorizeConstant.Users.UserId, supporter.Id);
             LoadMessage(lstMessage);
         }
 

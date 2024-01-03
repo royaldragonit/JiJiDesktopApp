@@ -61,7 +61,7 @@
             // 
             // xrLabel3
             // 
-            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Arial", 8F);
+            this.xrLabel3.Font = new System.Drawing.Font("Arial", 8F);
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 82.37498F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
@@ -76,7 +76,7 @@
             // 
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Money]")});
-            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Arial", 8F);
+            this.xrLabel2.Font = new System.Drawing.Font("Arial", 8F);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(75F, 82.37498F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
@@ -93,7 +93,7 @@
             this.xrLabel1.BorderWidth = 2F;
             this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[FoodName]")});
-            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Arial", 10F);
+            this.xrLabel1.Font = new System.Drawing.Font("Arial", 10F);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 50F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
@@ -108,7 +108,7 @@
             // 
             // lblShopName
             // 
-            this.lblShopName.Font = new DevExpress.Drawing.DXFont("Arial", 10F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblShopName.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.lblShopName.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
             this.lblShopName.Multiline = true;
             this.lblShopName.Name = "lblShopName";
@@ -123,7 +123,7 @@
             // 
             this.lblAddress.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.lblAddress.BorderWidth = 2F;
-            this.lblAddress.Font = new DevExpress.Drawing.DXFont("Arial", 8F);
+            this.lblAddress.Font = new System.Drawing.Font("Arial", 8F);
             this.lblAddress.LocationFloat = new DevExpress.Utils.PointFloat(0F, 30F);
             this.lblAddress.Multiline = true;
             this.lblAddress.Name = "lblAddress";
@@ -142,8 +142,8 @@
             this.TopMargin,
             this.BottomMargin,
             this.Detail});
-            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(0, 0, 0, 0);
+            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
             this.PageHeight = 114;
             this.PageWidth = 189;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;

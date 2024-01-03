@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ji.Model.Entities
 {
-    public class LFloor
+    public class Floor
     {
         public string Name { get; set; }
         public int CountFloor { get; set; }

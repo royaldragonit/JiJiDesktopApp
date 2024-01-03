@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E0CA4830-2F3B-4A95-A0A2-A6B33E7B7551}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>Shell</RootNamespace>
-    <AssemblyName>Shell</AssemblyName>
+    <ProjectGuid>{03BA1547-1F37-42D0-BBC8-543FB99003AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ji.Chat</RootNamespace>
+    <AssemblyName>Ji.Chat</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,64 +32,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>Resources\images\logo96x96_Yat_icon.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Printing.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Data.Desktop.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.Utils.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraBars.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraEditors.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis, Version=1.48.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.48.0\lib\net45\Google.Apis.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.48.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.48.0\lib\net45\Google.Apis.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.48.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Auth.1.48.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.48.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.48.0\lib\net45\Google.Apis.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Discovery.v1, Version=1.48.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Discovery.v1.1.48.0\lib\net45\Google.Apis.Discovery.v1.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.48.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.48.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Plus.v1, Version=1.48.0.1627, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Plus.v1.1.48.0.1627\lib\net45\Google.Apis.Plus.v1.dll</HintPath>
-    </Reference>
-    <Reference Include="Ji.Share, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\Ji.Share.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.AspNetCore.Connections.Abstractions, Version=5.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Connections.Abstractions.5.0.2\lib\net461\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Connections.Client, Version=5.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Connections.Client.5.0.2\lib\net461\Microsoft.AspNetCore.Http.Connections.Client.dll</HintPath>
@@ -136,24 +85,17 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PluginChat">
-      <HintPath>..\..\..\OpenSource\C#\ChatUI\ChatUI Src\bin\PluginChat.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=108.0.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.108.0.1\lib\netstandard2.0\RestSharp.dll</HintPath>
-    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -165,7 +107,6 @@
     <Reference Include="System.IO.Pipelines, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Pipelines.5.0.1\lib\net461\System.IO.Pipelines.dll</HintPath>
     </Reference>
-    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -197,6 +138,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -232,7 +174,6 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -241,136 +182,57 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\Frm\frmChat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmChat.Designer.cs">
-      <DependentUpon>frmChat.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmInformationLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmInformationLogin.Designer.cs">
-      <DependentUpon>frmInformationLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmInformationSoftware.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmInformationSoftware.Designer.cs">
-      <DependentUpon>frmInformationSoftware.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmListFacility.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmListFacility.Designer.cs">
-      <DependentUpon>frmListFacility.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmLoginWithGoogle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmLoginWithGoogle.Designer.cs">
-      <DependentUpon>frmLoginWithGoogle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmNewOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmNewOrder.Designer.cs">
-      <DependentUpon>frmNewOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Frm\frmSignUp.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Frm\frmSignUp.Designer.cs">
-      <DependentUpon>frmSignUp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Model\GooglePlusAccessToken.cs" />
-    <Compile Include="Views\Loader\PleaseWait.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Loader\PleaseWait.Designer.cs">
-      <DependentUpon>PleaseWait.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\TestBug.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Shared\TestBug.Designer.cs">
-      <DependentUpon>TestBug.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Loader\WaitCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Loader\WaitCheck.Designer.cs">
-      <DependentUpon>WaitCheck.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Loader\PleaseWaiting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Loader\PleaseWaiting.Designer.cs">
-      <DependentUpon>PleaseWaiting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Uc\ucListFacility.cs">
+    <Compile Include="Views\frmMainChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmMainChat.Designer.cs">
+      <DependentUpon>frmMainChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\BeautyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\RoundedRectangle.cs" />
+    <Compile Include="Views\Shared\Uc\ChatHeader.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Uc\ucListFacility.Designer.cs">
-      <DependentUpon>ucListFacility.cs</DependentUpon>
+    <Compile Include="Views\Shared\Uc\ChatHeader.Designer.cs">
+      <DependentUpon>ChatHeader.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Views\Frm\frmChat.resx">
-      <DependentUpon>frmChat.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmInformationLogin.resx">
-      <DependentUpon>frmInformationLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmInformationSoftware.resx">
-      <DependentUpon>frmInformationSoftware.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmListFacility.resx">
-      <DependentUpon>frmListFacility.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmLogin.resx">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmLoginWithGoogle.resx">
-      <DependentUpon>frmLoginWithGoogle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmNewOrder.resx">
-      <DependentUpon>frmNewOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Frm\frmSignUp.resx">
-      <DependentUpon>frmSignUp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Loader\PleaseWait.resx">
-      <DependentUpon>PleaseWait.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Shared\TestBug.resx">
-      <DependentUpon>TestBug.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Loader\WaitCheck.resx">
-      <DependentUpon>WaitCheck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Loader\PleaseWaiting.resx">
-      <DependentUpon>PleaseWaiting.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Views\Shared\Uc\MeBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\MeBubble.Designer.cs">
+      <DependentUpon>MeBubble.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\SearchBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\SearchBox.Designer.cs">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\TypingBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\TypingBox.Designer.cs">
+      <DependentUpon>TypingBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\YouBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Uc\YouBubble.Designer.cs">
+      <DependentUpon>YouBubble.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Users.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Shared\Users.Designer.cs">
+      <DependentUpon>Users.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -381,8 +243,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\Uc\ucListFacility.resx">
-      <DependentUpon>ucListFacility.cs</DependentUpon>
+    <EmbeddedResource Include="Views\frmMainChat.resx">
+      <DependentUpon>frmMainChat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\Uc\MeBubble.resx">
+      <DependentUpon>MeBubble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\Uc\YouBubble.resx">
+      <DependentUpon>YouBubble.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -399,41 +267,118 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo96x96.jpg" />
-    <None Include="Resources\logo32x32.jpg" />
-    <None Include="Resources\logo250x250.jpg" />
-    <None Include="Resources\zalo-icon.jpg" />
-    <None Include="Resources\logout-icon.jpg" />
-    <None Include="Resources\info-icon1.jpg" />
-    <None Include="Resources\info-icon.jpg" />
-    <None Include="Resources\images\Screenshot_1.png" />
-    <None Include="Resources\1524509357_lock.png" />
-    <None Include="Resources\fb-icon.jpg" />
-    <Content Include="Resources\images\logo75x75_cqt_icon.ico" />
-    <Content Include="Resources\images\logo96x96_Yat_icon.ico" />
-    <Content Include="Resources\images\logo.ico" />
-    <None Include="Resources\logo75x75.jpg" />
-    <None Include="Resources\logo150x150.jpg" />
-    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\1.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ji.Chat\Ji.Chat.csproj">
-      <Project>{03ba1547-1f37-42d0-bbc8-543fb99003ad}</Project>
-      <Name>Ji.Chat</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ji.Sales\Ji.Sales.csproj">
-      <Project>{c1071b03-4bdb-4e17-91a3-1d370ece1ef0}</Project>
-      <Name>Ji.Sales</Name>
+    <None Include="Resources\1_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.jfif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4.jfif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Away_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Attach_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Attach_321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Call_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Call-white_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Chat_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Close_Window_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Email_Send_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Maximize_Window_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Menu_Vertical_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Menu_Vertical-white_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Minimize_Window_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Minimize_Window_321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Neutral_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Neutral_321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Paper_Plane_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_User_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Video_Call_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Video_Call-white_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MsgDelivered_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MsgError_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MsgRead_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MsgSending_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MsgSent_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\offline_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Online_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ji.Share\Ji.Share.csproj">
+      <Project>{b7c3c1db-c1cf-4dea-b7be-f7646a4224b2}</Project>
+      <Name>Ji.Share</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
 </Project>

@@ -20,9 +20,9 @@ namespace Ji.Services
             var data = API.Get<ResultCustomModel<List<ji_GetApplicationResult>>>(UrlApi.ListSystemMenu);
             return data.Data;
         }
-        public List<LFloor> ListFloor()
+        public List<Floor> ListFloor()
         {
-            var data = API.Get<ResultCustomModel<List<LFloor>>>(UrlApi.ListFloor);
+            var data = API.Get<ResultCustomModel<List<Floor>>>(UrlApi.ListFloor);
             return data.Data;
         }
 

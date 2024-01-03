@@ -10,7 +10,7 @@ namespace Ji.Commons
     public static class Configure
     {
         public static SetupShop Setup { get; set; }
-        public static List<LFloor> SetupFloor { get; set; }
+        public static List<Floor> SetupFloor { get; set; }
         public static List<ji_GetApplicationResult> ListSystemMenu { get; set; }
     }
 }

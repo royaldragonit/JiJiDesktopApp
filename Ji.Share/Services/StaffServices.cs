@@ -31,9 +31,9 @@ namespace Ji.Services
             return data.Data;
         }
 
-        public List<LUsers> ListStaff()
+        public List<User> ListStaff()
         {
-            var data = API.Get<ResultCustomModel<List<LUsers>>>(UrlApi.ListStaff);
+            var data = API.Get<ResultCustomModel<List<User>>>(UrlApi.ListStaff);
             return data.Data;
         }
     }

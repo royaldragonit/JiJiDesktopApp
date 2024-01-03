@@ -12,7 +12,7 @@ namespace Ji.Services.Interface
     public interface ISystemServices
     {
         List<ji_GetApplicationResult> ListSystemMenu();
-        List<LFloor> ListFloor();
+        List<Floor> ListFloor();
         InitCashierModel InitCashier(OrderDetailRequest orderDetailRequest);
         bool SetDefaultDLL(string dll, string className);
         SetupShop GetConfigureStore();

@@ -11,7 +11,7 @@ namespace Ji.Services.Interface
 {
     public interface IStaffServices
     {
-        List<LUsers> ListStaff();
+        List<User> ListStaff();
         List<int> GetUserPermissionId(int userID);
         ResultCustomModel<bool> CreateStaff(StaffInput staff);
         ResultCustomModel<bool> ModifyStaff(StaffInput staff);
