@@ -658,6 +658,8 @@
             this.gridColumn1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.gridColumn1.Caption = "Topping";
+            this.gridColumn1.DisplayFormat.FormatString = "#,##0";
+            this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn1.FieldName = "cPriceTopping";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
@@ -751,6 +753,8 @@
             this.ColumnTotal.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.ColumnTotal.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.ColumnTotal.Caption = "Thành tiền";
+            this.ColumnTotal.DisplayFormat.FormatString = "{0:n0}";
+            this.ColumnTotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.ColumnTotal.FieldName = "cTotal";
             this.ColumnTotal.Name = "ColumnTotal";
             this.ColumnTotal.OptionsColumn.AllowEdit = false;

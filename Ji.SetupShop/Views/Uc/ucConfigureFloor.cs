@@ -63,7 +63,7 @@ namespace Ji.SetupShop.Views.Uc
                 ResultCustomModel<int> result = _systemServices.AddFloor(txtZone.Text, txtNumberTable.Text.ToInt());
                 if (result.Success)
                 {
-                    var floor = new LFloor();
+                    var floor = new Floor();
                     floor.Id = result.Data;
                     floor.FacId = Configure.Setup.FacId;
                     floor.CountTable = txtNumberTable.Text.ToInt();

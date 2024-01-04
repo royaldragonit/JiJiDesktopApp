@@ -15,9 +15,9 @@ namespace Ji.Services
 {
     public class OrderServices : IOrderServices
     {
-        public List<Ji_GetDetailBillResult> AddOrderItems(List<AddListOrder> listOrders)
+        public List<Ji_GetDetailBillResult> AddOrderItems(AddListOrder order)
         {
-            var data = API.Post<ResultCustomModel<List<Ji_GetDetailBillResult>>>(UrlApi.AddOrderItem, listOrders);
+            var data = API.Post<ResultCustomModel<List<Ji_GetDetailBillResult>>>(UrlApi.AddOrderItem, order);
             return data.Data;
         }
 

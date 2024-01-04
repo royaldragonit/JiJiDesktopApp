@@ -35,7 +35,7 @@ namespace Ji.Services
         public bool SetDefaultDLL(string dll, string className)
         {
             var data = API.Get<ResultCustomModel<bool>>(UrlApi.SetDefaultDLL + "?dll=" + dll + "&className=" + className);
-            return data.Data;
+            return data?.Data??true;
         }
 
         public SetupShop GetConfigureStore()

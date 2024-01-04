@@ -86,7 +86,7 @@ namespace Shell.Views.Frm
                 {
                     ToolStripMenuItem SubMenuItem = new ToolStripMenuItem(item.Name);
                     SubMenuItem.Name = item.NameNonUnicode;
-                    if (item.Image.Length > 100)
+                    if (item.Image?.Length > 100)
                     {
                         Image image = item.Image.Base64ToImage();
                         SubMenuItem.Image = image;

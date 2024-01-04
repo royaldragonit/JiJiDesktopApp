@@ -15,7 +15,6 @@ namespace Ji.Model.OrderModels
         public int Table { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Giá trị của số lượng (Quantity) phải lớn hơn 1")]
         public int Quantity { get; set; }
-        public string Query { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Giá trị của mã thực phẩm (FoodID) phải lớn hơn 1")]
         public int FoodID { get; set; }
         public List<int> ListTopping { get; set; }

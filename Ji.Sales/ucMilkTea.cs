@@ -478,31 +478,18 @@ namespace Ji.Sales
             var food = searchFood.EditValue as Food;
             string ListToppingID = string.Empty;
             int count = cbListTopping.Properties.Items.Count();
-            List<int> vs = new List<int>();
-            for (int i = 0; i < count; i++)
-            {
-                if (cbListTopping.Properties.Items[i].CheckState == CheckState.Checked)
-                    vs.Add(cbListTopping.Properties.Items[i].Value.ToInt());
-            }
-            if (vs.Count() > 0)
-            {
-                vs.Sort();
-                ListToppingID = vs.ToStringID();
-            }
+            List<int> vs =cbListTopping.Properties.Items.Select(x => x.Value.ToInt()).ToList();
             if (food != null)
             {
-                List<AddListOrder> listOrders = new List<AddListOrder>
+                var order = new AddListOrder
                 {
-                    new AddListOrder
-                    {
-                        Floor=Floor,
-                        FoodID=food.Id,
-                        ListTopping=vs,
-                        Quantity=1,
-                        Table=Table
-                    }
+                    Floor = Floor,
+                    FoodID = food.Id,
+                    ListTopping = vs,
+                    Quantity = 1,
+                    Table = Table
                 };
-                var rs = _orderServices.AddOrderItems(listOrders);
+                var rs = _orderServices.AddOrderItems(order);
                 if (rs != null && rs.Count > 0)
                 {
                     gridControl1.DataSource = null;

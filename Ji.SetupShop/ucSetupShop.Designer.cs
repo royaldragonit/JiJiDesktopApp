@@ -41,7 +41,7 @@
             this.txtTable = new DevExpress.XtraEditors.TextEdit();
             this.panelControl35 = new DevExpress.XtraEditors.PanelControl();
             this.btnConfigureFloor = new DevExpress.XtraEditors.SimpleButton();
-            this.panelFloor = new DevExpress.XtraEditors.PanelControl();
+            this.paneFloor = new DevExpress.XtraEditors.PanelControl();
             this.cbFloor = new System.Windows.Forms.ComboBox();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
@@ -117,8 +117,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTable.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl35)).BeginInit();
             this.panelControl35.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelFloor)).BeginInit();
-            this.panelFloor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paneFloor)).BeginInit();
+            this.paneFloor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl31)).BeginInit();
             this.panelControl31.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl32)).BeginInit();
@@ -263,7 +263,7 @@
             // 
             this.panelControl10.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl10.Controls.Add(this.panelControl12);
-            this.panelControl10.Controls.Add(this.panelFloor);
+            this.panelControl10.Controls.Add(this.paneFloor);
             this.panelControl10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl10.Location = new System.Drawing.Point(2, 162);
             this.panelControl10.Name = "panelControl10";
@@ -324,16 +324,16 @@
             this.btnConfigureFloor.Text = "Sửa";
             this.btnConfigureFloor.Click += new System.EventHandler(this.btnConfigureFloor_Click);
             // 
-            // panelFloor
+            // paneFloor
             // 
-            this.panelFloor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelFloor.Controls.Add(this.cbFloor);
-            this.panelFloor.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelFloor.Location = new System.Drawing.Point(0, 0);
-            this.panelFloor.Name = "panelFloor";
-            this.panelFloor.Padding = new System.Windows.Forms.Padding(5);
-            this.panelFloor.Size = new System.Drawing.Size(119, 33);
-            this.panelFloor.TabIndex = 2;
+            this.paneFloor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.paneFloor.Controls.Add(this.cbFloor);
+            this.paneFloor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.paneFloor.Location = new System.Drawing.Point(0, 0);
+            this.paneFloor.Name = "paneFloor";
+            this.paneFloor.Padding = new System.Windows.Forms.Padding(5);
+            this.paneFloor.Size = new System.Drawing.Size(119, 33);
+            this.paneFloor.TabIndex = 2;
             // 
             // cbFloor
             // 
@@ -970,8 +970,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTable.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl35)).EndInit();
             this.panelControl35.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelFloor)).EndInit();
-            this.panelFloor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.paneFloor)).EndInit();
+            this.paneFloor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl31)).EndInit();
             this.panelControl31.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl32)).EndInit();
@@ -1118,7 +1118,7 @@
         private DevExpress.XtraEditors.PanelControl panelBarCode;
         private DevExpress.XtraEditors.PanelControl panelControl10;
         private DevExpress.XtraEditors.TextEdit txtTable;
-        private DevExpress.XtraEditors.PanelControl panelFloor;
+        private DevExpress.XtraEditors.PanelControl paneFloor;
         private DevExpress.XtraEditors.PanelControl panelControl12;
         private DevExpress.XtraEditors.PanelControl panelControl35;
         private DevExpress.XtraEditors.PanelControl panelControl36;

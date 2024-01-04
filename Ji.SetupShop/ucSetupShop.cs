@@ -165,7 +165,7 @@ namespace Ji.SetupShop
 
         private void cbFloor_SelectedIndexChanged(object sender, EventArgs e)
         {
-           var selectedZone= cbFloor.SelectedItem as LFloor;
+           var selectedZone= cbFloor.SelectedItem as Floor;
             if (selectedZone != null)
             {
                 txtTable.Text = selectedZone.CountTable.ToString();
