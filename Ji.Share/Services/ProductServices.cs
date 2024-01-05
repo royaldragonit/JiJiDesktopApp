@@ -31,9 +31,9 @@ namespace Ji.Services
             return data.Data;
         }
 
-        public List<LTopping> ListTopping()
+        public List<Topping> ListTopping()
         {
-            var data = API.Get<ResultCustomModel<List<LTopping>>>(UrlApi.ListTopping);
+            var data = API.Get<ResultCustomModel<List<Topping>>>(UrlApi.ListTopping);
             return data.Data;
         }
         public int GetPriceFood(int foodId)

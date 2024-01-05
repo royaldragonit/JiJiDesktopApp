@@ -43,9 +43,9 @@ namespace Ji.Services
             var data = API.Post<ResultCustomModel<List<Ji_GetDetailBillResult>>>(UrlApi.ListOrderDetail, orderDetailRequest);
             return data.Data;
         }
-        public bool RemoveOrderItems(OrderDeleteItem item)
+        public bool RemoveOrderItem(int orderFoodId)
         {
-            var data = API.Post<ResultCustomModel<bool>>(UrlApi.RemoveOrderItems, item);
+            var data = API.Get<ResultCustomModel<bool>>(UrlApi.RemoveOrderItem+ "?orderFoodId="+ orderFoodId);
             return data.Data;
         }
         public bool Checkout(CheckoutModel item)

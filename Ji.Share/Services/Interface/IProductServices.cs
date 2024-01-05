@@ -11,7 +11,7 @@ namespace Ji.Services.Interface
     public interface IProductServices
     {
         List<Ji_GetAllMilkTeaOrderResult> ListMilkTea();
-        List<LTopping> ListTopping();
+        List<Topping> ListTopping();
         List<Material> ListCategory();
         List<Material> ListMenu();
         int GetPriceFood(int foodId);

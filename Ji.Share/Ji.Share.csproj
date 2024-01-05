@@ -174,7 +174,7 @@
     <Compile Include="Model\Entities\ji_PreviewPrintResult.cs" />
     <Compile Include="Model\Entities\ji_Report_RevenueResult.cs" />
     <Compile Include="Model\Entities\ji_Report_RevenueTodayResult.cs" />
-    <Compile Include="Model\Entities\LCustomer.cs" />
+    <Compile Include="Model\Entities\Customer.cs" />
     <Compile Include="Model\CustomModels\InitCashierModel.cs" />
     <Compile Include="Model\CustomModels\ResultCustomModel.cs" />
     <Compile Include="Model\Entities\Ji_GetDetailBillResult.cs" />
@@ -182,7 +182,7 @@
     <Compile Include="Model\Entities\Ji_GetAllMilkTeaOrderResult.cs" />
     <Compile Include="Model\Entities\ji_GetApplicationResult.cs" />
     <Compile Include="Model\Entities\Floor.cs" />
-    <Compile Include="Model\Entities\LTopping.cs" />
+    <Compile Include="Model\Entities\Topping.cs" />
     <Compile Include="Model\Entities\User.cs" />
     <Compile Include="Model\Entities\Pay.cs" />
     <Compile Include="Model\Entities\SetupShop.cs" />

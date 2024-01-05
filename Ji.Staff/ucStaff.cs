@@ -23,7 +23,7 @@ namespace Ji.Staff
         /// <summary>
         /// Lưu tất cả User vào biến này để tái sử dụng khỏi truy vấn Database
         /// </summary>
-        private List<LUsers> lstUser;
+        private List<User> lstUser;
         private int UserID { get; set; }
         private readonly IStaffServices _staffServices;
         public ucStaff()
@@ -43,7 +43,7 @@ namespace Ji.Staff
             int NumberTableInRow = (PanelPermisson.Width - 6) / 5;
             int Width = (PanelPermisson.Width - 6) / NumberTableInRow;
             int i = 0;
-            foreach (var item in Configure.ListSystemMenu)
+            foreach (var item in Configure.ListSystemMenu.Where(x=>!string.IsNullOrEmpty(x.Name)))
             {
                 CheckEdit chk = new CheckEdit();
                 if (item.PermissionBasic)
@@ -137,13 +137,13 @@ namespace Ji.Staff
         }
         public void BindingData()
         {
-            List<LUsers> ds = _staffServices.ListStaff();
+            List<User> ds = _staffServices.ListStaff();
             gridControl1.DataSource = ds;
             if (ds != null && ds.Count() > 0)
             {
                 lstUser = ds;
-                gridControl1.Tag = ds?[0]?.Id;
-                UserID = ds?[0]?.Id ?? 0;
+                gridControl1.Tag = ds?[0]?.UserId;
+                UserID = ds?[0]?.UserId ?? 0;
             }
 
         }

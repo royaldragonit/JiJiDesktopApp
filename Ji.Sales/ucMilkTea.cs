@@ -252,13 +252,7 @@ namespace Ji.Sales
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var row = gridView1.FocusedRowHandle;
-            int OrderID = gridView1.GetRowCellValue(row, "cOrderID").ToString().ToInt();
-            int FoodID = gridView1.GetRowCellValue(row, "cFoodID").ToString().ToInt();
-            string ToppingID = gridView1.GetRowCellValue(row, "cToppingID")?.ToString();
-            OrderDeleteItem item = new OrderDeleteItem();
-            item.FoodID = FoodID;
-            item.OrderID = OrderID;
-            item.ToppingID = ToppingID;
+            int OrderFoodId = gridView1.GetRowCellValue(row, "OrderFoodId").ToString().ToInt();
             if (UI.Question("Bạn có muốn xóa món này không?"))
             {
                 if (!Extension.CheckInternet())
@@ -266,7 +260,7 @@ namespace Ji.Sales
                     UI.Warning(MessageConstant.CheckInternet);
                     return;
                 }
-                bool isRemoveSuccess = _orderServices.RemoveOrderItems(item);
+                bool isRemoveSuccess = _orderServices.RemoveOrderItem(OrderFoodId);
                 if (isRemoveSuccess)
                     LoadData(Floor, Table);
             }
@@ -395,6 +389,7 @@ namespace Ji.Sales
                         if(item == "BarCode")
                         {
                             printing.BarCode = true;
+                            break;
                         }
                     }
                     if (!printing.BarCode)
@@ -647,7 +642,8 @@ namespace Ji.Sales
                 UI.Warning(MessageConstant.TableNoOrder);
             else
             {
-                if (((DataTable)gridControl1.DataSource).Rows.Count > 0)
+                var ds=gridControl1.DataSource as List<Ji_GetDetailBillResult>;
+                if (ds?.Count > 0)
                 {
                     string CustomerName = "Khách lẻ", Delivery = "";
                     int PercentSale = 0;
@@ -725,6 +721,9 @@ namespace Ji.Sales
                                 checkoutModel.CustomerRefund = (txtCustomerMoney.ToInt() - total + discount).ToVND();
                                 checkoutModel.TotalMoney = total - discount;
                                 checkoutModel.CustomerId = CustomerID;
+                                checkoutModel.DeliveryType = Delivery;
+                                checkoutModel.Table = Table;
+                                checkoutModel.AffectFloor = Floor;
                                 checkoutModel.DeliveryType = Delivery;
                                 checkoutModel.OrderDetail = dataSource;
                                 bool isCheckoutSuccess = _orderServices.Checkout(checkoutModel);

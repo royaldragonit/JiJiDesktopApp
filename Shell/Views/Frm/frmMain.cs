@@ -82,7 +82,7 @@ namespace Shell.Views.Frm
                 MenuItems.Name = cat.CategoryNonUnicode;
                 JiMenu.Items.Add(MenuItems);
                 var lstMenu2 = Configure.ListSystemMenu.Where(x => x.CategoryNonUnicode.Equals(cat.CategoryNonUnicode));
-                foreach (var item in lstMenu2)
+                foreach (var item in lstMenu2.Where(x => !string.IsNullOrEmpty(x.Name)))
                 {
                     ToolStripMenuItem SubMenuItem = new ToolStripMenuItem(item.Name);
                     SubMenuItem.Name = item.NameNonUnicode;

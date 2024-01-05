@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ji.Model.Entities
 {
-    public  class LTopping
+    public  class Topping
     {
 
         public int Id { get; set; }

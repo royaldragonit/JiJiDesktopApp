@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraWaitForm;
+using Ji.Commons;
 
 namespace Ji.Views
 {
@@ -38,6 +39,13 @@ namespace Ji.Views
 
         public enum WaitFormCommand
         {
+        }
+
+        private void Pleasewait_Load(object sender, EventArgs e)
+        {
+            txtAddress.Text = Configure.Setup?.Address==null? txtAddress.Text: Configure.Setup?.Address;
+            txtFacebook.Text = Configure.Setup?.FaceBook == null ? txtFacebook.Text : Configure.Setup?.FaceBook;
+            txtPhone.Text = Configure.Setup?.Hotline == null ? txtPhone.Text : Configure.Setup?.Hotline;
         }
     }
 }

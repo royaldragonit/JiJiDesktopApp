@@ -14,20 +14,20 @@ namespace Ji.Services
 {
     public class CustomerServices : ICustomerServices
     {
-        public ResultCustomModel<int> AddCustomer(LCustomer customer)
+        public ResultCustomModel<int> AddCustomer(Customer customer)
         {
             var data = API.Post<ResultCustomModel<int>>(UrlApi.AddCustomer);
             return data;
         }
-        public LCustomer GetCustomer(string phone)
+        public Customer GetCustomer(string phone)
         {
-            var data = API.Get<ResultCustomModel<LCustomer>>(UrlApi.GetCustomer + "?phone=" + phone);
+            var data = API.Get<ResultCustomModel<Customer>>(UrlApi.GetCustomer + "?phone=" + phone);
             return data.Data;
         }
 
-        public List<LCustomer> ListCustomer()
+        public List<Customer> ListCustomer()
         {
-            var data = API.Get<ResultCustomModel<List<LCustomer>>>(UrlApi.ListCustomer);
+            var data = API.Get<ResultCustomModel<List<Customer>>>(UrlApi.ListCustomer);
             return data.Data;
         }
         public List<Supporter> ListSupporter()

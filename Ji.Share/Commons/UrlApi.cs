@@ -42,7 +42,7 @@ namespace Ji.Commons
         public const string AddOrderItem = "api/Order/AddOrderItem";
         public const string CalculationTotalMoneyOrder = "api/Order/CalculationTotalMoneyOrder";
         public const string ListOrderDetail = "api/Order/ListOrderDetail";
-        public const string RemoveOrderItems = "api/Order/RemoveOrderItems";
+        public const string RemoveOrderItem = "api/Order/RemoveOrderItem";
         public const string Checkout = "api/Order/Checkout";
         public const string ConvertTable = "api/Order/ConvertTable";
         public const string GetListOrderByTable = "api/Order/GetListOrderByTable";
@@ -56,17 +56,17 @@ namespace Ji.Commons
         public const string RemoveRevenue = "api/Revenue/RemoveRevenue";
         #endregion
         #region Staff API
-        public static string ListStaff = "api/Staff/ListStaff";
-        public static string CreateStaff = "api/Staff/CreateStaff";
-        public static string ModifyStaff = "api/Staff/ModifyStaff";
-        public static string GetUserPermissionId = "api/Staff/GetUserPermissionId";
+        public const string ListStaff = "api/Staff/ListStaff";
+        public const string CreateStaff = "api/Staff/CreateStaff";
+        public const string ModifyStaff = "api/Staff/ModifyStaff";
+        public const string GetUserPermissionId = "api/Staff/GetUserPermissionId";
         #endregion
         #region Recipe API
-        public static string ListRecipe = "api/Recipe/ListRecipe";
-        public static string ListResourceRecipe = "api/Recipe/ListResourceRecipe";     
-        public static string UpdateRecipe = "api/Recipe/UpdateRecipe";     
-        public static string AddRecipe = "api/Recipe/AddRecipe";     
-        public static string AddResourceRecipe = "api/Recipe/AddResourceRecipe";     
+        public const string ListRecipe = "api/Recipe/ListRecipe";
+        public const string ListResourceRecipe = "api/Recipe/ListResourceRecipe";     
+        public const string UpdateRecipe = "api/Recipe/UpdateRecipe";     
+        public const string AddRecipe = "api/Recipe/AddRecipe";     
+        public const string AddResourceRecipe = "api/Recipe/AddResourceRecipe";     
         #endregion
         #region Pay API
         public static string ListPay = "api/Pay/ListPay";
@@ -87,9 +87,9 @@ namespace Ji.Commons
         public const string AddMenu = "api/Menu/AddMenu";
         public const string UpdateMenu = "api/Menu/UpdateMenu";
         #endregion
-        public static string BackEnd = "api/Deployment/BackEnd";
-        public static string FrontEnd = "api/Deployment/FrontEnd";
-        public static string Database = "api/Deployment/Database";
+        public const string BackEnd = "api/Deployment/BackEnd";
+        public const string FrontEnd = "api/Deployment/FrontEnd";
+        public const string Database = "api/Deployment/Database";
         public const string TokenType = "Bearer ";
     }
 }

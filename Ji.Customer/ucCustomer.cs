@@ -29,7 +29,7 @@ namespace Ji.Customer
         }
         private void LoadData()
         {
-            List<LCustomer> data = _customerServices.ListCustomer();
+            List<Model.Entities.Customer> data = _customerServices.ListCustomer();
               gridControl1.DataSource = data;
         }
         private void btnAdd_Click(object sender, EventArgs e)

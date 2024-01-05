@@ -79,6 +79,7 @@
             this.ColumnToppingIDs = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.ColumnOrderFood = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
@@ -595,7 +596,8 @@
             this.ColumnOrderIDs,
             this.ColumnFoodIDs,
             this.ColumnToppingIDs,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.ColumnOrderFood});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.RowAutoHeight = true;
@@ -832,6 +834,12 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Padding = new System.Windows.Forms.Padding(5);
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            // 
+            // ColumnOrderFood
+            // 
+            this.ColumnOrderFood.Caption = "OrderFood";
+            this.ColumnOrderFood.FieldName = "OrderFoodId";
+            this.ColumnOrderFood.Name = "ColumnOrderFood";
             // 
             // repositoryItemButtonEdit1
             // 
@@ -1536,5 +1544,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn ColumnOrderFood;
     }
 }

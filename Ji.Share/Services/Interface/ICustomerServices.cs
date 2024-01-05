@@ -11,9 +11,9 @@ namespace Ji.Services.Interface
 {
     public interface ICustomerServices
     {
-        ResultCustomModel<int> AddCustomer(LCustomer customer);
-        LCustomer GetCustomer(string phone);
-        List<LCustomer> ListCustomer();
+        ResultCustomModel<int> AddCustomer(Customer customer);
+        Customer GetCustomer(string phone);
+        List<Customer> ListCustomer();
         List<Supporter> ListSupporter();
         List<MessageResponse> GetMessenger(int customerId,int supporterId);
     }

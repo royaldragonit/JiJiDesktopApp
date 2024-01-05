@@ -27,7 +27,7 @@ namespace Ji.Core
             {
                 if (!string.IsNullOrEmpty(txtAddress.Text) || !string.IsNullOrEmpty(txtPhone.Text))
                 {
-                    LCustomer customer = new LCustomer();
+                    Customer customer = new Customer();
                     customer.Address = txtAddress.Text;
                     customer.Phone = txtPhone.Text;
                     customer.FullName = txtCustomerName.Text;

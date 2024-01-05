@@ -13,6 +13,10 @@ namespace Ji.Model.OrderModels
         public int Discount { get; set; }
         public string CustomerName { get; set; }
         public string Phone { get; set; }
+        public int CreateBy { get; set; } = 0;
+        public int Table { get; set; }
+        public int AffectFloor { get; set; }
+        public int FacId { get; set; } = 0;
         public int CustomerMoney { get; set; }
         public string Cashier { get; set; }
         public DateTime DischargOn { get; set; }

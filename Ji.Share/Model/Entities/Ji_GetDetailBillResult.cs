@@ -19,6 +19,7 @@ namespace Ji.Model.Entities
         public int? cSaleOff { get; set; }
         public string cFood { get; set; }
         public int? cTotal { get; set; }
+        public int OrderFoodId { get; set; }
         public string Note { get; set; }
     }
 }
