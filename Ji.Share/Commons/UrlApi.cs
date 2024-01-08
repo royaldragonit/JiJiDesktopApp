@@ -69,8 +69,8 @@ namespace Ji.Commons
         public const string AddResourceRecipe = "api/Recipe/AddResourceRecipe";     
         #endregion
         #region Pay API
-        public static string ListPay = "api/Pay/ListPay";
-        public static string AddPay = "api/Pay/AddPay";
+        public const string ListPay = "api/Pay/ListPay";
+        public const string AddPay = "api/Pay/AddPay";
         #endregion
         #region Inventory API
         public const string ListResources = "api/Inventory/ListResources";

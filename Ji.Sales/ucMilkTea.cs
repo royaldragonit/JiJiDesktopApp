@@ -289,7 +289,7 @@ namespace Ji.Sales
             gridControl1.DataSource = lstData;
             int totalOrderMoney = _orderServices.CalculationTotalMoneyOrder();
             lblTotalMoneyOrder.Text = totalOrderMoney.ToVND();
-            int total = lstData.Sum(x=>x.cTotal.Value);
+            int total = lstData.Sum(x => x.cTotal.Value);
             txtNote.Text = lstData.Count() > 0 ? lstData.FirstOrDefault()?.Note : "";
             txtTotalTemp.Text = total.ToVND();
             try
@@ -386,7 +386,7 @@ namespace Ji.Sales
                     printing.BarCode = false;
                     foreach (string item in System.Drawing.Printing.PrinterSettings.InstalledPrinters)
                     {
-                        if(item == "BarCode")
+                        if (item == "BarCode")
                         {
                             printing.BarCode = true;
                             break;
@@ -438,18 +438,18 @@ namespace Ji.Sales
                     rep.Quantity = item.cQuantity.ToInt();
                     rep.TimeCheckout = DateTime.Now;
                     rep.CustomerName = CustomerName;
-                    rep.CustomerRefund = (CustomerMoney - totalMoney).ToVND();
-                    rep.Discount = totalMoney;
+                    rep.CustomerRefund = (CustomerMoney - totalMoney + discount).ToVND();
+                    rep.Discount = discount;
                     rep.Floor = Floor;
                     rep.FoodName = item.cFood.ToString();
                     //Đơn giá tiền
-                    rep.Money = item.cPrice.ToVND();
+                    rep.Money = (item.cPrice - discount).ToVND();
                     //Tiền khách đưa
                     rep.MoneyCustomer = CustomerMoney.ToVND();
                     //tổng tiền sau khi nhân với số lượng và Topping
-                    rep.TotalMoney = item.cTotal.ToVND();
+                    rep.TotalMoney = (item.cTotal - discount).ToVND();
                     //Số tiền cần thanh toán
-                    rep.Total = totalMoney.ToVND();
+                    rep.Total = (totalMoney - discount).ToVND();
                     lst.Add(rep);
                 }
                 return lst;
@@ -473,7 +473,7 @@ namespace Ji.Sales
             var food = searchFood.EditValue as Food;
             string ListToppingID = string.Empty;
             int count = cbListTopping.Properties.Items.Count();
-            List<int> vs =cbListTopping.Properties.Items.Select(x => x.Value.ToInt()).ToList();
+            List<int> vs = cbListTopping.Properties.Items.Where(x => x.CheckState == CheckState.Checked).Select(x => x.Value.ToInt()).ToList();
             if (food != null)
             {
                 var order = new AddListOrder
@@ -504,7 +504,6 @@ namespace Ji.Sales
                         t += txtDiscountMoney.Text?.ToInt() ?? 0;
                         txtTotal.Text = (total - t).ToVND();
                     }
-                    ReloadOrders();
                 }
             }
             UI.CloseSplashForm();
@@ -642,7 +641,7 @@ namespace Ji.Sales
                 UI.Warning(MessageConstant.TableNoOrder);
             else
             {
-                var ds=gridControl1.DataSource as List<Ji_GetDetailBillResult>;
+                var ds = gridControl1.DataSource as List<Ji_GetDetailBillResult>;
                 if (ds?.Count > 0)
                 {
                     string CustomerName = "Khách lẻ", Delivery = "";
@@ -650,7 +649,9 @@ namespace Ji.Sales
                     switch (cbTypeSale.SelectedIndex)
                     {
                         case -1:
+                        case 4:
                             CustomerName = "Khách yêu ♥ ♥";
+                            Delivery = "Đơn tại quán";
                             break;
                         //Grab Food
                         case 0:
@@ -705,7 +706,7 @@ namespace Ji.Sales
                                     CustomerName = txtCustomerName.EditValue.ToString();
                                 PercentSale += txtDiscountPercent.Text.ToInt();
                                 var dataSource = (IEnumerable<Ji_GetDetailBillResult>)gridControl1.DataSource;
-                                int total = dataSource.Sum(x => x.cTotal).ToInt();
+                                int total = dataSource.Sum(x => x.cTotal * x.cQuantity).ToInt();
                                 int discount = total * PercentSale / 100 + txtDiscountMoney.Text?.ToInt() ?? 0;
                                 if (!string.IsNullOrEmpty(txtCustomerMoney.Text))
                                     CustomerMoney = txtCustomerMoney.EditValue.ToInt();

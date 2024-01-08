@@ -35,13 +35,13 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ColumnIndex = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnFoodName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColumnDiscount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnFoodPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnToppingName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColumnTotalMoney = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.ColumnDiscount = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
@@ -130,6 +130,20 @@
             this.ColumnFoodName.VisibleIndex = 1;
             this.ColumnFoodName.Width = 333;
             // 
+            // ColumnDiscount
+            // 
+            this.ColumnDiscount.AppearanceHeader.BackColor = System.Drawing.Color.Lime;
+            this.ColumnDiscount.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.ColumnDiscount.AppearanceHeader.Options.UseBackColor = true;
+            this.ColumnDiscount.AppearanceHeader.Options.UseFont = true;
+            this.ColumnDiscount.AppearanceHeader.Options.UseTextOptions = true;
+            this.ColumnDiscount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.ColumnDiscount.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.ColumnDiscount.Caption = "Giảm giá";
+            this.ColumnDiscount.FieldName = "cDiscount";
+            this.ColumnDiscount.Name = "ColumnDiscount";
+            this.ColumnDiscount.Width = 71;
+            // 
             // ColumnFoodPrice
             // 
             this.ColumnFoodPrice.AppearanceCell.Options.UseTextOptions = true;
@@ -143,6 +157,8 @@
             this.ColumnFoodPrice.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.ColumnFoodPrice.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.ColumnFoodPrice.Caption = "Giá";
+            this.ColumnFoodPrice.DisplayFormat.FormatString = "{0:n0}";
+            this.ColumnFoodPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.ColumnFoodPrice.FieldName = "cFoodPrice";
             this.ColumnFoodPrice.Name = "ColumnFoodPrice";
             this.ColumnFoodPrice.Visible = true;
@@ -161,8 +177,6 @@
             this.ColumnToppingName.Caption = "Topping";
             this.ColumnToppingName.FieldName = "cToppingName";
             this.ColumnToppingName.Name = "ColumnToppingName";
-            this.ColumnToppingName.Visible = true;
-            this.ColumnToppingName.VisibleIndex = 4;
             this.ColumnToppingName.Width = 305;
             // 
             // ColumnQuantity
@@ -181,7 +195,7 @@
             this.ColumnQuantity.FieldName = "cQuantity";
             this.ColumnQuantity.Name = "ColumnQuantity";
             this.ColumnQuantity.Visible = true;
-            this.ColumnQuantity.VisibleIndex = 5;
+            this.ColumnQuantity.VisibleIndex = 3;
             this.ColumnQuantity.Width = 36;
             // 
             // ColumnTotalMoney
@@ -194,10 +208,12 @@
             this.ColumnTotalMoney.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.ColumnTotalMoney.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.ColumnTotalMoney.Caption = "Tổng tiền";
-            this.ColumnTotalMoney.FieldName = "cSaleOff";
+            this.ColumnTotalMoney.DisplayFormat.FormatString = "{0:n0}";
+            this.ColumnTotalMoney.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.ColumnTotalMoney.FieldName = "cTotalMoney";
             this.ColumnTotalMoney.Name = "ColumnTotalMoney";
             this.ColumnTotalMoney.Visible = true;
-            this.ColumnTotalMoney.VisibleIndex = 6;
+            this.ColumnTotalMoney.VisibleIndex = 4;
             this.ColumnTotalMoney.Width = 67;
             // 
             // panelControl2
@@ -223,22 +239,6 @@
             this.btnPrint.TabIndex = 10;
             this.btnPrint.Text = "In Lại";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // ColumnDiscount
-            // 
-            this.ColumnDiscount.AppearanceHeader.BackColor = System.Drawing.Color.Lime;
-            this.ColumnDiscount.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
-            this.ColumnDiscount.AppearanceHeader.Options.UseBackColor = true;
-            this.ColumnDiscount.AppearanceHeader.Options.UseFont = true;
-            this.ColumnDiscount.AppearanceHeader.Options.UseTextOptions = true;
-            this.ColumnDiscount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.ColumnDiscount.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.ColumnDiscount.Caption = "Giảm (%)";
-            this.ColumnDiscount.FieldName = "cDiscount";
-            this.ColumnDiscount.Name = "ColumnDiscount";
-            this.ColumnDiscount.Visible = true;
-            this.ColumnDiscount.VisibleIndex = 3;
-            this.ColumnDiscount.Width = 71;
             // 
             // frmBillDetail
             // 

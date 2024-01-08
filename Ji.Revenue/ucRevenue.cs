@@ -40,15 +40,15 @@ namespace Ji.Revenue
             gridControl1.DataSource = data.RevenueToday;
             txtLy.Text = data.RevenueToday.Sum(x => x.cQuantity).ToString();
             lblTotalDiscount.Text = data.RevenueToday?.Sum(x => x.cDiscount).ToVND() ?? "0 VNĐ";
-            lblTotalRevenueReal.Text = data.RevenueToday?.Sum(x => x.cTotalMoney.VNDToNumber()).ToVND() ?? "0 VNĐ";
+            lblTotalRevenueReal.Text = data.RevenueToday?.Sum(x => x.cTotalMoney).ToVND() ?? "0 VNĐ";
             SaveRevenue = data.RevenueToday;
-            int total = data.RevenueToday.Sum(x => x.cTotalMoney.VNDToNumber());
+            int total = data.RevenueToday.Sum(x => x.cTotalMoney);
             txtTotalMoney.Text = total.ToVND();
             int p = data.PayToDay?.Sum(x => x.Money) ?? 0;
             txtTotalPay.Text = p.ToVND();
-            total = data.RevenueCurrentMonth.Sum(x => x.cTotalMoney.VNDToNumber()); ;
+            total = data.RevenueCurrentMonth.Sum(x => x.cTotalMoney); ;
             txtRevenueThisMonth.Text = total.ToVND();
-            lblRevenue.Text = data.RevenueToday.Where(x => x.Delivery.Contains("GRAB") || x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney.VNDToNumber()).ToVND();
+            lblRevenue.Text = data.RevenueToday.Where(x => x.Delivery.Contains("GRAB") || x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney).ToVND();
         }
 
         public void LoadControl()
@@ -100,9 +100,9 @@ namespace Ji.Revenue
                 List<ji_Report_RevenueTodayResult> data = _revenueServices.RevenueDistance(fromDate, toDate);
                 gridControl1.DataSource = data;
                 SaveRevenue = data;
-                int total = data.Sum(x => x.cTotalMoney.VNDToNumber());
+                int total = data.Sum(x => x.cTotalMoney);
                 txtTotalMoney.Text = total.ToVND();
-                lblRevenue.Text = data.Where(x => !x.Delivery.Contains("GRAB") || !x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney.VNDToNumber()).ToVND();
+                lblRevenue.Text = data.Where(x => !x.Delivery.Contains("GRAB") || !x.Delivery.Contains("NOW")).Sum(x => x.cTotalMoney).ToVND();
             }
             else
                 UI.Warning("Bạn phải chọn bộ lọc \"chọn ngày\"");
@@ -135,7 +135,7 @@ namespace Ji.Revenue
                     int total = 0;
                     foreach (var item in SaveRevenue)
                     {
-                        total += item.cTotalMoney.VNDToNumber();
+                        total += item.cTotalMoney;
                     }
                     txtTotalMoney.Text = total.ToVND();
                 }
